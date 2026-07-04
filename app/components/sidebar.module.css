@@ -1,0 +1,15 @@
+
+.sidebar{
+    position: relative;
+
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 150px;
+
+    padding-left: 15px;
+    margin-right: 20px;
+
+    background-color: #5AD3FF;
+    color: rgb(255, 255, 255);
+}

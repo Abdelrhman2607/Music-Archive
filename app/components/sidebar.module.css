@@ -1,5 +1,5 @@
 
-.sidebar{
+.sidebarBase{
     position: relative;
 
     left: 0px;
@@ -7,9 +7,8 @@
     bottom: 0px;
     width: 150px;
 
-    padding-left: 15px;
-    margin-right: 20px;
+    padding: 15px;
 
-    background-color: #5AD3FF;
+    background-color: var(--Blue);
     color: rgb(255, 255, 255);
 }

@@ -1,17 +1,13 @@
 import Sidebar from './components/sidebar';
+import Searchbar from './components/searchbar';
 
 export default function Home() {
   return (
     <div className="flex flex-row min-h-screen">
-      <Sidebar/>
-      <main>
+      <Sidebar />
+      <main className='flex-1 p-5'>
         <div>
-          <h1>
-            To get started, edit the page.tsx file.
-          </h1>
-          <p>
-            center.
-          </p>
+          <Searchbar />
         </div>
       </main>
     </div>

@@ -1,0 +1,10 @@
+
+.searchbarBase, .searchbarBase:focus{
+    display: flex;
+    flex-direction: row;
+
+    background-color: var(--Gray);
+    border-radius: 5px;
+}
+
+

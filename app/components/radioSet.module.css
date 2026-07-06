@@ -1,0 +1,38 @@
+
+.radioSet{
+    gap: 0px;
+}
+
+.primitiveRadio{
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+}
+
+.radioOption{
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    background-color: var(--Gray);
+    align-items: center;
+}
+
+.customRadio{
+    display: inline-block;
+    margin: 10px;
+
+    width: 25px;
+    height: 25px;
+    background-color: var(--White);
+
+    border: solid var(--Blue) 2px;
+    border-radius: 50%;
+}
+
+.primitiveRadio:checked ~ .customRadio{
+    background-color: var(--Blue);
+}
+
+.radioLabel{
+    font-size: 20px;
+}

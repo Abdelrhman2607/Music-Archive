@@ -1,5 +1,6 @@
 import Sidebar from './components/sidebar';
 import Searchbar from './components/searchbar';
+import RadioSet from './components/radioSet'
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
         <div>
           <Searchbar />
         </div>
+        <RadioSet optionsText={["tag", "Cat", 'date', 'test']}/>
       </main>
     </div>
   );

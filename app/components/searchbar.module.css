@@ -2,9 +2,11 @@
 .searchbarBase, .searchbarBase:focus{
     display: flex;
     flex-direction: row;
+    margin-bottom: 10px;
 
-    background-color: var(--Gray);
+    background-color: var(--White);
     border-radius: 5px;
+    border: solid var(--Blue) 2px;
 }
 
 

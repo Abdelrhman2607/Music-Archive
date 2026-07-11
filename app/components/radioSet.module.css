@@ -1,6 +1,7 @@
 
 .radioSet{
     gap: 0px;
+    display: inline-block;
 }
 
 .primitiveRadio{

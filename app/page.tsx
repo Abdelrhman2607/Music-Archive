@@ -1,6 +1,6 @@
+import SearchArea from './components/Search/searchArea';
 import Sidebar from './components/sidebar';
-import Searchbar from './components/searchbar';
-import RadioSet from './components/radioSet'
+
 
 export default function Home() {
   return (
@@ -8,9 +8,8 @@ export default function Home() {
       <Sidebar />
       <main className='flex-1 p-5'>
         <div>
-          <Searchbar />
+          <SearchArea />
         </div>
-        <RadioSet optionsText={["tag", "Cat", 'date', 'test']}/>
       </main>
     </div>
   );

@@ -1,0 +1,18 @@
+
+.searchArea{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+}
+
+.filterButton{
+    border-radius: 5px;
+    background-color: var(--Blue);
+    color: var(--White);
+    padding: 3px;
+    height: var(--SearchAreaDefaultHeight);
+    font-size: clamp(0px, 16px, 50px);
+    cursor: pointer;
+    flex-grow: 1;
+}

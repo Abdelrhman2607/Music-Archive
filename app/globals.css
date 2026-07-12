@@ -4,6 +4,8 @@
   --Blue: #5AD3FF;
   --Gray: #e5e5e5; 
   --White: #ffffff;
+
+  --SearchAreaDefaultHeight: 32px;
 }
 
 body {

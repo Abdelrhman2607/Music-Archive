@@ -1,9 +1,4 @@
 
-.radioSet{
-    gap: 0px;
-    display: inline-block;
-}
-
 .primitiveRadio{
     opacity: 0;
     width: 0px;
@@ -28,6 +23,8 @@
 
     border: solid var(--Blue) 2px;
     border-radius: 50%;
+
+    cursor: pointer;
 }
 
 .primitiveRadio:checked ~ .customRadio{

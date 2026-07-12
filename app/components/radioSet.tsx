@@ -4,7 +4,7 @@ import styles from './radioSet.module.css';
 
 export default function RadioSet({ optionsText }: { optionsText: string[] }) {
   return (
-    <div className={styles.radioSet}>
+    <div>
       {optionsText.map((option, index) => {
         return(<RadioOption optionText={option} key={index} isDefault={index===0} />);
         }

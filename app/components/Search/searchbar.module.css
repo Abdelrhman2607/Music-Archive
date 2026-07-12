@@ -1,0 +1,18 @@
+
+.searchbar{
+    padding: 5px;
+    margin-bottom: 10px;
+    height: var(--SearchAreaDefaultHeight);
+    flex-grow: 5;
+    background-color: var(--White);
+    border-radius: 5px;
+    border: solid var(--Blue) 2px;
+    cursor: pointer;
+}
+
+.searchbar:focus{
+    cursor: default;
+    outline: none;
+    background-color: var(--Gray);
+}
+

@@ -10,5 +10,5 @@
     padding: 15px;
 
     background-color: var(--Blue);
-    color: rgb(255, 255, 255);
+    color: var(--White);
 }

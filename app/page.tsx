@@ -1,5 +1,5 @@
 import SearchArea from './components/Search/searchArea';
-import Sidebar from './components/sidebar';
+import Sidebar from './components/Sidebar/sidebar';
 
 
 export default function Home() {

@@ -1,0 +1,21 @@
+
+.dropdownMenu{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--Gray);
+    max-height: calc(var(--SearchAreaDefaultHeight) * 4);
+    overflow: auto;
+    padding-left: 5px;
+    border: solid var(--Blue) 3px;
+    border-radius: 3px;
+}
+
+.dropdownItem{
+    color: var(--Black);
+    overflow-wrap: anywhere;
+}
+
+.dropdownItem input{
+    background-color: var(--Blue);
+}

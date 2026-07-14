@@ -11,8 +11,15 @@
     background-color: var(--Blue);
     color: var(--White);
     padding: 3px;
+    margin-bottom: 5px;
     height: var(--SearchAreaDefaultHeight);
     font-size: clamp(0px, 16px, 50px);
     cursor: pointer;
-    flex-grow: 1;
+    width: 100%;
+    min-width: 140px;
+    overflow-wrap: anywhere;
+}
+
+.filterArea{
+    flex: 1 1 0;
 }

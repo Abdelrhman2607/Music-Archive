@@ -1,12 +1,12 @@
 
 import styles from './dropdownMenu.module.css';
 
-export default function DropdownMenu({ options, isOpen }: {options: string[], isOpen: boolean}) {
+export default function DropdownMenu({ options, isOpen, name }: {options: string[], isOpen: boolean, name: string}) {
 
   return ( isOpen ?
-    <div>
+    <div className={styles.dropdownMenu}>
       {options.map((option, index) => {
-          return (<DropdownItem key={index} labelText={option}/>);
+          return (<DropdownItem key={index} labelText={option} name={name}/>);
         }
       )}
     </div>
@@ -14,10 +14,10 @@ export default function DropdownMenu({ options, isOpen }: {options: string[], is
   );
 }
 
-function DropdownItem({labelText}: {labelText: string}) {
+function DropdownItem({labelText, name}: {labelText: string, name: string}) {
   return(
-    <label>
-      <input type='checkbox' value={labelText} />
+    <label className={styles.dropdownItem}>
+      <input type='checkbox' value={labelText} name={name}/>
       {labelText}
     </label>
   );

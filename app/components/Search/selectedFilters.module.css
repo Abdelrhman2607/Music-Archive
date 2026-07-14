@@ -14,13 +14,29 @@
 
 .selectedTag, .selectedCat{
     margin-right: 5px;
-    padding: 3px 8px;
-    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
 }
 
-.selectedTag{
-    background-color: red;
+.selectedTag .SelectedFilterName{
+    background-color: var(--Yellow);
 }
-.selectedCat{
-    background-color: blue;
+.selectedCat .SelectedFilterName{
+    background-color: var(--Green);
+}
+
+.SelectedFilterName{
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 5px 0px 0px 5px;
+    height: 100%;
+}
+
+.SelectedFilterXButton{
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    background-color: var(--Gray);
+    border-radius: 0px 5px 5px 0px;
+    cursor: pointer;
 }

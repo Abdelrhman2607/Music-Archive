@@ -9,7 +9,7 @@ import SelectedFilters from './selectedFilters';
 import { useState } from 'react';
 
 export default function SearchArea() {
-  let tags = ['cat', 'dog', 'cat', 'dog', 'cat', 'dog', 'cat', 'dog','cat', 'dog', 'cat', 'dog', 'cat', 'dog', 'cat', 'dog', 'fish', 'fish', 'fish', 'fish', 'fish', 'fish', 'fish', 'fish', 'fish', 'fish', 'fish', 'fish', 'fish', 'fish'];
+  let tags = ['cat', 'dog', 'cat', 'fish'];
   let cats = ['fish', 'bird', 'reptile'];
 
   const [tagDropdownOpen, setTagDropdownOpen] = useState(false);

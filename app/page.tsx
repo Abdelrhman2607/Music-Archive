@@ -5,7 +5,7 @@ import DropdownMenu from './components/UI/dropdownMenu';
 
 export default function Home() {
   return (
-    <div className="flex flex-row min-h-screen">
+    <div className="flex flex-row h-screen">
       <Sidebar />
       <main className='flex-1 p-5'>
         <div>

@@ -1,5 +1,9 @@
 
 .searchArea{
+    border-bottom: solid var(--Blue) 2px;
+    padding-bottom: 5px;
+}
+.searchAreaControls{
     display: flex;
     flex-direction: row;
     gap: 5px;
@@ -22,4 +26,5 @@
 
 .filterArea{
     flex: 1 1 0;
+    position: relative;
 }

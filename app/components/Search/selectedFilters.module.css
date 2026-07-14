@@ -1,0 +1,26 @@
+
+.selectedFiltersArea{
+    display: flex;
+    flex-direction: column;
+}
+
+.selectedTagsArea, .selectedCatsArea{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+    row-gap: 5px;
+}
+
+.selectedTag, .selectedCat{
+    margin-right: 5px;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+.selectedTag{
+    background-color: red;
+}
+.selectedCat{
+    background-color: blue;
+}

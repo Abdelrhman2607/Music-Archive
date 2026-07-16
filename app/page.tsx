@@ -1,6 +1,5 @@
 import SearchArea from './components/Search/searchArea';
 import Sidebar from './components/Sidebar/sidebar';
-import DropdownMenu from './components/UI/dropdownMenu';
 
 
 export default function Home() {

@@ -36,8 +36,8 @@ export default function DropdownMenu({ options, isOpen, name, optionsState }:
 
   return (isOpen ?
     <div className={styles.dropdownMenu}>
-      {options.map((option, index) => {
-        return (<DropdownItem key={index} labelText={option} name={name} />);
+      {options.map((option) => {
+        return (<DropdownItem key={option} labelText={option} name={name} />);
       }
       )}
     </div>

@@ -9,14 +9,14 @@ import SelectedFilters from './selectedFilters';
 import { useState } from 'react';
 
 export default function SearchArea() {
-  let tags = ['cat', 'dog', 'cat', 'fish'];
+  let tags = ['cat', 'dog', 'fish'];
   let cats = ['fish', 'bird', 'reptile'];
 
   const [tagDropdownOpen, setTagDropdownOpen] = useState(false);
   const [catDropdownOpen, setCatDropdownOpen] = useState(false);
 
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [selectedCats, setSelectedCats] = useState([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedCats, setSelectedCats] = useState<string[]>([]);
 
   return (
     <div className={styles.searchArea}>
@@ -31,6 +31,7 @@ export default function SearchArea() {
             options={tags}
             isOpen={tagDropdownOpen}
             name={"tagFilter"}
+            optionsState={{state: selectedTags, setter: setSelectedTags}}
           />
         </div>
 
@@ -42,12 +43,24 @@ export default function SearchArea() {
             options={cats}
             isOpen={catDropdownOpen}
             name={"catFilter"}
+            optionsState={{state: selectedCats, setter: setSelectedCats}}
           />
         </div>
 
       </div >
 
-      <SelectedFilters selectedFilters={{tags: tags, cats: cats}}/>
+      <SelectedFilters
+        tags={selectedTags}
+        cats={selectedCats}
+        onRemoveFilter={(type: 'tag' | 'cat', value: string) => {
+          if (type === 'tag'){
+            setSelectedTags((prev) => prev.filter((item) => item !== value));
+          }
+          else{
+            setSelectedCats((prev) => prev.filter((item) => item !== value));
+          }
+        }}
+      />
 
     </div>
   );

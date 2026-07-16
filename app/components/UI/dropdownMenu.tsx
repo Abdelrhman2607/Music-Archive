@@ -1,24 +1,47 @@
 
 import styles from './dropdownMenu.module.css';
 
-export default function DropdownMenu({ options, isOpen, name }: {options: string[], isOpen: boolean, name: string}) {
+type checkboxStateObject = {
+  state: string[];
+  setter: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
-  return ( isOpen ?
+export default function DropdownMenu({ options, isOpen, name, optionsState }:
+  { options: string[], isOpen: boolean, name: string, optionsState: checkboxStateObject }) {
+
+  function DropdownItem({ labelText, name }: { labelText: string, name: string }) {
+    return (
+      <label className={styles.dropdownItem}>
+        <input 
+        type='checkbox' 
+        value={labelText} 
+        name={name} 
+        onChange={handleCheckBoxChange}
+        checked={optionsState.state.includes(labelText)} />
+        {labelText}
+      </label>
+    );
+  }
+
+  function handleCheckBoxChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const selectedValue = event.target.value;
+    const isChecked = event.target.checked;
+
+    const newSelection = isChecked
+      ? [...optionsState.state, selectedValue]
+      : optionsState.state.filter((value: string) => value !== selectedValue);
+
+    optionsState.setter(newSelection);
+  }
+
+  return (isOpen ?
     <div className={styles.dropdownMenu}>
       {options.map((option, index) => {
-          return (<DropdownItem key={index} labelText={option} name={name}/>);
-        }
+        return (<DropdownItem key={index} labelText={option} name={name} />);
+      }
       )}
     </div>
     : null
   );
-}
 
-function DropdownItem({labelText, name}: {labelText: string, name: string}) {
-  return(
-    <label className={styles.dropdownItem}>
-      <input type='checkbox' value={labelText} name={name}/>
-      {labelText}
-    </label>
-  );
 }

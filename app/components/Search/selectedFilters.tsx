@@ -3,24 +3,42 @@ import styles from './selectedFilters.module.css';
 
 import { IoCloseSharp } from "react-icons/io5";
 
-type SelectedFiltersObject = {
-  tags: string[];
-  cats: string[];
-}
+export default function SelectedFilters({
+  tags,
+  cats,
+  onRemoveFilter
+}: {
+  tags: string[],
+  cats: string[],
+  onRemoveFilter: (type: 'tag' | 'cat', value: string) => void
+}) {
+  function SelectedFilter({ name, type }: { name: string, type: "tag" | "cat" }) {
+    return (
+      <div className={type == 'tag' ? styles.selectedTag : styles.selectedCat}>
+        <span className={styles.SelectedFilterName}>{name}</span>
+        <button 
+          className={styles.SelectedFilterXButton} 
+          onClick={() => onRemoveFilter(type, name)}
+        >
+          <IoCloseSharp />
+        </button>
 
-export default function SelectedFilters({ selectedFilters }: { selectedFilters: SelectedFiltersObject }) {
+      </div>
+    );
+  }
+
   return (
     <div className={styles.selectedFiltersArea}>
       <div className={styles.selectedTagsArea}>
-        {selectedFilters.tags.map((tag, index) => {
-          return (<SelectedFilter name={tag} type={'tag'} key={index} />);
+        {tags.map((tag: string) => {
+          return (<SelectedFilter name={tag} type={'tag'} key={tag} />);
         })
         }
       </div>
 
       <div className={styles.selectedCatsArea}>
-        {selectedFilters.cats.map((cat, index) => {
-          return (<SelectedFilter name={cat} type={'cat'} key={index} />);
+        {cats.map((cat: string) => {
+          return (<SelectedFilter name={cat} type={'cat'} key={cat} />);
         })
         }
       </div>
@@ -28,14 +46,3 @@ export default function SelectedFilters({ selectedFilters }: { selectedFilters: 
   );
 }
 
-function SelectedFilter({ name, type }: { name: string, type: "tag" | "cat" }) {
-  return (
-    <div className={type == 'tag' ? styles.selectedTag : styles.selectedCat}>
-      <span className={styles.SelectedFilterName}>{name}</span>
-      <div className={styles.SelectedFilterXButton}>
-        <IoCloseSharp />
-      </div>
-      
-    </div>
-  );
-}

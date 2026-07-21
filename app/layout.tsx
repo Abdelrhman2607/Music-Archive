@@ -14,7 +14,7 @@ export default function RootLayout({children, }: Readonly<{children: React.React
       <body>
         <div className="flex flex-row h-screen">
           <Sidebar />
-        {children}
+          {children}
         </div>
       </body>
     </html>

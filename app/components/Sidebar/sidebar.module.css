@@ -1,14 +1,53 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
 
-.sidebarBase{
     position: relative;
-
     left: 0px;
     top: 0px;
     bottom: 0px;
-    width: 150px;
+    width: 12vw;
+}
+.sidebarBase{
+    padding: 20px 15px;
 
-    padding: 15px;
+    background-color: var(--Gray);
+    color: var(--White);
 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.topLeftCorner{
     background-color: var(--Blue);
     color: var(--White);
+    height: 128px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar button{
+    color: var(--White);
+    background-color: var(--Blue);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.dataButtons{
+    flex-grow: 3;
+}
+
+.import_exportButtons{
+    margin-top: auto;
+}
+
+.dataButtons, .import_exportButtons{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    overflow-wrap: break-word;
 }

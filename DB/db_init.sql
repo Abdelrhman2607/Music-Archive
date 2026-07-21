@@ -1,4 +1,4 @@
-/* Windows command to run in psql shell: \i 'D:/Music-Archive/backend/db_init.sql' */
+/* Windows command to run in psql shell: \i 'D:/Music-Archive/backend/DB/db_init.sql' */
 
 DROP DATABASE IF EXISTS music_archive;
 CREATE DATABASE music_archive;
@@ -36,7 +36,7 @@ CREATE TABLE artists(
 );
 
 DROP TABLE IF EXISTS artist_entries;
-CREATE TABLE Artistentries(
+CREATE TABLE artist_entries(
     artist_id INT NOT NULL REFERENCES artists(id)
     ON DELETE CASCADE,
 
@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS categories;
 CREATE TABLE categories(
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE DEFAULT 'Unnamed category',
-    parent_id INT REFERENCES categories(id)
+    parent_id INT DEFAULT NULL REFERENCES categories(id)
 );
 
 DROP TABLE IF EXISTS category_entries;

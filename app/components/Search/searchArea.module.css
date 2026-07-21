@@ -2,6 +2,7 @@
 .searchArea{
     border-bottom: solid var(--Blue) 2px;
     padding-bottom: 5px;
+    margin-bottom: 24px;
 }
 .searchAreaControls{
     display: flex;

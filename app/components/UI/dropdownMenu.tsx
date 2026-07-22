@@ -36,6 +36,7 @@ export default function DropdownMenu({ options, isOpen, name, optionsState }:
 
   return (isOpen ?
     <div className={styles.dropdownMenu}>
+      <input className={styles.dropdownSearch} type='text' placeholder='Search filters'/>
       {options.map((option) => {
         return (<DropdownItem key={option} labelText={option} name={name} />);
       }

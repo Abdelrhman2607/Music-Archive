@@ -1,0 +1,65 @@
+
+.musicEntry{
+    display: flex;
+    flex-direction: column;
+}
+
+.entryHeader{
+    display: flex;
+    flex-direction: row; 
+    background-color: var(--Blue);
+    color: var(--White);
+    padding: 5px;
+}
+
+.entryName{
+    margin-right: 5px;
+}
+
+.entryArtists{
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+.entryBody{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--Gray);
+    color: var(--Black);
+    padding: 5px;
+    border-radius: 0px 0px 20px 0px;
+}
+
+.entryBodyInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.entryControls{
+    margin-left: auto;
+}
+
+.entryControls button{
+    cursor: pointer;
+}
+
+.entryEdit{
+    background-color: var(--Green);
+}
+
+.entryDelete{
+    background-color: var(--Red);
+}
+
+.entryTags{
+    display: flex;
+    flex-direction: row;    
+}
+
+.entryCat{
+    color: var(--DarkGray)
+}
+
+.entryTag{
+    background-color: var(--Yellow);
+}

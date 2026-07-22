@@ -2,14 +2,7 @@
 .entryGrid{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 3px;
-    row-gap: 5px;
+    column-gap: 10px;
+    row-gap: 15px;
 
 } 
-
-.entryGrid p{
-    border: solid black 1px;
-    border-radius: 5px;
-    background-color: var(--Gray);
-
-}

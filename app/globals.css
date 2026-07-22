@@ -3,9 +3,12 @@
 :root{
   --Blue: #5AD3FF;
   --Gray: #e5e5e5; 
+  --DarkGray: #818181; 
   --White: #ffffff;
+  --Black: #000000;
   --Yellow: #FFCF5E;
   --Green: #8FF08B;
+  --Red: #ff6060;
 
   --SearchAreaDefaultHeight: 32px;
 }

@@ -1,65 +1,97 @@
-
-.musicEntry{
+.musicEntry {
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-.entryHeader{
+.entryHeader {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     background-color: var(--Blue);
     color: var(--White);
     padding: 5px;
 }
 
-.entryName{
+.entryName {
     margin-right: 5px;
+    font-weight: bold;
 }
 
-.entryArtists{
+.entryArtists {
     margin-left: auto;
     margin-right: 5px;
 }
 
-.entryBody{
-    display: flex;
-    flex-direction: row;
-    background-color: var(--Gray);
-    color: var(--Black);
-    padding: 5px;
-    border-radius: 0px 0px 20px 0px;
-}
-
-.entryBodyInfo{
+.entryBody {
     display: flex;
     flex-direction: column;
+    background-color: var(--Gray);
+    color: var(--Black);
+    padding: 10px;
 }
 
-.entryControls{
+.entryBodyTop {
+    display: flex;
+    flex-direction: row;
+}
+
+.entryControls {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
     margin-left: auto;
+    column-gap: 5px;
 }
 
-.entryControls button{
+.entryControls button {
+    padding: 5px;
+    border-radius: 5px;
     cursor: pointer;
+    min-width: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.entryEdit{
+.entryEdit {
     background-color: var(--Green);
 }
 
-.entryDelete{
+.entryDelete {
     background-color: var(--Red);
 }
 
-.entryTags{
+.entryTags {
     display: flex;
-    flex-direction: row;    
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 5px;
+    row-gap: 5px;
 }
 
-.entryCat{
-    color: var(--DarkGray)
+.entryCat {
+    color: var(--White);
+    overflow-wrap: anywhere;
 }
 
-.entryTag{
+.entryTag {
     background-color: var(--Yellow);
+    border-radius: 5px;
+    padding: 10px 5px;
+    overflow-wrap: anywhere;
+    text-align: center;
+    min-width: 48px;
+    height: 27px;
+    font-size: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.entryDesc {
+    margin-top: 16px;
+    overflow-wrap: anywhere;
 }

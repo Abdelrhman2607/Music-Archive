@@ -1,4 +1,6 @@
-/* Windows command to run in psql shell: \i 'D:/Music-Archive/backend/DB/db_init.sql' */
+/* Windows command to run in psql shell: 
+\i 'D:/Music-Archive/database/db_init.sql'
+ */
 
 DROP DATABASE IF EXISTS music_archive;
 CREATE DATABASE music_archive;

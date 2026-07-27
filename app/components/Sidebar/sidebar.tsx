@@ -8,6 +8,9 @@ export default function Sidebar() {
       </div>
 
       <div className={styles.sidebarBase}>
+
+        <button className={styles.newEntryButton}>New Entry</button>
+
         <div className={styles.dataButtons}>
           <button>Artists</button>
           <button>Tags</button>

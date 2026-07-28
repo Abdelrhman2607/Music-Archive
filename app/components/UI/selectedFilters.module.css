@@ -25,7 +25,7 @@
     background-color: var(--Green);
 }
 .selectedArtist .SelectedFilterName{
-    background-color: var(--Purple);
+    background-color: var(--Red);
 }
 
 .SelectedFilterName{

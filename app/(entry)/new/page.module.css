@@ -1,3 +1,9 @@
+
+.main{
+    display: flex;
+    flex-direction: column;
+}
+
 .pageHeader {
     font-size: 20px;
     margin: 20px 20px;

@@ -10,7 +10,7 @@ export default function NewEntryForm() {
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedCat, setSelectedCat] = useState<string[]>([]);
 
-  const example = ["example", 'tag', 'artist', 'cat'];
+  const example = ["example", 'tag', 'artist', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '91', '92'];
 
   return (
     <form className={styles.entryForm}>
@@ -35,7 +35,6 @@ export default function NewEntryForm() {
         }}/>
       </div>
       
-
       <div className={styles.dropdownArea}>
         <label className={styles.fieldLabel}>Tags:</label>
         <DropdownMenu

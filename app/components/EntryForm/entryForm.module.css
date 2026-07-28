@@ -60,6 +60,14 @@
     flex-wrap: wrap;
 }
 
+.selectedCat{
+    width: fit-content;
+    margin: 0px 15%;
+    padding: 5px 8px;
+    border-radius: 5px;
+    background-color: var(--Green);
+}
+
 /* div child to select the wrapper div of each DropdownMenu */
 .dropdownArea > div{
     margin: 5px 0px;

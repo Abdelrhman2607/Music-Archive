@@ -13,12 +13,12 @@ export default function DropdownMenu({ inputType, options, isOpen, name, options
   function DropdownItem({ labelText, name }: { labelText: string, name: string }) {
     return (
       <label className={styles.dropdownItem}>
-        <input 
-        type={inputType} 
-        value={labelText} 
-        name={name} 
-        onChange={handleCheckBoxChange}
-        checked={optionsState.state.includes(labelText)} />
+        <input
+          type={inputType}
+          value={labelText}
+          name={name}
+          onChange={handleCheckBoxChange}
+          checked={optionsState.state.includes(labelText)} />
         {labelText}
       </label>
     );
@@ -26,6 +26,11 @@ export default function DropdownMenu({ inputType, options, isOpen, name, options
 
   function handleCheckBoxChange(event: React.ChangeEvent<HTMLInputElement>) {
     const selectedValue = event.target.value;
+    if (inputType === 'radio') {
+      optionsState.setter([selectedValue]);
+      return;
+    }
+
     const isChecked = event.target.checked;
 
     const newSelection = isChecked
@@ -37,7 +42,7 @@ export default function DropdownMenu({ inputType, options, isOpen, name, options
 
   return (isOpen ?
     <div className={styles.dropdownMenu}>
-      <input className={styles.dropdownSearch} type='text' placeholder='Search'/>
+      <input className={styles.dropdownSearch} type='text' placeholder='Search' />
       {options.map((option) => {
         return (<DropdownItem key={option} labelText={option} name={name} />);
       }

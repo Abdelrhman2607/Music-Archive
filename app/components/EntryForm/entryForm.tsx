@@ -6,11 +6,12 @@ import SelectedFilters from '../UI/selectedFilters';
 import styles from './entryForm.module.css';
 
 export default function NewEntryForm() {
+  const example = ["example", 'tag', 'artist'];
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
-  const [selectedCat, setSelectedCat] = useState<string[]>([]);
+  const [selectedCat, setSelectedCat] = useState<string[]>([example[0]]);
 
-  const example = ["example", 'tag', 'artist'];
+  
 
   return (
     <form className={styles.entryForm}>
@@ -61,6 +62,9 @@ export default function NewEntryForm() {
           name={"catSelection"}
           optionsState={{ state: selectedCat, setter: setSelectedCat }}
         ></DropdownMenu>
+      </div>
+      <div className={styles.selectedCat}>
+        {selectedCat}
       </div>
 
       <div className={styles.textArea} >

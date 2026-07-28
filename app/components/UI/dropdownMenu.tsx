@@ -1,3 +1,4 @@
+'use client';
 
 import styles from './dropdownMenu.module.css';
 
@@ -6,14 +7,14 @@ type checkboxStateObject = {
   setter: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export default function DropdownMenu({ options, isOpen, name, optionsState }:
-  { options: string[], isOpen: boolean, name: string, optionsState: checkboxStateObject }) {
+export default function DropdownMenu({ inputType, options, isOpen, name, optionsState }:
+  { inputType: 'checkbox' | 'radio', options: string[], isOpen: boolean, name: string, optionsState: checkboxStateObject }) {
 
   function DropdownItem({ labelText, name }: { labelText: string, name: string }) {
     return (
       <label className={styles.dropdownItem}>
         <input 
-        type='checkbox' 
+        type={inputType} 
         value={labelText} 
         name={name} 
         onChange={handleCheckBoxChange}
@@ -36,7 +37,7 @@ export default function DropdownMenu({ options, isOpen, name, optionsState }:
 
   return (isOpen ?
     <div className={styles.dropdownMenu}>
-      <input className={styles.dropdownSearch} type='text' placeholder='Search filters'/>
+      <input className={styles.dropdownSearch} type='text' placeholder='Search'/>
       {options.map((option) => {
         return (<DropdownItem key={option} labelText={option} name={name} />);
       }

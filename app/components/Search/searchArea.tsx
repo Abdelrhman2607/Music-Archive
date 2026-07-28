@@ -4,7 +4,7 @@ import styles from './searchArea.module.css';
 
 import Searchbar from './searchbar';
 import DropdownMenu from '../UI/dropdownMenu';
-import SelectedFilters from './selectedFilters';
+import SelectedFilters from '../UI/selectedFilters';
 
 import { useState } from 'react';
 
@@ -28,6 +28,7 @@ export default function SearchArea() {
             Filter by Tag
           </button>
           <DropdownMenu
+            inputType='checkbox'
             options={tags}
             isOpen={tagDropdownOpen}
             name={"tagFilter"}
@@ -40,6 +41,7 @@ export default function SearchArea() {
             Filter by Category
           </button>
           <DropdownMenu
+            inputType='checkbox'
             options={cats}
             isOpen={catDropdownOpen}
             name={"catFilter"}
@@ -50,18 +52,20 @@ export default function SearchArea() {
       </div >
 
       <SelectedFilters
-        tags={selectedTags}
-        cats={selectedCats}
-        onRemoveFilter={(type: 'tag' | 'cat', value: string) => {
-          if (type === 'tag'){
+        type='tag'
+        filters={selectedTags}
+        onRemoveFilter={(value: string) => {
             setSelectedTags((prev) => prev.filter((item) => item !== value));
-          }
-          else{
-            setSelectedCats((prev) => prev.filter((item) => item !== value));
-          }
         }}
       />
-
+      <SelectedFilters
+        type='cat'
+        filters={selectedCats}
+        onRemoveFilter={(value: string) => {
+            setSelectedCats((prev) => prev.filter((item) => item !== value));
+        }}
+      />
+      
     </div>
   );
 }

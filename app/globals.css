@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
-:root{
+:root {
   --Blue: #5AD3FF;
-  --Gray: #e5e5e5; 
-  --DarkGray: #818181; 
+  --Gray: #e5e5e5;
+  --DarkGray: #818181;
   --White: #ffffff;
   --Black: #000000;
   --Yellow: #FFCF5E;
   --Green: #8FF08B;
   --Red: #ff6060;
+  --Purple: #d881fd;
 
   --SearchAreaDefaultHeight: 32px;
 }
@@ -19,4 +20,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
 
+}
+
+button {
+  color: var(--White);
+  background-color: var(--Blue);
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100%;
 }

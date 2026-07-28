@@ -1,0 +1,60 @@
+.entryForm{
+    margin: 20px;
+    padding-right: 40px;
+    padding: 10px;
+    background-color: var(--White);
+    border: solid 3px var(--Blue);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.submitButton{
+    color: var(--White);
+    background-color: var(--Blue);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.dropdownArea, .textArea{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.fieldLabel{
+    width: 140px;
+    font-size: 20px;
+}
+
+.textArea input, .textArea textarea{
+    padding: 5px;
+    height: var(--SearchAreaDefaultHeight);
+    width: 100%;
+    background-color: var(--White);
+    border-radius: 5px;
+    border: solid var(--Blue) 3px;
+    cursor: pointer;
+    text-wrap: wrap;
+    
+}
+.textArea textarea{
+    height: auto;
+}
+
+.textArea input:focus, .textArea textarea:focus{
+    cursor: default;
+    outline: none;
+    background-color: var(--Gray);
+}
+
+/* div child to select the wrapper div of each DropdownMenu */
+.dropdownArea > div{
+    margin: 5px 0px;
+    position: static;
+    display: inline-flex;
+}

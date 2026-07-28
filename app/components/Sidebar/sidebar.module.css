@@ -35,11 +35,13 @@
     cursor: pointer;
     border-radius: 5px;
     padding: 5px;
+    width: 100%;
 }
 
 .sidebar .newEntryButton{
     background-color: var(--Green);
     margin-bottom: 10px;
+    
 }
 
 .dataButtons{

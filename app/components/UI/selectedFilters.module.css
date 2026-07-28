@@ -4,7 +4,7 @@
     flex-direction: column;
 }
 
-.selectedTagsArea, .selectedCatsArea{
+.selectedTagsArea, .selectedCatsArea, .selectedArtistsArea{
     display: flex;
     flex-direction: row;
     margin-bottom: 5px;
@@ -12,7 +12,7 @@
     row-gap: 5px;
 }
 
-.selectedTag, .selectedCat{
+.selectedTag, .selectedCat, .selectedArtist{
     margin-right: 5px;
     display: flex;
     flex-direction: row;
@@ -23,6 +23,9 @@
 }
 .selectedCat .SelectedFilterName{
     background-color: var(--Green);
+}
+.selectedArtist .SelectedFilterName{
+    background-color: var(--Purple);
 }
 
 .SelectedFilterName{

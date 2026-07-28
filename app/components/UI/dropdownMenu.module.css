@@ -37,4 +37,5 @@
 
 .dropdownItem input{
     background-color: var(--Blue);
+    margin-right: 3px;
 }

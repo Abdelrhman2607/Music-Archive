@@ -34,8 +34,8 @@ export default function MusicEntry({ musicData }: { musicData: musicEntryData })
             })}
           </div>
           <div className={styles.entryControls}>
-            <button className={styles.entryEdit}><MdEdit /></button>
-            <button className={styles.entryDelete}><MdDeleteForever /></button>
+            <button className={styles.entryEdit}><MdEdit color='black'/></button>
+            <button className={styles.entryDelete}><MdDeleteForever color='black'/></button>
           </div>
         </div>
         <span className={styles.entryDesc}>{musicData.description}</span>

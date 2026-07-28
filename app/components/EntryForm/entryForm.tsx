@@ -29,9 +29,12 @@ export default function NewEntryForm() {
           optionsState={{ state: selectedArtists, setter: setSelectedArtists }}
         ></DropdownMenu>
       </div>
-      <SelectedFilters type='artist' filters={selectedArtists} onRemoveFilter={(value: string) => {
+      <div className={styles.selectedFilters}>
+        <SelectedFilters type='artist' filters={selectedArtists} onRemoveFilter={(value: string) => {
             setSelectedArtists((prev) => prev.filter((item) => item !== value));
         }}/>
+      </div>
+      
 
       <div className={styles.dropdownArea}>
         <label className={styles.fieldLabel}>Tags:</label>
@@ -43,9 +46,12 @@ export default function NewEntryForm() {
           optionsState={{ state: selectedTags, setter: setSelectedTags }}
         ></DropdownMenu>
       </div>
-      <SelectedFilters type='tag' filters={selectedTags} onRemoveFilter={(value: string) => {
+      <div className={styles.selectedFilters}>
+        <SelectedFilters type='tag' filters={selectedTags} onRemoveFilter={(value: string) => {
             setSelectedTags((prev) => prev.filter((item) => item !== value));
         }}/>
+      </div>
+      
 
       <div className={styles.dropdownArea}>
         <label className={styles.fieldLabel}>Category:</label>

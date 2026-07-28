@@ -52,6 +52,10 @@
     background-color: var(--Gray);
 }
 
+.selectedFilters{
+    margin-left: 140px;
+}
+
 /* div child to select the wrapper div of each DropdownMenu */
 .dropdownArea > div{
     margin: 5px 0px;

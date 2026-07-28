@@ -27,7 +27,9 @@
 }
 
 .fieldLabel{
-    width: 15%;
+    font-weight: 500;
+    width: 20%;
+    padding: 5px;
     font-size: 20px;
     overflow-wrap: break-word;
 }
@@ -54,7 +56,7 @@
 }
 
 .selectedFilters{
-    margin: 0px 15%;
+    margin: 0px 20%;
     padding-left: 0px;
     width: 80%;
     flex-wrap: wrap;
@@ -62,7 +64,7 @@
 
 .selectedCat{
     width: fit-content;
-    margin: 0px 15%;
+    margin: 0px 20%;
     padding: 5px 8px;
     border-radius: 5px;
     background-color: var(--Green);

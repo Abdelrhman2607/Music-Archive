@@ -16,7 +16,7 @@ CREATE TABLE categories(
 DROP TABLE IF EXISTS music_entries;
 CREATE TABLE music_entries(
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL DEFAULT 'Unnamed entry',
+    title TEXT NOT NULL DEFAULT 'Untitled entry',
     date_added DATE NOT NULL DEFAULT CURRENT_DATE,
     description TEXT,
     category_id INT NOT NULL REFERENCES categories(id)

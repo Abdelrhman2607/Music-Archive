@@ -7,7 +7,7 @@
 INSERT INTO categories (name) VALUES
     ('Genshin Impact'), ('Sonic'), ('SMASH');
 
-INSERT INTO music_entries (name, category_id) VALUES
+INSERT INTO music_entries (title, category_id) VALUES
     ('Escape from the City', 1),('Lotus of Haftkarsvar', 2),('Dig Deep', 1);
 
 INSERT INTO artists (name) VALUES

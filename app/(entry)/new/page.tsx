@@ -1,11 +1,11 @@
 
-import styles from './page.module.css';
+import EntryFormHeader from '@/app/components/EntryFormHeader/entryFormHeader';
 import EntryForm from '@/app/components/EntryForm/entryForm';
 
 export default function newEntryPage(){
     return(
-    <main className={styles.main}>
-        <h1 className={styles.pageHeader}>New Entry</h1>
+    <main>
+        <EntryFormHeader />
         <EntryForm />
     </main>
     );

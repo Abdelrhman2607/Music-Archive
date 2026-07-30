@@ -12,7 +12,7 @@ export default function MusicEntry({ entryData }: { entryData: EntryData }) {
 
       <div className={styles.entryHeader}>
         <span className={styles.entryName}>{entryData.title}</span>
-        <span className={styles.entryCat}>: {entryData.catPath}</span>
+        <span className={styles.entryCat}>: {entryData.catPath.join(' / ')}</span>
         <span className={styles.entryArtists}>{entryData.artists.join(', ')}</span>
       </div>
 
@@ -32,7 +32,7 @@ export default function MusicEntry({ entryData }: { entryData: EntryData }) {
         </div>
         <div className={styles.entryBodyBottom}>
           <span className={styles.entryDesc}>{entryData.description}</span>
-          <span className={styles.entryDate}>Last Modified: {entryData['date-added'].toDateString()}</span>
+          <span className={styles.entryDate}>Last Modified: {entryData.date_added.toDateString()}</span>
         </div>
         
       </div>

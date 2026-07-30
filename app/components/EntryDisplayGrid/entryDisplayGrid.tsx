@@ -3,18 +3,20 @@ import styles from './entryDisplayGrid.module.css';
 
 import MusicEntry from '../MusicEntry/musicEntry';
 
-const sampleData = {
-  'id': 1,
-  'title': 'Dig Deep',
-  'date-added': new Date(),
-  'description': 'Megan Hilty song from SMASH!',
-  'artists': ['Megan Hilty', 'Singer 2'],
-  'tags': ['tag0', 'tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'loooooooooooooongtag'],
-  'catPath': ['SMASH','subcat1','subcat2','subcat3']
-}
+import getEntryDataByID from '@/data_fetching/getEntryDataByID';
 
-export default function EntryDisplayGrid(){
-    
+ 
+export default async function EntryDisplayGrid(){
+    const sampleData = await getEntryDataByID(0) ?? {
+    id: 0,
+    title: 'No entry available',
+    date_added: new Date(),
+    description: 'No entry data available.',
+    artists: [],
+    tags: [],
+    catPath: []
+    };
+
     return(
         <div className={styles.entryGrid}>
             <MusicEntry entryData={sampleData} />

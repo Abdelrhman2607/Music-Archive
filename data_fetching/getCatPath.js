@@ -1,13 +1,14 @@
 import { pool } from './db_pool';
 
 export default async function getCatPath(catId) {
+  if (!catId) return [];
 
   const client = await pool.connect();
+  try {
+    const pathString = [];
 
-  let pathString = [];
-
-  const queryString =
-    `
+    const queryString =
+      `
     SELECT
     parent_id, name
 
@@ -16,21 +17,23 @@ export default async function getCatPath(catId) {
     WHERE c.id = $1::int
     `
 
-  let queryValues = [catId];
+    let currentParentId = catId;
 
-  let result = await client.query(queryString, queryValues);
-  let { parent_id, name } = result.rows[0];
-  pathString.push(name);
+    while (currentParentId) {
+      const result = await client.query(queryString, [currentParentId]);
+      if (result.rows.length === 0) break;
 
-  while (parent_id) {
-    queryValues = [parent_id]
-    let result = await client.query(queryString, queryValues);
-    let { new_parent_id, name } = result.rows[0];
-    parent_id = new_parent_id;
-    pathString.push(name);
+      const { parent_id, name } = result.rows[0];
+      pathString.push(name);
+      currentParentId = parent_id;
+    }
+
+    return (pathString.reverse());
   }
 
-  client.release();
+  finally {
+    client.release();
+  }
 
-  return (pathString.reverse());
+
 }

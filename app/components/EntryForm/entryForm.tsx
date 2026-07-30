@@ -11,8 +11,6 @@ export default function NewEntryForm() {
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedCat, setSelectedCat] = useState<string[]>([example[0]]);
 
-  
-
   return (
     <form className={styles.entryForm}>
       <div className={styles.textArea}>
@@ -30,6 +28,7 @@ export default function NewEntryForm() {
           optionsState={{ state: selectedArtists, setter: setSelectedArtists }}
         ></DropdownMenu>
       </div>
+      
       <div className={styles.selectedFilters}>
         <SelectedFilters type='artist' filters={selectedArtists} onRemoveFilter={(value: string) => {
             setSelectedArtists((prev) => prev.filter((item) => item !== value));
@@ -46,12 +45,12 @@ export default function NewEntryForm() {
           optionsState={{ state: selectedTags, setter: setSelectedTags }}
         ></DropdownMenu>
       </div>
+
       <div className={styles.selectedFilters}>
         <SelectedFilters type='tag' filters={selectedTags} onRemoveFilter={(value: string) => {
             setSelectedTags((prev) => prev.filter((item) => item !== value));
         }}/>
       </div>
-      
 
       <div className={styles.dropdownArea}>
         <label className={styles.fieldLabel}>Category:</label>
@@ -63,6 +62,7 @@ export default function NewEntryForm() {
           optionsState={{ state: selectedCat, setter: setSelectedCat }}
         ></DropdownMenu>
       </div>
+
       <div className={styles.selectedCat}>
         {selectedCat}
       </div>

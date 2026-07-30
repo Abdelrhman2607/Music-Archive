@@ -7,7 +7,7 @@ import getEntryDataByID from '@/data_fetching/getEntryDataByID';
 
  
 export default async function EntryDisplayGrid(){
-    const sampleData = await getEntryDataByID(0) ?? {
+    const sampleData = await getEntryDataByID(1) ?? {
     id: 0,
     title: 'No entry available',
     date_added: new Date(),

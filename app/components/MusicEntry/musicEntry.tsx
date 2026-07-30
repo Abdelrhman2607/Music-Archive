@@ -1,6 +1,8 @@
 
 import styles from './musicEntry.module.css';
 
+import Link from 'next/link';
+
 import { MdEdit } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 
@@ -26,7 +28,7 @@ export default function MusicEntry({ entryData }: { entryData: EntryData }) {
             })}
           </div>
           <div className={styles.entryControls}>
-            <button className={styles.entryEdit}><MdEdit color='black'/></button>
+            <button className={styles.entryEdit}><Link href={`/edit/${entryData.id}`} ><MdEdit color='black'/></Link></button>
             <button className={styles.entryDelete}><MdDeleteForever color='black'/></button>
           </div>
         </div>

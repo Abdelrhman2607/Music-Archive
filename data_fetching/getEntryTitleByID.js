@@ -8,10 +8,11 @@ export default async function getEntryTitleByID(id){
     let result;
     try{
         result = await pool.query(queryString, queryValues);
+        return(result.rows[0].title);
     }
-    catch(error){
-        return(undefined)
+    catch{
+        return('no data found for this id');
     }
     
-    return(result.rows[0].title);
+    
 }

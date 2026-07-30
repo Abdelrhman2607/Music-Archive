@@ -20,7 +20,3 @@ pool.connect((err, client, release) => {
     release();
 });
 
-export async function getTitleByID(id){
-    const result = await pool.query(`SELECT name FROM music_entries WHERE id = ${id} LIMIT 1`);
-    return(result.rows[0].name);
-}

@@ -4,30 +4,22 @@ import styles from './musicEntry.module.css';
 import { MdEdit } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 
-interface musicEntryData {
-  'id': number
-  'name': string
-  'date-added': Date
-  'description': string
-  'artists': string[]
-  'tags': string[]
-  'catPath': string
-}
+import { EntryData } from '@/definitions'
 
-export default function MusicEntry({ musicData }: { musicData: musicEntryData }) {
+export default function MusicEntry({ entryData }: { entryData: EntryData }) {
   return (
     <div className={styles.musicEntry}>
 
       <div className={styles.entryHeader}>
-        <span className={styles.entryName}>{musicData.name}</span>
-        <span className={styles.entryCat}>: {musicData.catPath}</span>
-        <span className={styles.entryArtists}>{musicData.artists.join(', ')}</span>
+        <span className={styles.entryName}>{entryData.title}</span>
+        <span className={styles.entryCat}>: {entryData.catPath}</span>
+        <span className={styles.entryArtists}>{entryData.artists.join(', ')}</span>
       </div>
 
       <div className={styles.entryBody}>
         <div className={styles.entryBodyTop}>
           <div className={styles.entryTags}>
-            {musicData.tags.map((tag) => {
+            {entryData.tags.map((tag) => {
               return (
                 <span className={styles.entryTag} key={tag}>{tag}</span>
               );
@@ -38,7 +30,11 @@ export default function MusicEntry({ musicData }: { musicData: musicEntryData })
             <button className={styles.entryDelete}><MdDeleteForever color='black'/></button>
           </div>
         </div>
-        <span className={styles.entryDesc}>{musicData.description}</span>
+        <div className={styles.entryBodyBottom}>
+          <span className={styles.entryDesc}>{entryData.description}</span>
+          <span className={styles.entryDate}>Last Modified: {entryData['date-added'].toDateString()}</span>
+        </div>
+        
       </div>
 
     </div>

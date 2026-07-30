@@ -91,7 +91,18 @@
     justify-content: center;
 }
 
-.entryDesc {
+.entryBodyBottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.entryDesc, .entryDate{
     margin-top: 16px;
     overflow-wrap: anywhere;
+    display: inline-block;
+}
+
+.entryDate{
+    justify-self: flex-end;
 }

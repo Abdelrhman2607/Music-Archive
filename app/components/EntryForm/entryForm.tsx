@@ -49,7 +49,7 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
     <form className={styles.entryForm} onSubmit={handleSubmit}>
       <div className={styles.textArea}>
         <label className={styles.fieldLabel}>Title:</label>
-        <input type='text' name='entryTitle'></input>
+        <input type='text' name='entryTitle' required></input>
       </div>
 
       <div className={styles.dropdownArea}>

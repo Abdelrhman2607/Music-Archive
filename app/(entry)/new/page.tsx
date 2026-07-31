@@ -6,7 +6,7 @@ export default function newEntryPage(){
     return(
     <main>
         <EntryFormHeader />
-        <EntryForm />
+        <EntryForm mode='new'/>
     </main>
     );
 }

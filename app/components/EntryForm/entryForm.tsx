@@ -5,17 +5,51 @@ import DropdownMenu from '../UI/dropdownMenu';
 import SelectedFilters from '../UI/selectedFilters';
 import styles from './entryForm.module.css';
 
-export default function NewEntryForm() {
+type EntryFormProps = {
+  mode: 'new' | 'edit';
+  entryId?: number;
+};
+
+export default function EntryForm({ mode, entryId }: EntryFormProps) {
+
+  async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const submission = {
+      title: event.target.entryTitle.value,
+      tags: selectedTags,
+      artists: selectedArtists,
+      cat: selectedCat,
+      description: event.target.entryDesc.value
+    }
+
+    const response = await fetch(
+      (mode === 'new' ? '/api/new' : `/api/edit/${entryId}`), 
+      {
+        method: (mode === 'new' ? 'POST' : `PUT`),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submission)
+      }
+    )
+     if (!response.ok) {
+      console.error('Request failed');
+    }
+    else {
+      console.log( await response.json());
+    }
+
+  }
+
   const example = ["example", 'tag', 'artist'];
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedCat, setSelectedCat] = useState<string[]>([example[0]]);
 
   return (
-    <form className={styles.entryForm}>
+    <form className={styles.entryForm} onSubmit={handleSubmit}>
       <div className={styles.textArea}>
         <label className={styles.fieldLabel}>Title:</label>
-        <input type='text'></input>
+        <input type='text' name='entryTitle'></input>
       </div>
 
       <div className={styles.dropdownArea}>
@@ -28,13 +62,13 @@ export default function NewEntryForm() {
           optionsState={{ state: selectedArtists, setter: setSelectedArtists }}
         ></DropdownMenu>
       </div>
-      
+
       <div className={styles.selectedFilters}>
         <SelectedFilters type='artist' filters={selectedArtists} onRemoveFilter={(value: string) => {
-            setSelectedArtists((prev) => prev.filter((item) => item !== value));
-        }}/>
+          setSelectedArtists((prev) => prev.filter((item) => item !== value));
+        }} />
       </div>
-      
+
       <div className={styles.dropdownArea}>
         <label className={styles.fieldLabel}>Tags:</label>
         <DropdownMenu
@@ -48,8 +82,8 @@ export default function NewEntryForm() {
 
       <div className={styles.selectedFilters}>
         <SelectedFilters type='tag' filters={selectedTags} onRemoveFilter={(value: string) => {
-            setSelectedTags((prev) => prev.filter((item) => item !== value));
-        }}/>
+          setSelectedTags((prev) => prev.filter((item) => item !== value));
+        }} />
       </div>
 
       <div className={styles.dropdownArea}>
@@ -69,7 +103,7 @@ export default function NewEntryForm() {
 
       <div className={styles.textArea} >
         <label className={styles.fieldLabel}>Description:</label>
-        <textarea></textarea>
+        <textarea name='entryDesc'></textarea>
       </div>
 
       <button type='submit' className={styles.submitButton}>Save New Entry</button>

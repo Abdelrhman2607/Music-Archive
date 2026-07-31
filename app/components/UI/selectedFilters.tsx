@@ -19,7 +19,8 @@ export default function SelectedFilters({
     return (
       <div className={wrapperClass}>
         <span className={styles.SelectedFilterName}>{name}</span>
-        <button 
+        <button
+          type="button" 
           className={styles.SelectedFilterXButton} 
           onClick={() => onRemoveFilter(name)}
         >

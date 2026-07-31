@@ -5,7 +5,7 @@ import EntryFormHeader from '@/app/components/EntryFormHeader/entryFormHeader';
 import getEntryTitleByID from '@/data_fetching/getEntryTitleByID';
 
 type Props = {
-  params: Promise<{ EntryID: string }>;
+  params: Promise<{ EntryID: number }>;
 };
 
 export default async function editEntryPage({params}: Props){
@@ -16,7 +16,7 @@ export default async function editEntryPage({params}: Props){
     return(
     <main>
         <EntryFormHeader editEntry={true} title={title}/>
-        <EntryForm />
+        <EntryForm mode='edit' entryId={id}/>
     </main>
     );
 }

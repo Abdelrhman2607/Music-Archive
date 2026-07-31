@@ -1,4 +1,4 @@
-import {pool} from './db_pool';
+import {pool} from '../db_pool';
 
 export default async function getEntryCatByID(id){
 
@@ -23,10 +23,11 @@ export default async function getEntryCatByID(id){
     catch(error){
         return(undefined)
     }
-
+    finally{
+        client.release();
+    }
+    
     const cat = result.rows[0].name;
-
-    client.release();
 
     return(cat);
 }

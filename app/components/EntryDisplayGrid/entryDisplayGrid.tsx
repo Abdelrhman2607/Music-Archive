@@ -1,32 +1,39 @@
+'use client';
 
 import styles from './entryDisplayGrid.module.css';
 
 import MusicEntry from '../MusicEntry/musicEntry';
 
-import getEntryDataByID from '@/data_fetching/getEntryDataByID';
+import { EntryData } from '@/definitions';
+import { useState, useEffect } from 'react';
 
- 
-export default async function EntryDisplayGrid(){
-    const sampleData = await getEntryDataByID(1) ?? {
-    id: 0,
-    title: 'No entry available',
-    date_added: new Date(),
-    description: 'No entry data available.',
-    artists: [],
-    tags: [],
-    catPath: []
-    };
 
-    return(
+export default function EntryDisplayGrid({ currentPage }: { currentPage: number }) {
+
+    const [gridData, setGridData] = useState<EntryData[]>([
+        {
+            id: 0,
+            title: 'No entry available',
+            date_added: new Date(),
+            description: 'No entry data available.',
+            artists: [],
+            tags: [],
+            catPath: []
+        }
+    ]);
+
+    useEffect(() => {
+    fetch(`/api?page=${currentPage}`, {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => setGridData(data));
+  }, [currentPage]);
+
+    return (
         <div className={styles.entryGrid}>
-            <MusicEntry entryData={sampleData} />
-            <MusicEntry entryData={sampleData} />
-            <MusicEntry entryData={sampleData} />
-            <MusicEntry entryData={sampleData} />
-            <MusicEntry entryData={sampleData} />
-            <MusicEntry entryData={sampleData} />
-            <MusicEntry entryData={sampleData} />
-            <MusicEntry entryData={sampleData} />
+            {gridData.map((entry: EntryData) => { return (<MusicEntry key={entry.id} entryData={entry} />) })}
         </div>
     );
 }

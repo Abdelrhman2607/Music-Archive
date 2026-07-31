@@ -2,7 +2,7 @@
 import EntryForm from '@/app/components/EntryForm/entryForm';
 import EntryFormHeader from '@/app/components/EntryFormHeader/entryFormHeader';
 
-import getEntryTitleByID from '@/data_fetching/getEntryTitleByID';
+import getEntryTitleByID from '@/data_fetching/single/getEntryTitleByID';
 
 type Props = {
   params: Promise<{ EntryID: number }>;

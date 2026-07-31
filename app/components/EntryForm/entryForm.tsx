@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import DropdownMenu from '../UI/dropdownMenu';
-import SelectedFilters from '../UI/selectedFilters';
+import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
+import SelectedFilters from '../UI/selectedFilters/selectedFilters';
 import styles from './entryForm.module.css';
 
 type EntryFormProps = {

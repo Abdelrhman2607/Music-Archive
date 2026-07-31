@@ -3,8 +3,8 @@
 import styles from './searchArea.module.css';
 
 import Searchbar from './searchbar';
-import DropdownMenu from '../UI/dropdownMenu';
-import SelectedFilters from '../UI/selectedFilters';
+import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
+import SelectedFilters from '../UI/selectedFilters/selectedFilters';
 
 import { useState } from 'react';
 

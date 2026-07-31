@@ -1,0 +1,39 @@
+
+.pageNav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pageNumber{
+    text-align: center;
+    padding: 5px;
+    background-color: var(--White);
+    border: solid var(--Blue) 2px;
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+    height: 3rem;
+    width: 3rem;
+}
+
+.pageNumber:focus{
+    cursor: default;
+    outline: none;
+    background-color: var(--Gray);
+}
+
+.arrowNavButtonUp, .arrowNavButtonDown{
+    text-align: center;
+    padding: 5px;
+    height: 3rem;
+    width: 3rem;
+}
+
+.arrowNavButtonUp{
+    border-radius: 0px 5px 5px 0px;
+}
+
+.arrowNavButtonDown{
+    border-radius: 5px 0px 0px 5px;
+}

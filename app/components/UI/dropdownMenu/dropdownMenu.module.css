@@ -4,7 +4,7 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    background-color: var(--Gray);
+    background-color: var(--LightBlue);
     max-height: calc(var(--SearchAreaDefaultHeight) * 10);
     width: 100%;
     overflow: auto;

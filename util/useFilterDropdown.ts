@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export type useFilterDropownType={
+export type useFilterDropdownType={
   isOpen: boolean;
   toggleOpen: () => void;
   searchText: string;
@@ -25,6 +25,7 @@ export default function useFilterDropdown() {
 
   return {
     isOpen,
+    setIsOpen,
     toggleOpen,
     searchText,
     setSearchText,

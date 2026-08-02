@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import useFilterDropdown from '@/util/useFilterDropdown';
+
 import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
 import SelectedFilters from '../UI/selectedFilters/selectedFilters';
 import styles from './entryForm.module.css';
@@ -11,48 +13,56 @@ type EntryFormProps = {
 };
 
 export default function EntryForm({ mode, entryId }: EntryFormProps) {
-  const [tagSearchText, setTagSearchText] = useState('');
-  const [catSearchText, setCatSearchText] = useState('');
-  const [artistSearchText, setArtistSearchText] = useState('');
+  const tagFilter = useFilterDropdown();
+  const catFilter = useFilterDropdown();
+  const artistFilter = useFilterDropdown(); 
 
   const [tagOptions, setTagOptions] = useState<string[]>([]);
   useEffect(() => {
-    fetch(`/api/getTags?target=${tagSearchText}`, {
+    fetch(`/api/getTags?target=${tagFilter.searchText}`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => setTagOptions(data));
-  }, [tagSearchText]);
+  }, [tagFilter.searchText]);
 
+  
   const [catOptions, setCatOptions] = useState<string[]>([]);
   useEffect(() => {
-    fetch(`/api/getCats?target=${catSearchText}`, {
+    fetch(`/api/getCats?target=${catFilter.searchText}`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
-      .then((data) => setCatOptions(data));
-  }, [catSearchText]);
+      .then((data) => {
+        setCatOptions(data);
+
+        // default chosen category will load a green stub if it renders before options are ready
+        if (data.length > 0 && catFilter.selected.length === 0) {
+          catFilter.setSelected([data[0]]);
+        }})
+  }, [catFilter.searchText]);
+
 
   const [artistOptions, setArtistOptions] = useState<string[]>([]);
   useEffect(() => {
-    fetch(`/api/getCats?target=${catSearchText}`, {
+    fetch(`/api/getArtists?target=${artistFilter.searchText}`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => setArtistOptions(data));
-  }, [artistSearchText]);
+  }, [artistFilter.searchText]);
 
   async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const submission = {
       title: event.target.entryTitle.value,
-      tags: selectedTags,
-      artists: selectedArtists,
-      cat: selectedCat,
+      tags: tagFilter.selected,
+      artists: artistFilter.selected,
+      cat: catFilter.selected,
       description: event.target.entryDesc.value
     }
 
@@ -73,10 +83,15 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
 
   }
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
-  const [selectedCat, setSelectedCat] = useState<string[]>([catOptions[0]]);
+  // initial states / entryForm special cases
+  useEffect(() => {
+    tagFilter.setIsOpen(true);
+    artistFilter.setIsOpen(true);
+    catFilter.setIsOpen(true);
 
+  }, [])
+
+  console.log(artistFilter.selected[0])
   return (
     <form className={styles.entryForm} onSubmit={handleSubmit}>
       <div className={styles.textArea}>
@@ -91,14 +106,14 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
           options={artistOptions}
           isOpen={true}
           name={"artistSelection"}
-          optionsState={{ state: selectedArtists, setter: setSelectedArtists }}
-          onSearchChange={setArtistSearchText}
+          optionsState={{ state: artistFilter.selected, setter: artistFilter.setSelected }}
+          onSearchChange={artistFilter.setSearchText}
         ></DropdownMenu>
       </div>
 
       <div className={styles.selectedFilters}>
-        <SelectedFilters type='artist' filters={selectedArtists} onRemoveFilter={(value: string) => {
-          setSelectedArtists((prev) => prev.filter((item) => item !== value));
+        <SelectedFilters type='artist' filters={artistFilter.selected} onRemoveFilter={(value: string) => {
+          artistFilter.setSelected((prev) => prev.filter((item) => item !== value));
         }} />
       </div>
 
@@ -109,14 +124,14 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
           options={tagOptions}
           isOpen={true}
           name={"tagSelection"}
-          optionsState={{ state: selectedTags, setter: setSelectedTags }}
-          onSearchChange={setTagSearchText}
+          optionsState={{ state: tagFilter.selected, setter: tagFilter.setSelected }}
+          onSearchChange={tagFilter.setSearchText}
         ></DropdownMenu>
       </div>
 
       <div className={styles.selectedFilters}>
-        <SelectedFilters type='tag' filters={selectedTags} onRemoveFilter={(value: string) => {
-          setSelectedTags((prev) => prev.filter((item) => item !== value));
+        <SelectedFilters type='tag' filters={tagFilter.selected} onRemoveFilter={(value: string) => {
+          tagFilter.setSelected((prev) => prev.filter((item) => item !== value));
         }} />
       </div>
 
@@ -127,13 +142,13 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
           options={catOptions}
           isOpen={true}
           name={"catSelection"}
-          optionsState={{ state: selectedCat, setter: setSelectedCat }}
-          onSearchChange={setCatSearchText}
+          optionsState={{ state: catFilter.selected, setter: catFilter.setSelected }}
+          onSearchChange={catFilter.setSearchText}
         ></DropdownMenu>
       </div>
 
       <div className={styles.selectedCat}>
-        {selectedCat}
+        {catFilter.selected[0]}
       </div>
 
       <div className={styles.textArea} >

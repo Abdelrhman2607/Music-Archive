@@ -44,7 +44,7 @@
     column-gap: 5px;
 }
 
-.entryControls button {
+.entryControls > *{
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
@@ -57,6 +57,8 @@
 
 .entryEdit {
     background-color: var(--Green);
+    color: var(--White);
+
 }
 
 .entryDelete {
@@ -91,18 +93,19 @@
     justify-content: center;
 }
 
-.entryBodyBottom{
+.entryBodyBottom {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.entryDesc, .entryDate{
+.entryDesc,
+.entryDate {
     margin-top: 16px;
     overflow-wrap: anywhere;
     display: inline-block;
 }
 
-.entryDate{
+.entryDate {
     justify-self: flex-end;
 }

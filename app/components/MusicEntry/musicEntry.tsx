@@ -28,7 +28,7 @@ export default function MusicEntry({ entryData }: { entryData: EntryData }) {
             })}
           </div>
           <div className={styles.entryControls}>
-            <button className={styles.entryEdit}><Link href={`/edit/${entryData.id}`} ><MdEdit color='black'/></Link></button>
+            <Link href={`/edit/${entryData.id}`} className={styles.entryEdit}><MdEdit color='black'/></Link>
             <button className={styles.entryDelete}><MdDeleteForever color='black'/></button>
           </div>
         </div>

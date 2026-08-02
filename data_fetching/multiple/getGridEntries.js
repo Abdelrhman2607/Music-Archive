@@ -73,35 +73,3 @@ export default async function getGridEntries(pageOffset = 1, target = '', tags =
   }
 
 }
-
-/*
-WITH filter_ids AS (
-        SELECT m.id 
-        FROM music_entries m
-        JOIN categories c ON m.category_id = c.id
-        WHERE (
-          $4 = '{}'::text[]
-          OR c.name = ANY($4)
-        )
-
-        INTERSECT
-
-        SELECT te.entry_id
-        FROM tag_entries te
-        JOIN tags t ON te.tag_id = t.id 
-        WHERE (
-          $5 = '{}'::text[]
-          OR t.name = ANY($5)
-        )
-
-        INTERSECT
-
-        SELECT ae.entry_id
-        FROM artist_entries ae
-        JOIN artists a ON ae.artist_id = a.id 
-        WHERE (
-          $6 = '{}'::text[]
-          OR a.name = ANY($6)
-        )
-        )  
-*/

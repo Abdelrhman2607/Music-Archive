@@ -40,6 +40,9 @@
     background-color: var(--Gray);
     cursor: default;
 }
+.arrowNavButtonUp:disabled::after{
+    opacity: 0;
+}
 
 .arrowNavButtonDown{
     border-radius: 5px 0px 0px 5px;

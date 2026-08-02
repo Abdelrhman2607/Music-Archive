@@ -58,7 +58,7 @@ export default function SearchArea({ setSearchBarValue, tagFilter, catFilter, ar
         />
 
         <div className={styles.filterArea}>
-          <button className={styles.filterButton} onClick={() => { tagFilter.toggleOpen(); }}>
+          <button className={`${styles.filterButton} linearShine`} onClick={() => { tagFilter.toggleOpen(); }}>
             Filter by Tag
           </button>
           <DropdownMenu
@@ -72,7 +72,7 @@ export default function SearchArea({ setSearchBarValue, tagFilter, catFilter, ar
         </div>
 
         <div className={styles.filterArea}>
-          <button className={styles.filterButton} onClick={() => { catFilter.toggleOpen(); }}>
+          <button className={`${styles.filterButton} linearShine`} onClick={() => { catFilter.toggleOpen(); }}>
             Filter by Category
           </button>
           <DropdownMenu
@@ -86,7 +86,7 @@ export default function SearchArea({ setSearchBarValue, tagFilter, catFilter, ar
         </div>
 
         <div className={styles.filterArea}>
-          <button className={styles.filterButton} onClick={() => { artistFilter.toggleOpen(); }}>
+          <button className={`${styles.filterButton} linearShine`} onClick={() => { artistFilter.toggleOpen(); }}>
             Filter by Artist
           </button>
           <DropdownMenu

@@ -11,7 +11,7 @@ export default function PageNav({ currentPage, setCurrentPage, pageTotal}: PageN
     <nav className={styles.pageNav}>
 
       <button
-        className={styles.arrowNavButtonDown}
+        className={`${styles.arrowNavButtonDown} linearShine`}
         onClick={() => { setCurrentPage(Math.max(1, currentPage - 1)) }}>
         &#60;
       </button>
@@ -25,7 +25,7 @@ export default function PageNav({ currentPage, setCurrentPage, pageTotal}: PageN
       />
 
       <button
-        className={styles.arrowNavButtonUp}
+        className={`${styles.arrowNavButtonUp} linearShine`}
         disabled={currentPage >= pageTotal}
         onClick={() => { setCurrentPage(currentPage + 1) }}>
         &#62;

@@ -17,7 +17,7 @@ export default function SelectedFilters({
     const wrapperClass = type === 'tag' ? styles.selectedTag : type === 'artist' ? styles.selectedArtist: styles.selectedCat;
 
     return (
-      <div className={wrapperClass}>
+      <div className={`${wrapperClass} linearShine`}>
         <span className={styles.SelectedFilterName}>{name}</span>
         <button
           type="button" 

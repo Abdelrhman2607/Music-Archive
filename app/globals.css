@@ -31,3 +31,96 @@ button {
   padding: 5px;
   width: 100%;
 }
+
+.linearShine, .wideLinearShine{
+    position: relative;
+    overflow: hidden;
+}
+
+.linearShine::after, .wideLinearShine::after{
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: -100%;
+    width: 50px;
+    height: 200%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--White),
+        transparent
+        );
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+.wideLinearShine::after{
+  height: 300%;
+}
+
+.linearShine:hover::after{
+    animation: linearShine 0.5s ease-in-out;
+    opacity: 0.9;
+}
+.wideLinearShine:hover::after{
+    animation: wideLinearShine 1.2s ease-in-out;
+    opacity: 0.9;
+}
+
+@keyframes wideLinearShine {
+    from {
+        left: -30%;
+        top: -200%;
+    }
+    to {
+        left: 250%;
+        top: 100%;
+    }
+}
+
+@keyframes linearShine {
+    from {
+        left: -100%;
+        top: -100%;
+    }
+    to {
+        left: 300%;
+        top: 100%;
+    }
+}
+
+.radialShine{
+    position: relative;
+    overflow: hidden;
+}
+
+.radialShine::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 0%;
+    background: radial-gradient(
+        circle,
+        transparent 40%,
+        var(--White) 45%,
+        var(--White) 50%,
+        transparent 50%
+        );
+}
+
+.radialShine:hover::after{
+    animation: radialShine 0.7s ease-in-out;
+}
+
+@keyframes radialShine {
+    0% {
+        width: 0%;
+        height: 0%;
+        opacity: 1;
+    }
+    100% {
+        width: 1000%;
+        height: 1000%;
+        opacity: 0;
+    }
+}

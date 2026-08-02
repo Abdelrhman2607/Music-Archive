@@ -118,7 +118,7 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
 
   return (
     <>
-    { entryFound ?
+    { entryFound || mode === 'new'?
     <form className={styles.entryForm} onSubmit={handleSubmit}>
       <div className={styles.textArea}>
         <label className={styles.fieldLabel}>Title:</label>
@@ -179,7 +179,7 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
         ></DropdownMenu>
       </div>
 
-      <div className={styles.selectedCat}>
+      <div className={`${styles.selectedCat} linearShine`}>
         {catFilter.selected[0]}
       </div>
 
@@ -192,7 +192,7 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
         />
       </div>
 
-      <button type='submit' className={styles.submitButton}>Save New Entry</button>
+      <button type='submit' className={`${styles.submitButton} wideLinearShine`}>Save New Entry</button>
     </form>
     : <p className={styles.entryNotFound}> Entry not found </p>
     }

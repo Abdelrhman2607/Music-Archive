@@ -21,6 +21,7 @@
     cursor: default;
     outline: none;
     background-color: var(--Gray);
+    border-right: solid var(--Blue) 2px;
 }
 
 .arrowNavButtonUp, .arrowNavButtonDown{
@@ -28,12 +29,19 @@
     padding: 5px;
     height: 3rem;
     width: 3rem;
+    border: solid var(--Blue) 2px;
 }
 
 .arrowNavButtonUp{
     border-radius: 0px 5px 5px 0px;
+    border-left: none;
+}
+.arrowNavButtonUp:disabled{
+    background-color: var(--Gray);
+    cursor: default;
 }
 
 .arrowNavButtonDown{
     border-radius: 5px 0px 0px 5px;
+    border-right: none;
 }

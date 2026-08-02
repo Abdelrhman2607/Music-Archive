@@ -1,0 +1,111 @@
+.musicEntry {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.entryHeader {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--Blue);
+    color: var(--White);
+    padding: 5px 10px;
+}
+
+.entryName {
+    margin-right: 5px;
+    font-weight: 600;
+}
+
+.entryArtists {
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+.entryBody {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--Gray);
+    color: var(--Black);
+    padding: 10px;
+}
+
+.entryBodyTop {
+    display: flex;
+    flex-direction: row;
+}
+
+.entryControls {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin-left: auto;
+    column-gap: 5px;
+}
+
+.entryControls > *{
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.entryEdit {
+    background-color: var(--Green);
+    color: var(--White);
+
+}
+
+.entryDelete {
+    background-color: var(--Red);
+}
+
+.entryTags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 5px;
+    row-gap: 5px;
+}
+
+.entryCat {
+    color: var(--White);
+    overflow-wrap: anywhere;
+}
+
+.entryTag {
+    background-color: var(--Yellow);
+    border-radius: 5px;
+    padding: 10px 5px;
+    overflow-wrap: anywhere;
+    text-align: center;
+    min-width: 48px;
+    height: 27px;
+    font-size: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.entryBodyBottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.entryDesc,
+.entryDate {
+    margin-top: 16px;
+    overflow-wrap: anywhere;
+    display: inline-block;
+}
+
+.entryDate {
+    justify-self: flex-end;
+}

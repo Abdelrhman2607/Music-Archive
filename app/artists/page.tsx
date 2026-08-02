@@ -1,11 +1,9 @@
+import FilterPageClient from "../components/FilterPageClient";
+import getPageTotal from "@/data_fetching/actions/getPageTotal";
 
-
-export default async function ArtistPage() {
-
-
-  return (
-    <main className='flex-1 p-5'>
-      Artists
-    </main>
-  );
+export default async function ArtistsPage(){
+  const pageTotal = await getPageTotal('artists');
+  return(
+    <FilterPageClient filterType="artist" pageTotal={pageTotal}/>
+  )
 }

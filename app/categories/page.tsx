@@ -1,11 +1,9 @@
+import FilterPageClient from "../components/FilterPageClient";
+import getPageTotal from "@/data_fetching/actions/getPageTotal";
 
-
-export default async function CategoriesPage() {
-
-
-  return (
-    <main className='flex-1 p-5'>
-      Categories
-    </main>
-  );
+export default async function CatsPage(){
+  const pageTotal = await getPageTotal('cats');
+  return(
+    <FilterPageClient filterType="cat" pageTotal={pageTotal}/>
+  )
 }

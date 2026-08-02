@@ -1,10 +1,9 @@
+import FilterPageClient from "../components/FilterPageClient";
+import getPageTotal from "@/data_fetching/actions/getPageTotal";
 
-
-export default async function TagsPage() {
-
-  return (
-    <main className='flex-1 p-5'>
-      Tags
-    </main>
-  );
+export default async function TagsPage(){
+  const pageTotal = await getPageTotal('tags');
+  return(
+    <FilterPageClient filterType="tag" pageTotal={pageTotal}/>
+  )
 }

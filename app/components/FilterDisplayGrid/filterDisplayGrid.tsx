@@ -1,0 +1,48 @@
+'use client';
+
+import styles from './filterDisplayGrid.module.css';
+
+import FilterEntry from '@/app/components/FilterEntry/filterEntry';
+import { FilterEntryData } from '@/definitions'
+import titleCaseWord from '@/util/titleCaseWord'
+
+import { useState, useEffect } from 'react';
+
+type FilterDisplayGridProps = {
+  currentPage: number;
+  pageTotal: number;
+  searchText: string;
+  filterType: 'tag' | 'cat' | 'artist'
+};
+
+export default function FilterDisplayGrid({ currentPage, pageTotal, searchText, filterType }:
+  FilterDisplayGridProps
+) {
+
+  const [gridData, setGridData] = useState<FilterEntryData[]>([]);
+
+  useEffect(() => {
+    if (currentPage <= pageTotal) {
+      const params = new URLSearchParams({
+        filterType: filterType,
+        page: currentPage.toString(),
+        target: searchText
+      });
+
+      fetch(`/api/get${titleCaseWord(filterType)}Entries?${params.toString()}`, {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => setGridData(data));
+    }
+  }, [currentPage, searchText]);
+
+  return (
+    <div className={styles.entryGrid}>
+      {gridData.length === 0
+      ? <p className={styles.noEntriesFound}>No entries match search criteria</p>
+      : gridData.map((entryData) => { return (<FilterEntry key={entryData.id} entryData={entryData} />) })}
+    </div>
+  );
+}

@@ -10,6 +10,7 @@ export interface EntryData {
   'catPath': string[]
 }
 
+
 export function blankEntry(){
   return (
   {
@@ -23,3 +24,10 @@ export function blankEntry(){
   }
   )
 }
+
+export interface FilterEntryData{
+  id: number,
+  name: string,
+}
+
+export const ENTRIES_PER_PAGE = 10

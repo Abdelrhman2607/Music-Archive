@@ -6,8 +6,6 @@ import PageNav from '@/app/components/UI/pageNav/pageNav';
 
 import { useState } from 'react';
 import useFilterDropdown from '@/util/useFilterDropdown';
-import SelectedFilters from './UI/selectedFilters/selectedFilters';
-
 
 export default function HomepageClient({ pageTotal }: { pageTotal: number }) {
   const [currentPage, setCurrentPage] = useState(1);

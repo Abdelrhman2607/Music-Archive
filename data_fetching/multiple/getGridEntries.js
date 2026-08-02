@@ -1,8 +1,8 @@
+
 import { pool } from '../db_pool';
 
 import getEntryDataByID from '../single/getEntryDataByID'
-
-export const ENTRIES_PER_PAGE = 10
+import {ENTRIES_PER_PAGE} from '@/definitions'
 
 export default async function getGridEntries(pageOffset = 1, target = '', tags = [], cats = [], artists = []) {
   const client = await pool.connect();
@@ -52,7 +52,7 @@ export default async function getGridEntries(pageOffset = 1, target = '', tags =
         LIMIT $1
         OFFSET $2
       `
-    const queryValues = [ENTRIES_PER_PAGE, (pageOffset - 1) * 10, `%${target}%`, cats, tags, artists];
+    const queryValues = [ENTRIES_PER_PAGE, (pageOffset - 1) * ENTRIES_PER_PAGE, `%${target}%`, cats, tags, artists];
 
     const result = await client.query(queryString, queryValues);
 

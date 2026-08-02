@@ -1,21 +1,27 @@
 'use server';
 
 import { pool } from '@/data_fetching/db_pool';
-import { ENTRIES_PER_PAGE } from '@/data_fetching/multiple/getGridEntries'
+import { ENTRIES_PER_PAGE } from '@/definitions'
 
-export default async function getPageTotal(){
-const client = await pool.connect();
+export default async function getPageTotal(table) {
+
+  const allowedTables = {
+    tags:'tags',
+    cats: 'categories',
+    artists: 'artists'
+  };
+
+  const client = await pool.connect();
   try {
 
-    let queryString =
+    const queryString =
       `
-      SELECT COUNT(*) as total FROM music_entries
+      SELECT COUNT(*) as total FROM ${allowedTables[table] || 'music_entries'}
       `
 
-    let result;
-    result = await client.query(queryString);
+    const result = await client.query(queryString);
 
-    const pageTotal = Math.ceil(parseInt(result.rows[0].total) / 10);
+    const pageTotal = Math.ceil(parseInt(result.rows[0].total) / ENTRIES_PER_PAGE);
     return pageTotal;
   }
 

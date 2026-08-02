@@ -52,10 +52,12 @@ button {
         );
     transform: rotate(45deg);
     opacity: 0;
+    filter: blur(8px);
 }
 
 .wideLinearShine::after{
   height: 300%;
+  
 }
 
 .linearShine:hover::after{
@@ -68,24 +70,34 @@ button {
 }
 
 @keyframes wideLinearShine {
-    from {
+    0% {
         left: -30%;
         top: -200%;
+        transform: scaleX(0.8);
     }
-    to {
+    50%{
+        transform: scaleX(2);
+    }
+    100% {
         left: 250%;
         top: 100%;
+        transform: scaleX(0.8);
     }
 }
 
 @keyframes linearShine {
-    from {
+    0% {
         left: -100%;
         top: -100%;
+        transform: scaleX(0.8);
     }
-    to {
+    50%{
+        transform: scaleX(2);
+    }
+    100% {
         left: 300%;
         top: 100%;
+        transform: scaleX(0.8);
     }
 }
 

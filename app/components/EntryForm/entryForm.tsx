@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import useFilterDropdown from '@/util/useFilterDropdown';
 
 import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
@@ -13,9 +13,34 @@ type EntryFormProps = {
 };
 
 export default function EntryForm({ mode, entryId }: EntryFormProps) {
+  const [entryFound, setEntryFound] = useState(false);
+  const [entryTitle, setEntryTitle] = useState('');
+  const [entryDesc, setEntryDesc] = useState('');
+
   const tagFilter = useFilterDropdown();
   const catFilter = useFilterDropdown();
-  const artistFilter = useFilterDropdown(); 
+  const artistFilter = useFilterDropdown();
+
+  // Prepopulate entry edit forms
+  if (mode === 'edit') {
+    useEffect(() => {
+      fetch(`/api/edit/${entryId}`, {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((entryData) => {
+          if (entryData.id){
+            setEntryFound(true);
+            tagFilter.setSelected(entryData.tags)
+            catFilter.setSelected([entryData.catPath[0]])
+            artistFilter.setSelected(entryData.artists)
+            setEntryTitle(entryData.title)
+            setEntryDesc(entryData.description)
+          }
+        })
+    }, []);
+  }
 
   const [tagOptions, setTagOptions] = useState<string[]>([]);
   useEffect(() => {
@@ -27,7 +52,6 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
       .then((data) => setTagOptions(data));
   }, [tagFilter.searchText]);
 
-  
   const [catOptions, setCatOptions] = useState<string[]>([]);
   useEffect(() => {
     fetch(`/api/getCats?target=${catFilter.searchText}`, {
@@ -41,9 +65,9 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
         // default chosen category will load a green stub if it renders before options are ready
         if (data.length > 0 && catFilter.selected.length === 0) {
           catFilter.setSelected([data[0]]);
-        }})
+        }
+      })
   }, [catFilter.searchText]);
-
 
   const [artistOptions, setArtistOptions] = useState<string[]>([]);
   useEffect(() => {
@@ -54,6 +78,15 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
       .then((response) => response.json())
       .then((data) => setArtistOptions(data));
   }, [artistFilter.searchText]);
+
+  // initial states / entryForm special cases
+  useEffect(() => {
+    tagFilter.setIsOpen(true);
+    artistFilter.setIsOpen(true);
+    catFilter.setIsOpen(true);
+
+  }, [])
+
 
   async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -83,20 +116,19 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
 
   }
 
-  // initial states / entryForm special cases
-  useEffect(() => {
-    tagFilter.setIsOpen(true);
-    artistFilter.setIsOpen(true);
-    catFilter.setIsOpen(true);
-
-  }, [])
-
-  console.log(artistFilter.selected[0])
   return (
+    <>
+    { entryFound ?
     <form className={styles.entryForm} onSubmit={handleSubmit}>
       <div className={styles.textArea}>
         <label className={styles.fieldLabel}>Title:</label>
-        <input type='text' name='entryTitle' required></input>
+        <input
+          type='text'
+          name='entryTitle'
+          value={entryTitle}
+          onChange={(event) => { setEntryTitle(event.target.value) }}
+          required
+        />
       </div>
 
       <div className={styles.dropdownArea}>
@@ -153,10 +185,17 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
 
       <div className={styles.textArea} >
         <label className={styles.fieldLabel}>Description:</label>
-        <textarea name='entryDesc'></textarea>
+        <textarea
+          name='entryDesc'
+          value={entryDesc || ''}
+          onChange={(event) => { setEntryDesc(event.target.value) }}
+        />
       </div>
 
       <button type='submit' className={styles.submitButton}>Save New Entry</button>
     </form>
+    : <p className={styles.entryNotFound}> Entry not found </p>
+    }
+    </>
   );
 }

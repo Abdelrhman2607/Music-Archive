@@ -11,7 +11,7 @@ export default async function getEntryTitleByID(id){
         return(result.rows[0].title);
     }
     catch{
-        return('no data found for this id');
+        return(`no data found for id: ${id}`);
     }
     
     

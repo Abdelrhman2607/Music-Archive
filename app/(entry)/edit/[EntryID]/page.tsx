@@ -12,7 +12,6 @@ export default async function editEntryPage({params}: Props){
     const id = (await params).EntryID;
     const title = await getEntryTitleByID(id);
 
-    console.log(title);
     return(
     <main>
         <EntryFormHeader editEntry={true} title={title}/>

@@ -75,3 +75,12 @@
     position: static;
     display: inline-flex;
 }
+
+.entryNotFound{
+    background-color: var(--DarkGray);
+    border-radius: 10px;
+    color: var(--White);
+    text-align: center;
+    padding: 10px 0px;
+    margin: 20px;
+}

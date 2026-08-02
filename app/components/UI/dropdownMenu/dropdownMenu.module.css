@@ -39,3 +39,15 @@
     background-color: var(--Blue);
     margin-right: 3px;
 }
+
+@media (prefers-color-scheme: dark){
+    .dropdownMenu{
+        background-color: var(--Blue);
+        border-color: var(--DarkBlue);
+        
+    }
+
+    .dropdownItem{
+        color: var(--White);
+    }
+}

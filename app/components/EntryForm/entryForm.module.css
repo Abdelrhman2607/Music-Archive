@@ -10,6 +10,12 @@
     row-gap: 10px;
 }
 
+@media (prefers-color-scheme: dark){
+    .entryForm{
+        background-color: var(--LightBlue);
+    }
+}
+
 .submitButton{
     color: var(--White);
     background-color: var(--Blue);
@@ -45,6 +51,7 @@
     text-wrap: wrap;
     
 }
+
 .textArea textarea{
     height: auto;
 }

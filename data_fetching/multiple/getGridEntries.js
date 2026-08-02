@@ -2,15 +2,17 @@ import { pool } from '../db_pool';
 
 import getEntryDataByID from '../single/getEntryDataByID'
 
-export default async function getGridEntries(pageOffset = 0) {
+export const ENTRIES_PER_PAGE = 10
+
+export default async function getGridEntries(pageOffset = 1) {
   const client = await pool.connect();
   try {
 
     let queryString =
       `
-      SELECT id FROM music_entries ORDER BY id LIMIT 10 OFFSET $1::int
+      SELECT id FROM music_entries ORDER BY id LIMIT $1::int OFFSET $2::int
       `
-    let queryValues = [pageOffset * 10];
+    let queryValues = [ENTRIES_PER_PAGE, (pageOffset - 1) * 10];
 
     let result;
     result = await client.query(queryString, queryValues);

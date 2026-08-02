@@ -7,8 +7,16 @@ type checkboxStateObject = {
   setter: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export default function DropdownMenu({ inputType, options, isOpen, name, optionsState }:
-  { inputType: 'checkbox' | 'radio', options: string[], isOpen: boolean, name: string, optionsState: checkboxStateObject }) {
+type DropdownMenuProps = { 
+  inputType: 'checkbox' | 'radio';
+  options: string[];
+  isOpen: boolean; 
+  name: string; 
+  optionsState: checkboxStateObject;
+  onSearchChange: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function DropdownMenu({ inputType, options, isOpen, name, optionsState, onSearchChange }: DropdownMenuProps) {
 
   function DropdownItem({ labelText, name }: { labelText: string, name: string }) {
     return (
@@ -42,7 +50,12 @@ export default function DropdownMenu({ inputType, options, isOpen, name, options
 
   return (isOpen ?
     <div className={styles.dropdownMenu}>
-      <input className={styles.dropdownSearch} type='text' placeholder='Search' />
+      <input 
+        className={styles.dropdownSearch}
+        type='text' 
+        placeholder='Search'
+        onChange={(e) => onSearchChange(e.target.value)}
+      />
       {options.map((option) => {
         return (<DropdownItem key={option} labelText={option} name={name} />);
       }

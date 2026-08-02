@@ -6,17 +6,46 @@ import Searchbar from './searchbar';
 import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
 import SelectedFilters from '../UI/selectedFilters/selectedFilters';
 
-import { useState } from 'react';
+import useFilterDropdown from '@/util/useFilterDropdown';
+import { useState, useEffect } from 'react';
 
 export default function SearchArea() {
-  let tags = ['cat', 'dog', 'fish'];
-  let cats = ['fish', 'bird', 'reptile'];
 
-  const [tagDropdownOpen, setTagDropdownOpen] = useState(false);
-  const [catDropdownOpen, setCatDropdownOpen] = useState(false);
+  const tagFilter = useFilterDropdown();
+  const [tagOptions, setTagOptions] = useState<string[]>([]);
+  useEffect(() => {
+    fetch(`/api/getTags?target=${tagFilter.searchText}`, {
+      method: 'GET',
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => setTagOptions(data));
+  }, [tagFilter.searchText]);
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedCats, setSelectedCats] = useState<string[]>([]);
+
+  const catFilter = useFilterDropdown();
+  const [catOptions, setCatOptions] = useState<string[]>([]);
+  useEffect(() => {
+    fetch(`/api/getCats?target=${catFilter.searchText}`, {
+      method: 'GET',
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => setCatOptions(data));
+  }, [catFilter.searchText]);
+
+
+  const artistFilter = useFilterDropdown();
+  const [artistOptions, setArtistOptions] = useState<string[]>([]);
+  useEffect(() => {
+    fetch(`/api/getArtists?target=${artistFilter.searchText}`, {
+      method: 'GET',
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => setArtistOptions(data));
+  }, [artistFilter.searchText]);
+
 
   return (
     <div className={styles.searchArea}>
@@ -24,28 +53,44 @@ export default function SearchArea() {
         <Searchbar />
 
         <div className={styles.filterArea}>
-          <button className={styles.filterButton} onClick={() => { setTagDropdownOpen(!tagDropdownOpen); }}>
+          <button className={styles.filterButton} onClick={() => { tagFilter.toggleOpen(); }}>
             Filter by Tag
           </button>
           <DropdownMenu
             inputType='checkbox'
-            options={tags}
-            isOpen={tagDropdownOpen}
+            options={tagOptions}
+            isOpen={tagFilter.isOpen}
             name={"tagFilter"}
-            optionsState={{state: selectedTags, setter: setSelectedTags}}
+            optionsState={{ state: tagFilter.selected, setter: tagFilter.setSelected}}
+            onSearchChange={tagFilter.setSearchText}
           />
         </div>
 
         <div className={styles.filterArea}>
-          <button className={styles.filterButton} onClick={() => { setCatDropdownOpen(!catDropdownOpen); }}>
+          <button className={styles.filterButton} onClick={() => { catFilter.toggleOpen(); }}>
             Filter by Category
           </button>
           <DropdownMenu
             inputType='checkbox'
-            options={cats}
-            isOpen={catDropdownOpen}
+            options={catOptions}
+            isOpen={catFilter.isOpen}
             name={"catFilter"}
-            optionsState={{state: selectedCats, setter: setSelectedCats}}
+            optionsState={{ state: catFilter.selected, setter: catFilter.setSelected}}
+            onSearchChange={catFilter.setSearchText}
+          />
+        </div>
+
+        <div className={styles.filterArea}>
+          <button className={styles.filterButton} onClick={() => { artistFilter.toggleOpen(); }}>
+            Filter by Artist
+          </button>
+          <DropdownMenu
+            inputType='checkbox'
+            options={artistOptions}
+            isOpen={artistFilter.isOpen}
+            name={"artistFilter"}
+            optionsState={{ state: artistFilter.selected, setter: artistFilter.setSelected}}
+            onSearchChange={artistFilter.setSearchText}
           />
         </div>
 
@@ -53,19 +98,26 @@ export default function SearchArea() {
 
       <SelectedFilters
         type='tag'
-        filters={selectedTags}
+        filters={tagFilter.selected}
         onRemoveFilter={(value: string) => {
-            setSelectedTags((prev) => prev.filter((item) => item !== value));
+          tagFilter.toggleSelection(value);
         }}
       />
       <SelectedFilters
         type='cat'
-        filters={selectedCats}
+        filters={catFilter.selected}
         onRemoveFilter={(value: string) => {
-            setSelectedCats((prev) => prev.filter((item) => item !== value));
+          catFilter.toggleSelection(value);
         }}
       />
-      
+      <SelectedFilters
+        type='artist'
+        filters={artistFilter.selected}
+        onRemoveFilter={(value: string) => {
+          artistFilter.toggleSelection(value);
+        }}
+      />
+
     </div>
   );
 }

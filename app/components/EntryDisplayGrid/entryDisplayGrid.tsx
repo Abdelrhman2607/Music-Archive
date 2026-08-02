@@ -8,32 +8,39 @@ import { EntryData } from '@/definitions';
 import { useState, useEffect } from 'react';
 
 
-export default function EntryDisplayGrid({ currentPage }: { currentPage: number }) {
+export default function EntryDisplayGrid({ currentPage, setCurrentPage, pageTotal }:
+  {
+    currentPage: number,
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
+    pageTotal: number
+  }) {
 
-    const [gridData, setGridData] = useState<EntryData[]>([
-        {
-            id: 0,
-            title: 'No entry available',
-            date_added: new Date(),
-            description: 'No entry data available.',
-            artists: [],
-            tags: [],
-            catPath: []
-        }
-    ]);
+  const [gridData, setGridData] = useState<EntryData[]>([
+    {
+      id: 0,
+      title: 'No entry available',
+      date_added: new Date(),
+      description: 'No entry data available.',
+      artists: [],
+      tags: [],
+      catPath: []
+    }
+  ]);
 
-    useEffect(() => {
-    fetch(`/api?page=${currentPage}`, {
-        method: 'GET',
-        headers: { "Content-Type": "application/json" },
+  useEffect(() => {
+    if (currentPage <= pageTotal){
+      fetch(`/api?page=${currentPage}`, {
+      method: 'GET',
+      headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => setGridData(data));
+    }
   }, [currentPage]);
 
-    return (
-        <div className={styles.entryGrid}>
-            {gridData.map((entry: EntryData) => { return (<MusicEntry key={entry.id} entryData={entry} />) })}
-        </div>
-    );
+  return (
+    <div className={styles.entryGrid}>
+      {gridData.map((entry: EntryData) => { return (<MusicEntry key={entry.id} entryData={entry} />) })}
+    </div>
+  );
 }

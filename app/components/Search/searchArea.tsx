@@ -6,12 +6,17 @@ import Searchbar from './searchbar';
 import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
 import SelectedFilters from '../UI/selectedFilters/selectedFilters';
 
-import useFilterDropdown from '@/util/useFilterDropdown';
 import { useState, useEffect } from 'react';
+import { useFilterDropdownType } from '@/util/useFilterDropdown'
 
-export default function SearchArea() {
+export default function SearchArea({ setSearchBarValue, tagFilter, catFilter, artistFilter}: 
+  {
+    setSearchBarValue: React.Dispatch<React.SetStateAction<string>>,
+    tagFilter: useFilterDropdownType,
+    catFilter: useFilterDropdownType,
+    artistFilter: useFilterDropdownType,
+  }) {
 
-  const tagFilter = useFilterDropdown();
   const [tagOptions, setTagOptions] = useState<string[]>([]);
   useEffect(() => {
     fetch(`/api/getTags?target=${tagFilter.searchText}`, {
@@ -23,7 +28,6 @@ export default function SearchArea() {
   }, [tagFilter.searchText]);
 
 
-  const catFilter = useFilterDropdown();
   const [catOptions, setCatOptions] = useState<string[]>([]);
   useEffect(() => {
     fetch(`/api/getCats?target=${catFilter.searchText}`, {
@@ -35,7 +39,6 @@ export default function SearchArea() {
   }, [catFilter.searchText]);
 
 
-  const artistFilter = useFilterDropdown();
   const [artistOptions, setArtistOptions] = useState<string[]>([]);
   useEffect(() => {
     fetch(`/api/getArtists?target=${artistFilter.searchText}`, {
@@ -50,7 +53,9 @@ export default function SearchArea() {
   return (
     <div className={styles.searchArea}>
       <div className={styles.searchAreaControls}>
-        <Searchbar />
+        <Searchbar 
+          setSearchBarValue={setSearchBarValue}
+        />
 
         <div className={styles.filterArea}>
           <button className={styles.filterButton} onClick={() => { tagFilter.toggleOpen(); }}>

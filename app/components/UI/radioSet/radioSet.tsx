@@ -20,7 +20,6 @@ function RadioOption({ optionText, isDefault }: { optionText: string, isDefault:
         <input 
           type='radio' name='searchType' value={optionText} defaultChecked={isDefault}
           className={styles.primitiveRadio}
-          // onChange={(event)=>console.log(event.currentTarget.value)}
         />
         <span className={styles.customRadio}></span>
         <span className={styles.radioLabel}>{optionText}</span>

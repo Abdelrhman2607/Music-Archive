@@ -4,18 +4,57 @@ import getEntryDataByID from '../single/getEntryDataByID'
 
 export const ENTRIES_PER_PAGE = 10
 
-export default async function getGridEntries(pageOffset = 1) {
+export default async function getGridEntries(pageOffset = 1, target = '', tags = [], cats = [], artists = []) {
   const client = await pool.connect();
   try {
 
-    let queryString =
+    const queryString =
       `
-      SELECT id FROM music_entries ORDER BY id LIMIT $1::int OFFSET $2::int
-      `
-    let queryValues = [ENTRIES_PER_PAGE, (pageOffset - 1) * 10];
+        SELECT m.id 
+        FROM music_entries m 
+        JOIN categories c ON c.id = m.category_id 
+        WHERE m.title ILIKE $3
+        AND (
+          cardinality($4::text[]) = 0       /*Make empty filter lists match anything */
+          OR c.name = ANY($4)
+        )
+        
+        AND (
+          cardinality($5::text[]) = 0
+          OR EXISTS (                       /*Check if this entry id matches any of tag/artist ids selected*/
+            SELECT 1
+            FROM tag_entries te
+            JOIN tags t ON t.id = te.tag_id
+            WHERE te.entry_id = m.id
+              AND t.name = ANY($5)
 
-    let result;
-    result = await client.query(queryString, queryValues);
+            GROUP BY te.entry_id
+            HAVING COUNT(DISTINCT t.name) = cardinality($5::text[])       
+            /*Make the filtering more exclusive by checking that it matches all the tags/artists selected rather than at least one of them*/
+          )
+        )
+
+        AND (
+          cardinality($6::text[]) = 0
+          OR EXISTS (
+            SELECT 1
+            FROM artist_entries ae
+            JOIN artists a ON a.id = ae.artist_id
+            WHERE ae.entry_id = m.id
+              AND a.name = ANY($6)
+
+            GROUP BY ae.entry_id
+            HAVING COUNT(DISTINCT a.name) = cardinality($6::text[])
+          )
+        )
+
+        ORDER BY id 
+        LIMIT $1
+        OFFSET $2
+      `
+    const queryValues = [ENTRIES_PER_PAGE, (pageOffset - 1) * 10, `%${target}%`, cats, tags, artists];
+
+    const result = await client.query(queryString, queryValues);
 
     const entryIds = result.rows.map((object) => (object.id));
     const entriesData = await Promise.all(
@@ -34,3 +73,35 @@ export default async function getGridEntries(pageOffset = 1) {
   }
 
 }
+
+/*
+WITH filter_ids AS (
+        SELECT m.id 
+        FROM music_entries m
+        JOIN categories c ON m.category_id = c.id
+        WHERE (
+          $4 = '{}'::text[]
+          OR c.name = ANY($4)
+        )
+
+        INTERSECT
+
+        SELECT te.entry_id
+        FROM tag_entries te
+        JOIN tags t ON te.tag_id = t.id 
+        WHERE (
+          $5 = '{}'::text[]
+          OR t.name = ANY($5)
+        )
+
+        INTERSECT
+
+        SELECT ae.entry_id
+        FROM artist_entries ae
+        JOIN artists a ON ae.artist_id = a.id 
+        WHERE (
+          $6 = '{}'::text[]
+          OR a.name = ANY($6)
+        )
+        )  
+*/

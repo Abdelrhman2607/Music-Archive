@@ -11,7 +11,9 @@
 .sidebarBase{
     padding: 20px 15px;
 
-    background-color: var(--Gray);
+    background-color: var(--LightBlue);
+    border-right: solid var(--Blue) 3px;
+
     color: var(--White);
 
     display: flex;

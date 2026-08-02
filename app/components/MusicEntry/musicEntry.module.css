@@ -3,6 +3,7 @@
     flex-direction: column;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: 1px 2px 3px var(--DarkGray);
 }
 
 .entryHeader {
@@ -26,7 +27,9 @@
 .entryBody {
     display: flex;
     flex-direction: column;
-    background-color: var(--Gray);
+    background-color: var(--LightBlue);
+    border: solid var(--Blue) 2px;
+    border-radius: 0px 0px 5px 5px;
     color: var(--Black);
     padding: 10px;
 }

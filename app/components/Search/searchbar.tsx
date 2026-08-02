@@ -2,7 +2,7 @@ import styles from './searchbar.module.css';
 
 export default function Searchbar({ setSearchBarValue }:
   {
-    setSearchBarValue: React.Dispatch<React.SetStateAction<string>>
+    setSearchBarValue: React.Dispatch<React.SetStateAction<string>>,
   }) {
 
   return (
@@ -10,7 +10,7 @@ export default function Searchbar({ setSearchBarValue }:
       type='text'
       placeholder="Search entries"
       onChange={(event) => {setSearchBarValue(event.target.value)}}
-      className={styles.searchbar}
+      className={`${styles.searchbar}`}
     />
   );
 }

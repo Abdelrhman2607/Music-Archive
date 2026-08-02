@@ -42,7 +42,7 @@ export default function FilterDisplayGrid({ currentPage, pageTotal, searchText, 
     <div className={styles.entryGrid}>
       {gridData.length === 0
       ? <p className={styles.noEntriesFound}>No entries match search criteria</p>
-      : gridData.map((entryData) => { return (<FilterEntry key={entryData.id} entryData={entryData} />) })}
+      : gridData.map((entryData) => { return (<FilterEntry key={entryData.id} entryData={entryData} filterType={filterType}/>) })}
     </div>
   );
 }

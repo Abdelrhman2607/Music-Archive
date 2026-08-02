@@ -1,7 +1,7 @@
 
 import styles from './selectedFilters.module.css';
 
-import { IoCloseSharp } from "react-icons/io5";
+import { MdClose } from "react-icons/md";
 
 export default function SelectedFilters({
   type,
@@ -24,7 +24,7 @@ export default function SelectedFilters({
           className={styles.SelectedFilterXButton} 
           onClick={() => onRemoveFilter(name)}
         >
-          <IoCloseSharp color='black'/>
+          <MdClose color='black'/>
         </button>
 
       </div>

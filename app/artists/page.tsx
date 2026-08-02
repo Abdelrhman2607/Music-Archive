@@ -1,4 +1,4 @@
-import FilterPageClient from "../components/FilterPageClient";
+import FilterPageClient from "../components/FilterPageClient/FilterPageClient";
 import getPageTotal from "@/data_fetching/actions/getPageTotal";
 
 export default async function ArtistsPage(){

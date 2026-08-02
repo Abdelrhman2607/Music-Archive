@@ -1,0 +1,18 @@
+.pageHeader {
+    font-size: 20px;
+    margin: 20px 0px;
+    padding: 10px 20px;
+    
+    color: var(--White);
+    border-radius: 5px;
+}
+
+.tag{
+    background-color: var(--Yellow);
+}
+.cat{
+    background-color: var(--Green);
+}
+.artist{
+    background-color: var(--Red);
+}

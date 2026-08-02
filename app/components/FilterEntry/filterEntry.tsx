@@ -1,31 +1,86 @@
+'use client';
 
 import styles from './filterEntry.module.css';
 
-import Link from 'next/link';
+import { useState } from 'react';
 
-import { MdEdit } from "react-icons/md";
-import { MdDeleteForever } from "react-icons/md";
+import { MdEdit, MdDeleteForever, MdOutlineCheckCircle, MdClose } from "react-icons/md";
 
 import { FilterEntryData } from '@/definitions'
 
-export default function FilterEntry({ entryData }: { entryData: FilterEntryData }) {
-  return (
-    <div className={styles.musicEntry}>
+export default function FilterEntry({ filterType, entryData }: { filterType: 'tag' | 'cat' | 'artist', entryData: FilterEntryData }) {
+  const [beingEdited, setBeingEdited] = useState(false);
 
-      <div className={styles.entryHeader}>
+  const headerClass = {
+    'tag': styles.tagHeader,
+    'cat': styles.catHeader,
+    'artist': styles.artistHeader
+  }
+  const bodyClass = {
+    'tag': styles.tagBody,
+    'cat': styles.catBody,
+    'artist': styles.artistBody
+  }
+  const inputClass = {
+    'tag': styles.tagInput,
+    'cat': styles.catInput,
+    'artist': styles.artistInput
+  }
+
+
+  return (
+    <div className={styles.filterEntry}>
+      <div className={headerClass[filterType]}>
         <span className={styles.entryName}>{entryData.name}</span>
+        <div className={styles.entryControls}>
+
+
+          <button
+            className={`${styles.entryEdit} linearShine`}
+            onClick={() => { 
+              if (!beingEdited){
+                setBeingEdited(!beingEdited) 
+              }
+              else{
+                //save
+              }
+              
+            }}
+          >
+            {beingEdited ?
+              <MdEdit color='black' /> :
+              <MdOutlineCheckCircle color='black' />}
+          </button>
+
+          <button 
+            className={`${styles.entryDelete} linearShine`} 
+            onClick={() => {
+              if (beingEdited){
+                setBeingEdited(!beingEdited)
+              }
+              else{
+                // delete
+              }
+            }}
+          >
+            {beingEdited ?
+              <MdClose color='black' /> :
+              <MdDeleteForever color='black' />}</button>
+        </div>
       </div>
 
-      <div className={styles.entryBody}>
-        <div className={styles.entryBodyTop}>
-          <div className={styles.entryControls}>
-            <Link href={`/edit/${entryData.id}`} className={`${styles.entryEdit} linearShine`}><MdEdit color='black'/></Link>
-            <button className={`${styles.entryDelete} linearShine`}><MdDeleteForever color='black'/></button>
-          </div>
-        </div>
-        <div className={styles.entryBodyBottom}>
-        </div>
-        
+      <div className={bodyClass[filterType]}>
+        {
+          beingEdited ?
+            <input
+              type='text'
+              placeholder='Enter new name'
+              defaultValue={entryData.name}
+              className={inputClass[filterType]}
+            />
+            : <></>
+        }
+
       </div>
 
     </div>

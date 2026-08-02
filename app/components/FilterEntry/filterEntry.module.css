@@ -1,16 +1,35 @@
-.musicEntry {
+.filterEntry {
     display: flex;
     flex-direction: column;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: 1px 2px 3px var(--Gray);
 }
 
-.entryHeader {
+@media (prefers-color-scheme: dark){
+    .filterEntry{
+        box-shadow: none;
+    }
+}
+
+.tagHeader, .catHeader, .artistHeader {
     display: flex;
     flex-direction: row;
-    background-color: var(--Blue);
     color: var(--White);
     padding: 5px 10px;
+}
+
+.tagHeader{
+    background-color: var(--Yellow);
+
+}
+.catHeader{
+    background-color: var(--Green);
+
+}
+.artistHeader{
+    background-color: var(--Red);
+
 }
 
 .entryName {
@@ -18,22 +37,61 @@
     font-weight: 600;
 }
 
-.entryArtists {
-    margin-left: auto;
-    margin-right: 5px;
-}
-
-.entryBody {
+.tagBody, .catBody, .artistBody {
     display: flex;
-    flex-direction: column;
-    background-color: var(--Gray);
+    flex-direction: row;
     color: var(--Black);
     padding: 10px;
 }
+.tagBody{
+    background-color: var(--LightYellow);
+    border: solid var(--Yellow) 2px;
+    border-radius: 0px 0px 5px 5px;
+}
+.catBody{
+    background-color: var(--LightGreen);
+    border: solid var(--Green) 2px;
+    border-radius: 0px 0px 5px 5px;
+}
+.artistBody{
+    background-color: var(--LightRed);
+    border: solid var(--Red) 2px;
+    border-radius: 0px 0px 5px 5px;
+}
 
-.entryBodyTop {
-    display: flex;
-    flex-direction: row;
+.tagInput, .catInput, .artistInput {
+    padding: 5px;
+    height: 26px;
+    margin-right: 10px;
+    flex: 5 1 0;
+    background-color: var(--White);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tagInput{
+    border: solid var(--Yellow) 2px;
+}
+.catInput{
+    border: solid var(--Green) 2px;
+}
+.artistInput{
+    border: solid var(--Red) 2px;
+}
+.tagInput:focus{
+    border: solid var(--Yellow) 2px;
+}
+.catInput:focus{
+    border: solid var(--Green) 2px;
+}
+.artistInput:focus{
+    border: solid var(--Red) 2px;
+}
+
+.tagInput:focus, .catInput:focus, .artistInput:focus{
+    cursor: default;
+    outline: none;
+    background-color: var(--Gray);
 }
 
 .entryControls {
@@ -47,6 +105,7 @@
 .entryControls > *{
     padding: 5px;
     border-radius: 5px;
+    border: 2px solid var(--White);
     cursor: pointer;
     min-width: 48px;
 
@@ -58,54 +117,14 @@
 .entryEdit {
     background-color: var(--Green);
     color: var(--White);
+    
+}
 
+.entryEditConfirm {
+    background-color: var(--Blue);
 }
 
 .entryDelete {
     background-color: var(--Red);
-}
-
-.entryTags {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    column-gap: 5px;
-    row-gap: 5px;
-}
-
-.entryCat {
-    color: var(--White);
-    overflow-wrap: anywhere;
-}
-
-.entryTag {
-    background-color: var(--Yellow);
-    border-radius: 5px;
-    padding: 10px 5px;
-    overflow-wrap: anywhere;
-    text-align: center;
-    min-width: 48px;
-    height: 27px;
-    font-size: 14px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.entryBodyBottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.entryDesc,
-.entryDate {
-    margin-top: 16px;
-    overflow-wrap: anywhere;
-    display: inline-block;
-}
-
-.entryDate {
-    justify-self: flex-end;
+    border: 2px solid var(--White);
 }

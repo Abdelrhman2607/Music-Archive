@@ -13,9 +13,9 @@ export default function Sidebar() {
         <Link href={'/new'}><button className={styles.newEntryButton}>New Entry</button></Link>
 
         <div className={styles.dataButtons}>
-          <button>Artists</button>
-          <button>Tags</button>
-          <button>Categories</button>
+          <Link href='/artists'>Artists</Link>
+          <Link href='/tags'>Tags</Link>
+          <Link href='/categories'>Categories</Link>
         </div>
 
         <div className={styles.import_exportButtons}>

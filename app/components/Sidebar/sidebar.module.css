@@ -48,6 +48,16 @@
     flex-grow: 3;
 }
 
+.dataButtons > * {
+    color: var(--White);
+    background-color: var(--Blue);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+}
+
 .import_exportButtons{
     margin-top: auto;
 }

@@ -24,11 +24,9 @@ export default async function updateFilter(filterType, id, value) {
     }
 
     catch (error) {
-        console.error(error);
-        return
+        return(error.code);
     }
     finally {
         client.release();
-        return
     }
 }

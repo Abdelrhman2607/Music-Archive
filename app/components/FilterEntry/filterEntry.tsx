@@ -20,7 +20,7 @@ export default function FilterEntry({ filterType, entryData, onSaveSuccess }: Fi
 
   const [name, setName] = useState(entryData.name);
   const [catPath, setCatPath] = useState([])
-  
+
   useEffect(() => {
     if (filterType !== 'cat' || !entryData.id) return;
 
@@ -73,10 +73,15 @@ export default function FilterEntry({ filterType, entryData, onSaveSuccess }: Fi
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
             });
-
             if (res.ok) {
               setBeingEdited(false);
               onSaveSuccess?.();
+            }
+
+            else {
+              setBeingEdited(false);
+              const errorMsg = (await res.json()).error;
+              alert(errorMsg);
             }
           }}
         >

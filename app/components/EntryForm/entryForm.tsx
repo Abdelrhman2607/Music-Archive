@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import useFilterDropdown from '@/util/useFilterDropdown';
 
 import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
@@ -30,7 +30,7 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
       })
         .then((response) => response.json())
         .then((entryData) => {
-          if (entryData.id){
+          if (entryData.id) {
             setEntryFound(true);
             tagFilter.setSelected(entryData.tags)
             catFilter.setSelected([entryData.catPath[0]])
@@ -118,84 +118,87 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
 
   return (
     <>
-    { entryFound || mode === 'new'?
-    <form className={styles.entryForm} onSubmit={handleSubmit}>
-      <div className={styles.textArea}>
-        <label className={styles.fieldLabel}>Title:</label>
-        <input
-          type='text'
-          name='entryTitle'
-          value={entryTitle}
-          onChange={(event) => { setEntryTitle(event.target.value) }}
-          required
-        />
-      </div>
+      {entryFound || mode === 'new' ?
+        <form
+          action={() => { }}
+          className={styles.entryForm}
+          onSubmit={handleSubmit}>
+          <div className={styles.textArea}>
+            <label className={styles.fieldLabel}>Title:</label>
+            <input
+              type='text'
+              name='entryTitle'
+              value={entryTitle}
+              onChange={(event) => { setEntryTitle(event.target.value) }}
+              required
+            />
+          </div>
 
-      <div className={styles.dropdownArea}>
-        <label className={styles.fieldLabel}>Artists:</label>
-        <DropdownMenu
-          inputType='checkbox'
-          options={artistOptions}
-          isOpen={true}
-          name={"artistSelection"}
-          optionsState={{ state: artistFilter.selected, setter: artistFilter.setSelected }}
-          onSearchChange={artistFilter.setSearchText}
-        ></DropdownMenu>
-      </div>
+          <div className={styles.dropdownArea}>
+            <label className={styles.fieldLabel}>Artists:</label>
+            <DropdownMenu
+              inputType='checkbox'
+              options={artistOptions}
+              isOpen={true}
+              name={"artistSelection"}
+              optionsState={{ state: artistFilter.selected, setter: artistFilter.setSelected }}
+              onSearchChange={artistFilter.setSearchText}
+            ></DropdownMenu>
+          </div>
 
-      <div className={styles.selectedFilters}>
-        <SelectedFilters type='artist' filters={artistFilter.selected} onRemoveFilter={(value: string) => {
-          artistFilter.setSelected((prev) => prev.filter((item) => item !== value));
-        }} />
-      </div>
+          <div className={styles.selectedFilters}>
+            <SelectedFilters type='artist' filters={artistFilter.selected} onRemoveFilter={(value: string) => {
+              artistFilter.setSelected((prev) => prev.filter((item) => item !== value));
+            }} />
+          </div>
 
-      <div className={styles.dropdownArea}>
-        <label className={styles.fieldLabel}>Tags:</label>
-        <DropdownMenu
-          inputType='checkbox'
-          options={tagOptions}
-          isOpen={true}
-          name={"tagSelection"}
-          optionsState={{ state: tagFilter.selected, setter: tagFilter.setSelected }}
-          onSearchChange={tagFilter.setSearchText}
-        ></DropdownMenu>
-      </div>
+          <div className={styles.dropdownArea}>
+            <label className={styles.fieldLabel}>Tags:</label>
+            <DropdownMenu
+              inputType='checkbox'
+              options={tagOptions}
+              isOpen={true}
+              name={"tagSelection"}
+              optionsState={{ state: tagFilter.selected, setter: tagFilter.setSelected }}
+              onSearchChange={tagFilter.setSearchText}
+            ></DropdownMenu>
+          </div>
 
-      <div className={styles.selectedFilters}>
-        <SelectedFilters type='tag' filters={tagFilter.selected} onRemoveFilter={(value: string) => {
-          tagFilter.setSelected((prev) => prev.filter((item) => item !== value));
-        }} />
-      </div>
+          <div className={styles.selectedFilters}>
+            <SelectedFilters type='tag' filters={tagFilter.selected} onRemoveFilter={(value: string) => {
+              tagFilter.setSelected((prev) => prev.filter((item) => item !== value));
+            }} />
+          </div>
 
-      <div className={styles.dropdownArea}>
-        <label className={styles.fieldLabel}>Category:</label>
-        <DropdownMenu
-          inputType='radio'
-          options={catOptions}
-          isOpen={true}
-          name={"catSelection"}
-          optionsState={{ state: catFilter.selected, setter: catFilter.setSelected }}
-          onSearchChange={catFilter.setSearchText}
-        ></DropdownMenu>
-      </div>
+          <div className={styles.dropdownArea}>
+            <label className={styles.fieldLabel}>Category:</label>
+            <DropdownMenu
+              inputType='radio'
+              options={catOptions}
+              isOpen={true}
+              name={"catSelection"}
+              optionsState={{ state: catFilter.selected, setter: catFilter.setSelected }}
+              onSearchChange={catFilter.setSearchText}
+            ></DropdownMenu>
+          </div>
 
-      <div className={`${styles.selectedCat} linearShine`}>
-        {catFilter.selected[0]}
-      </div>
+          <div className={`${styles.selectedCat} linearShine`}>
+            {catFilter.selected[0]}
+          </div>
 
-      <div className={styles.textArea} >
-        <label className={styles.fieldLabel}>Description:</label>
-        <textarea
-          name='entryDesc'
-          value={entryDesc || ''}
-          onChange={(event) => { setEntryDesc(event.target.value) }}
-        />
-      </div>
+          <div className={styles.textArea} >
+            <label className={styles.fieldLabel}>Description:</label>
+            <textarea
+              name='entryDesc'
+              value={entryDesc || ''}
+              onChange={(event) => { setEntryDesc(event.target.value) }}
+            />
+          </div>
 
-      <button type='submit' className={`${styles.submitButton} wideLinearShine`}>Save New Entry</button>
-    </form>
-    : <p className={styles.entryNotFound}> Entry not found </p>
-    }
+          <button type='submit' className={`${styles.submitButton} wideLinearShine`}>Save New Entry</button>
+        </form>
+        : <p className={styles.entryNotFound}> Entry not found </p>
+      }
     </>
   );
 }

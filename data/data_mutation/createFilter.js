@@ -28,11 +28,9 @@ export default async function createFilter(filterType, value, parentId = null) {
     }
 
     catch (error) {
-        console.error(error);
-        return
+        return(error.code);
     }
     finally {
         client.release();
-        return
     }
 }

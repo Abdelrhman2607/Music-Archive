@@ -12,7 +12,6 @@ export default async function getCatIDByCatName(name){
     catch(error){
         return(undefined)
     }
-    
-
+    console.log(result.rows)
     return(result.rows[0].id);
 }

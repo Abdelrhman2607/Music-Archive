@@ -44,8 +44,12 @@ export default function NewFilterInput({ filterType, onSaveSuccess, parentCat }:
             });
 
             if (res.ok) {
-              setName('');
               onSaveSuccess?.();
+            }
+
+            else {
+              const errorMsg = (await res.json()).error;
+              alert(errorMsg);
             }
           }
 

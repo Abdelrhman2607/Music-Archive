@@ -6,31 +6,32 @@ type PageNavProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   pageTotal: number;
 };
-export default function PageNav({ currentPage, setCurrentPage, pageTotal}: PageNavProps) {
+export default function PageNav({ currentPage, setCurrentPage, pageTotal }: PageNavProps) {
   return (
     <nav className={styles.pageNav}>
 
-      <button
-        className={`${styles.arrowNavButtonDown} linearShine`}
-        onClick={() => { setCurrentPage(Math.max(1, currentPage - 1)) }}>
-        &#60;
-      </button>
+      <div className={styles.boxShadowContainer}>
+        <button
+          className={`${styles.arrowNavButtonDown} linearShine`}
+          onClick={() => { setCurrentPage(Math.max(1, currentPage - 1)) }}>
+          &#60;
+        </button>
 
-      <input
-        type='text'
-        inputMode='numeric'
-        className={styles.pageNumber}
-        value={currentPage}
-        onChange={(e) => setCurrentPage(parseInt(e.currentTarget.value) || 1)}
-      />
+        <input
+          type='text'
+          inputMode='numeric'
+          className={styles.pageNumber}
+          value={currentPage}
+          onChange={(e) => setCurrentPage(parseInt(e.currentTarget.value) || 1)}
+        />
 
-      <button
-        className={`${styles.arrowNavButtonUp} linearShine`}
-        disabled={currentPage >= pageTotal}
-        onClick={() => { setCurrentPage(currentPage + 1) }}>
-        &#62;
-      </button>
-
+        <button
+          className={`${styles.arrowNavButtonUp} linearShine`}
+          disabled={currentPage >= pageTotal}
+          onClick={() => { setCurrentPage(currentPage + 1) }}>
+          &#62;
+        </button>
+      </div>
     </nav>
   )
 }

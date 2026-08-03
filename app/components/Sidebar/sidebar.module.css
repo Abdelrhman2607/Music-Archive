@@ -42,13 +42,14 @@
 }
 
 .sidebar .newEntryButton{
-    background-color: var(--Green);
-    margin-bottom: 10px;
-    
+    background-color: var(--Blue);
+    margin-bottom: 10px;    
 }
 
 .dataButtons{
     flex-grow: 3;
+    border-top: solid var(--Blue) 3px;
+    padding-top: 10px;
 }
 
 .dataButtons > * {

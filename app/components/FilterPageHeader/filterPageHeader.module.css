@@ -2,19 +2,33 @@
     font-size: 20px;
     margin: 20px 0px;
     padding: 10px 20px;
-    
+
     color: var(--White);
     border-radius: 5px;
     box-shadow: 1px 2px 3px var(--Gray);
 
 }
 
-.tag{
+.tag {
     background-color: var(--Yellow);
 }
-.cat{
-    background-color: var(--Green-DarkMode);
+
+.cat {
+    background-color: var(--Green);
 }
-.artist{
-    background-color: var(--Red-DarkMode);
+
+.artist {
+    background-color: var(--Red);
+}
+
+@media (prefers-color-scheme: dark) {
+
+
+    .cat {
+        background-color: var(--Green-DarkMode);
+    }
+
+    .artist {
+        background-color: var(--Red-DarkMode);
+    }
 }

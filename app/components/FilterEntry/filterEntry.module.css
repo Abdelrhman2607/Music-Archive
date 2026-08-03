@@ -6,29 +6,27 @@
     box-shadow: 1px 2px 3px var(--Gray);
 }
 
-@media (prefers-color-scheme: dark){
-    .filterEntry{
-        box-shadow: 1px 2px 3px var(--Blue);
-    }
-}
-
-.tagHeader, .catHeader, .artistHeader {
+.tagHeader,
+.catHeader,
+.artistHeader {
     display: flex;
     flex-direction: row;
     color: var(--White);
     padding: 5px 10px;
 }
 
-.tagHeader{
+.tagHeader {
     background-color: var(--Yellow);
 
 }
-.catHeader{
-    background-color: var(--Green-DarkMode);
+
+.catHeader {
+    background-color: var(--Green);
 
 }
-.artistHeader{
-    background-color: var(--Red-DarkMode);
+
+.artistHeader {
+    background-color: var(--Red);
 
 }
 
@@ -37,29 +35,36 @@
     font-weight: 600;
 }
 
-.tagBody, .catBody, .artistBody {
+.tagBody,
+.catBody,
+.artistBody {
     display: flex;
     flex-direction: row;
     color: var(--Black);
     padding: 10px;
 }
-.tagBody{
+
+.tagBody {
     background-color: var(--LightYellow);
     border: solid var(--Yellow) 2px;
     border-radius: 0px 0px 5px 5px;
 }
-.catBody{
+
+.catBody {
     background-color: var(--LightGreen);
-    border: solid var(--Green-DarkMode) 2px;
-    border-radius: 0px 0px 5px 5px;
-}
-.artistBody{
-    background-color: var(--LightRed-DarkMode);
-    border: solid var(--Red-DarkMode) 2px;
+    border: solid var(--Green) 2px;
     border-radius: 0px 0px 5px 5px;
 }
 
-.tagInput, .catInput, .artistInput {
+.artistBody {
+    background-color: var(--LightRed);
+    border: solid var(--Red) 2px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.tagInput,
+.catInput,
+.artistInput {
     padding: 5px;
     height: 26px;
     margin-right: 10px;
@@ -69,26 +74,33 @@
     cursor: pointer;
 }
 
-.tagInput{
+.tagInput {
     border: solid var(--Yellow) 2px;
-}
-.catInput{
-    border: solid var(--Green-DarkMode) 2px;
-}
-.artistInput{
-    border: solid var(--Red-DarkMode) 2px;
-}
-.tagInput:focus{
-    border: solid var(--Yellow) 2px;
-}
-.catInput:focus{
-    border: solid var(--Green-DarkMode) 2px;
-}
-.artistInput:focus{
-    border: solid var(--Red-DarkMode) 2px;
 }
 
-.tagInput:focus, .catInput:focus, .artistInput:focus{
+.catInput {
+    border: solid var(--Green) 2px;
+}
+
+.artistInput {
+    border: solid var(--Red) 2px;
+}
+
+.tagInput:focus {
+    border: solid var(--Yellow) 2px;
+}
+
+.catInput:focus {
+    border: solid var(--Green) 2px;
+}
+
+.artistInput:focus {
+    border: solid var(--Red) 2px;
+}
+
+.tagInput:focus,
+.catInput:focus,
+.artistInput:focus {
     cursor: default;
     outline: none;
     background-color: var(--Gray);
@@ -102,7 +114,7 @@
     column-gap: 5px;
 }
 
-.entryControls > *{
+.entryControls>* {
     padding: 5px;
     border-radius: 5px;
     border: 2px solid var(--White);
@@ -117,7 +129,7 @@
 .entryEdit {
     background-color: var(--Green);
     color: var(--White);
-    
+
 }
 
 .entryEditConfirm {
@@ -127,4 +139,48 @@
 .entryDelete {
     background-color: var(--Red);
     border: 2px solid var(--White);
+}
+
+@media (prefers-color-scheme: dark) {
+    .filterEntry {
+        box-shadow: 1px 2px 3px var(--Blue);
+    }
+
+    .catHeader {
+        background-color: var(--Green-DarkMode);
+
+    }
+
+    .artistHeader {
+        background-color: var(--Red-DarkMode);
+
+    }
+
+    .catBody {
+        background-color: var(--LightGreen);
+        border: solid var(--Green-DarkMode) 2px;
+        border-radius: 0px 0px 5px 5px;
+    }
+
+    .artistBody {
+        background-color: var(--LightRed-DarkMode);
+        border: solid var(--Red-DarkMode) 2px;
+        border-radius: 0px 0px 5px 5px;
+    }
+
+    .catInput {
+        border: solid var(--Green-DarkMode) 2px;
+    }
+
+    .artistInput {
+        border: solid var(--Red-DarkMode) 2px;
+    }
+
+    .catInput:focus {
+        border: solid var(--Green-DarkMode) 2px;
+    }
+
+    .artistInput:focus {
+        border: solid var(--Red-DarkMode) 2px;
+    }
 }

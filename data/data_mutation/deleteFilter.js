@@ -24,10 +24,9 @@ export default async function deleteFilter(filterType, id) {
 
     catch (error) {
         console.error(error);
-        return
+        return(error.code);
     }
     finally {
         client.release();
-        return
     }
 }

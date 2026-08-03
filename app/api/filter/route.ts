@@ -38,10 +38,16 @@ export async function DELETE(request: Request) {
     const id = searchParams.get('id') ?? 0;
     const filterType = searchParams.get('filterType');
 
-    const data = await deleteFilter(
+    const errorCode = await deleteFilter(
         filterType,
         id
     );
 
-    return Response.json({ status: 200 });
+    if (errorCode === '23503' && filterType === 'cat'){
+        const errorMsg = 'Can\'t delete a category with existing subcategories'
+        return Response.json({error: errorMsg}, { status: 400 });
+    }
+    else{
+        return Response.json({ status: 200 });
+    }
 }

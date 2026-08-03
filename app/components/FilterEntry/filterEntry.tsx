@@ -123,6 +123,12 @@ export default function FilterEntry({ filterType, entryData, onSaveSuccess }: Fi
                 setBeingDeleted(false);
                 onSaveSuccess?.();
               }
+
+              else{
+                setBeingDeleted(false);
+                const errorMsg = (await res.json()).error;
+                alert(errorMsg);
+              }
             }
 
           }}

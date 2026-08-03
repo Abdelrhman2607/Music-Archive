@@ -1,4 +1,4 @@
-import getCats from '@/data_fetching/multiple/getCats';
+import getCats from '@/data/data_fetching/multiple/getCats';
 
 export async function GET(request: Request) {
 

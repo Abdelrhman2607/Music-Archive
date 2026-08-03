@@ -1,4 +1,4 @@
-import { pool } from '../db_pool';
+import { pool } from '../../db_pool';
 
 export default async function getCatPath(catId) {
   if (!catId) return [];

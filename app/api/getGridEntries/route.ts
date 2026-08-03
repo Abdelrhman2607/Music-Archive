@@ -1,4 +1,4 @@
-import getGridEntries from "@/data_fetching/multiple/getGridEntries";
+import getGridEntries from "@/data/data_fetching/multiple/getGridEntries";
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);

@@ -1,5 +1,5 @@
 
-import { pool } from '../db_pool';
+import { pool } from '../../db_pool';
 import { ENTRIES_PER_PAGE } from '@/definitions';
 
 export default async function getFilterEntries(filterType, pageOffset = 1, target = '') {

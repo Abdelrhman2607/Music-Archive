@@ -1,5 +1,5 @@
 
-import { pool } from '../db_pool';
+import { pool } from '../../db_pool';
 
 import getEntryDataByID from '../single/getEntryDataByID'
 import {ENTRIES_PER_PAGE} from '@/definitions'

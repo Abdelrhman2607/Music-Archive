@@ -1,4 +1,4 @@
-import { pool } from '../db_pool';
+import { pool } from '../../db_pool';
 import getEntryTagsByID from './getEntryTagsByID';
 import getEntryArtistsByID from './getEntryArtistsByID';
 import getCatPath from './getCatPath';

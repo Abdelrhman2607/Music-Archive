@@ -1,22 +1,23 @@
-import {pool} from '../db_pool';
+import {pool} from '../../db_pool';
 
-export default async function getEntryTagsByID(id){
+export default async function getEntryArtistsByID(id){
 
     const queryString =
     `
     SELECT
-    t.name 
+    a.name 
 
-    FROM tags t JOIN tag_entries te
-    ON te.tag_id = t.id
+    FROM artists a JOIN artist_entries ae
+    ON ae.artist_id = a.id
     
-    WHERE te.entry_id = $1::int
+    WHERE ae.entry_id = $1::int
  
     `;
 
     const queryValues = [id];
 
     const client = await pool.connect();
+
     let result;
     try{
         result = await client.query(queryString, queryValues);
@@ -28,6 +29,5 @@ export default async function getEntryTagsByID(id){
         client.release();
     }
     
-
     return(result.rows.map((object) => (object.name)));
 }

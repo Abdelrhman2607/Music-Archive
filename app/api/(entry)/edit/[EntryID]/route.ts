@@ -1,5 +1,5 @@
 
-import getEntryDataByID from '@/data_fetching/single/getEntryDataByID'
+import getEntryDataByID from '@/data/data_fetching/single/getEntryDataByID'
 
 export async function GET(request: Request) {
     const responseURL = new URL(request.url);

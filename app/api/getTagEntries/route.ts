@@ -1,4 +1,4 @@
-import getFilterEntries from "@/data_fetching/multiple/getFilterEntries";
+import getFilterEntries from "@/data/data_fetching/multiple/getFilterEntries";
 
 export async function GET(request: Request){
     const { searchParams } = new URL(request.url);

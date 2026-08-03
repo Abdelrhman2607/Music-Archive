@@ -20,6 +20,7 @@ export default function FilterDisplayGrid({ currentPage, pageTotal, searchText, 
 ) {
 
   const [gridData, setGridData] = useState<FilterEntryData[]>([]);
+  const [refreshKey, setRefreshKey] = useState(false);
 
   useEffect(() => {
     if (currentPage <= pageTotal) {
@@ -36,13 +37,22 @@ export default function FilterDisplayGrid({ currentPage, pageTotal, searchText, 
         .then((response) => response.json())
         .then((data) => setGridData(data));
     }
-  }, [currentPage, searchText]);
+  }, [currentPage, searchText, refreshKey]);
 
   return (
     <div className={styles.entryGrid}>
       {gridData.length === 0
-      ? <p className={styles.noEntriesFound}>No entries match search criteria</p>
-      : gridData.map((entryData) => { return (<FilterEntry key={entryData.id} entryData={entryData} filterType={filterType}/>) })}
+        ? <p className={styles.noEntriesFound}>No entries match search criteria</p>
+        : gridData.map((entryData) => {
+          return (
+            <FilterEntry
+              key={entryData.id}
+              entryData={entryData}
+              filterType={filterType}
+              onSaveSuccess={() => setRefreshKey(!refreshKey)}
+            />
+          )
+        })}
     </div>
   );
 }

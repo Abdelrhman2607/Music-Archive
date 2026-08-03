@@ -1,4 +1,4 @@
-import getArtists from '@/data_fetching/multiple/getArtists';
+import getArtists from '@/data/data_fetching/multiple/getArtists';
 
 export async function GET(request: Request) {
 

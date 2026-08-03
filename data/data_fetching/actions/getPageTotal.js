@@ -1,6 +1,6 @@
 'use server';
 
-import { pool } from '@/data_fetching/db_pool';
+import { pool } from '@/data/db_pool';
 import { ENTRIES_PER_PAGE } from '@/definitions'
 
 export default async function getPageTotal(table) {

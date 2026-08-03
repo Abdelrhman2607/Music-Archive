@@ -1,4 +1,4 @@
-import getTags from '@/data_fetching/multiple/getTags';
+import getTags from '@/data/data_fetching/multiple/getTags';
 
 export async function GET(request: Request) {
 

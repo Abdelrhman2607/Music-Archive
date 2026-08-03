@@ -12,15 +12,15 @@ type FilterDisplayGridProps = {
   currentPage: number;
   pageTotal: number;
   searchText: string;
-  filterType: 'tag' | 'cat' | 'artist'
+  filterType: 'tag' | 'cat' | 'artist';
+  refreshKey: boolean;
+  setRefreshKey: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-export default function FilterDisplayGrid({ currentPage, pageTotal, searchText, filterType }:
+export default function FilterDisplayGrid({ currentPage, pageTotal, searchText, filterType, refreshKey, setRefreshKey }:
   FilterDisplayGridProps
 ) {
-
   const [gridData, setGridData] = useState<FilterEntryData[]>([]);
-  const [refreshKey, setRefreshKey] = useState(false);
 
   useEffect(() => {
     if (currentPage <= pageTotal) {

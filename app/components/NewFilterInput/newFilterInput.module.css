@@ -1,0 +1,30 @@
+.inputWrapper{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.createButton{
+    flex: 1 5 0;
+    margin-bottom: 10px;
+    height: var(--SearchAreaDefaultHeight);
+}
+
+
+.inputText{
+    padding: 5px;
+    margin-bottom: 10px;
+    height: var(--SearchAreaDefaultHeight);
+    flex: 5 1 0;
+    background-color: var(--White);
+    border-radius: 5px;
+    border: solid var(--Blue) 2px;
+    cursor: pointer;
+}
+
+.inputText:focus{
+    cursor: default;
+    outline: none;
+    background-color: var(--Gray);
+}
+

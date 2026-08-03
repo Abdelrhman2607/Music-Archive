@@ -107,21 +107,24 @@ export default function FilterEntry({ filterType, entryData, onSaveSuccess }: Fi
           type='button'
           className={`${styles.entryDelete} linearShine`}
           onClick={async () => {
-            const params = new URLSearchParams({
-              filterType,
-              id: entryData.id.toString(),
-              value: name
-            });
+            if (name.length > 0) {
+              const params = new URLSearchParams({
+                filterType,
+                id: entryData.id.toString(),
+                value: name
+              });
 
-            const res = await fetch(`/api/filter?${params.toString()}`, {
-              method: 'DELETE',
-              headers: { 'Content-Type': 'application/json' },
-            });
+              const res = await fetch(`/api/filter?${params.toString()}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+              });
 
-            if (res.ok) {
-              setBeingDeleted(false);
-              onSaveSuccess?.();
+              if (res.ok) {
+                setBeingDeleted(false);
+                onSaveSuccess?.();
+              }
             }
+
           }}
         >
           <MdOutlineCheckCircle color='black' />

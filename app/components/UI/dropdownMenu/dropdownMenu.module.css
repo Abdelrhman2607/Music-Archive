@@ -10,8 +10,7 @@
     overflow: auto;
     padding: 5px;
     border: solid var(--Blue) 3px;
-    border-radius: 3px;
-    
+    border-radius: 5px 5px 10px 10px;
 }
 
 .dropdownSearch{
@@ -20,7 +19,7 @@
     height: 24px;
     font-size: 14px;
     background-color: var(--White);
-    border-radius: 3px;
+    border-radius: 5px;
     border: solid var(--Blue) 2px;
     cursor: pointer;
 }
@@ -37,7 +36,8 @@
 
 .dropdownItem input{
     background-color: var(--Blue);
-    margin-right: 3px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 @media (prefers-color-scheme: dark){

@@ -2,7 +2,7 @@
 
 import styles from './filterEntry.module.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { MdEdit, MdDeleteForever, MdOutlineCheckCircle, MdClose } from "react-icons/md";
 
@@ -19,6 +19,26 @@ export default function FilterEntry({ filterType, entryData, onSaveSuccess }: Fi
   const [beingDeleted, setBeingDeleted] = useState(false);
 
   const [name, setName] = useState(entryData.name);
+  const [catPath, setCatPath] = useState([])
+  
+  useEffect(() => {
+    if (filterType !== 'cat' || !entryData.id) return;
+
+    let cancelled = false;
+
+    const loadCatPath = async () => {
+      const res = await fetch(`/api/getCatPath?id=${entryData.id}`);
+      if (!res.ok) return;
+
+      const data = await res.json();
+      if (!cancelled) setCatPath(data);
+    };
+
+    loadCatPath();
+    return () => {
+      cancelled = true;
+    };
+  }, [filterType, entryData.id]);
 
   const headerClass = {
     'tag': styles.tagHeader,
@@ -124,7 +144,7 @@ export default function FilterEntry({ filterType, entryData, onSaveSuccess }: Fi
                 onSaveSuccess?.();
               }
 
-              else{
+              else {
                 setBeingDeleted(false);
                 const errorMsg = (await res.json()).error;
                 alert(errorMsg);
@@ -170,6 +190,12 @@ export default function FilterEntry({ filterType, entryData, onSaveSuccess }: Fi
               className={inputClass[filterType]}
             />
             : <></>
+        }
+        {
+          filterType === 'cat' && catPath.length > 0 ?
+            <span className={styles.catPath}>{catPath.join(' / ')}</span>
+            :
+            <></>
         }
 
       </div>

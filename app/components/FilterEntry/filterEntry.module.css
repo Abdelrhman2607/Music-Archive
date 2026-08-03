@@ -13,6 +13,7 @@
     flex-direction: row;
     color: var(--White);
     padding: 5px 10px;
+    flex-grow: 1;
 }
 
 .tagHeader {
@@ -33,6 +34,7 @@
 .entryName {
     margin-right: 5px;
     font-weight: 600;
+    overflow-wrap: anywhere;
 }
 
 .tagBody,
@@ -42,6 +44,7 @@
     flex-direction: row;
     color: var(--Black);
     padding: 10px;
+    flex-grow: 3;
 }
 
 .tagBody {
@@ -127,7 +130,7 @@
 }
 
 .entryEdit {
-    background-color: var(--Green);
+    background-color: var(--EditGreen);
     color: var(--White);
 
 }
@@ -137,8 +140,12 @@
 }
 
 .entryDelete {
-    background-color: var(--Red);
-    border: 2px solid var(--White);
+    background-color: var(--DeleteRed);
+}
+
+.catPath{
+    color: var(--DarkGray);
+    overflow-wrap: anywhere;
 }
 
 @media (prefers-color-scheme: dark) {

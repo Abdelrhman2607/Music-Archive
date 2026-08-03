@@ -6,10 +6,11 @@ import { useState } from "react";
 
 type FilterEntryProps = {
   filterType: 'tag' | 'cat' | 'artist';
+  parentCat?: string
   onSaveSuccess?: () => void;
 }
 
-export default function NewFilterInput({ filterType, onSaveSuccess }: FilterEntryProps) {
+export default function NewFilterInput({ filterType, onSaveSuccess, parentCat }: FilterEntryProps) {
   const filterFullNames = {
     'tag': 'Tag',
     'cat': 'Category',
@@ -33,7 +34,8 @@ export default function NewFilterInput({ filterType, onSaveSuccess }: FilterEntr
           if (name.length > 0) {
             const params = new URLSearchParams({
               filterType,
-              value: name
+              value: name,
+              parentCat: parentCat ?? ''
             });
 
             const res = await fetch(`/api/filter?${params.toString()}`, {

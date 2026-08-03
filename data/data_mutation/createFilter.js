@@ -1,7 +1,7 @@
 
 import { pool } from '@/data/db_pool';
 
-export default async function createFilter(filterType, value) {
+export default async function createFilter(filterType, value, parentId = null) {
     const allowedTables = {
         tag: 'tags',
         cat: 'categories',
@@ -11,13 +11,18 @@ export default async function createFilter(filterType, value) {
     const client = await pool.connect();
     try {
 
-        const queryString =
+        const queryString = filterType === 'cat' ?
+            `
+            INSERT INTO ${allowedTables[filterType]} (name, parent_id) VALUES
+            ($1::text, $2::int) 
+            `
+        :
             `
             INSERT INTO ${allowedTables[filterType]} (name) VALUES
             ($1::text) 
             `
 
-        const queryValues = [value]
+        const queryValues = filterType === 'cat' ? [value, parentId] : [value]
         const result = await client.query(queryString, queryValues);
         return
     }

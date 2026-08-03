@@ -6,89 +6,49 @@ import styles from './musicEntry.module.css';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { MdEdit, MdDeleteForever, MdOutlineCheckCircle, MdClose } from 'react-icons/md';
+import { MdEdit, MdDeleteForever, MdClose, MdOutlineCheckCircle } from 'react-icons/md';
 
 import { EntryData } from '@/definitions'
 
 export default function MusicEntry({ entryData }: { entryData: EntryData }) {
   const router = useRouter();
-  const [beingEdited, setBeingEdited] = useState(false);
   const [beingDeleted, setBeingDeleted] = useState(false);
 
-  const editButton = (() => {
-    if (beingEdited) {
-      return (
-        <button
-          type='button'
-          className={`${styles.entryEdit} linearShine`}
-          onClick={() => {
-            setBeingEdited(false);
-            router.push(`/edit/${entryData.id}`);
-          }}
-        >
-          <MdOutlineCheckCircle color='black' />
-        </button>
-      );
-    }
+  const editButton = beingDeleted ? (
+    <button
+      type='button'
+      className={`${styles.entryEdit} linearShine`}
+      onClick={() => setBeingDeleted(false)}
+    >
+      <MdClose color='black' />
+    </button>
+  ) : (
+    <button
+      type='button'
+      className={`${styles.entryEdit} linearShine`}
+      onClick={() => router.push(`/edit/${entryData.id}`)}
+    >
+      <MdEdit color='black' />
+    </button>
+  );
 
-    if (beingDeleted) {
-      return (
-        <button
-          type='button'
-          className={`${styles.entryEdit} linearShine`}
-          onClick={() => setBeingDeleted(false)}
-        >
-          <MdClose color='black' />
-        </button>
-      );
-    }
-
-    return (
-      <button
-        type='button'
-        className={`${styles.entryEdit} linearShine`}
-        onClick={() => setBeingEdited(true)}
-      >
-        <MdEdit color='black' />
-      </button>
-    );
-  })();
-
-  const deleteButton = (() => {
-    if (beingEdited) {
-      return (
-        <button
-          type='button'
-          className={`${styles.entryDelete} linearShine`}
-          onClick={() => setBeingEdited(false)}
-        >
-          <MdClose color='black' />
-        </button>
-      );
-    }
-
-    if (beingDeleted) {
-      return (
-        <button
-          type='button'
-          className={`${styles.entryDelete} linearShine`}
-          onClick={() => setBeingDeleted(false)}
-        >
-          <MdOutlineCheckCircle color='black' />
-        </button>
-      );
-    }
-
-    return (
-      <button
-        type='button'
-        className={`${styles.entryDelete} linearShine`}
-        onClick={() => setBeingDeleted(true)}
-      >
-        <MdDeleteForever color='black' />
-      </button>
-    );
-  })();
+  const deleteButton = beingDeleted ? (
+    <button
+      type='button'
+      className={`${styles.entryDelete} linearShine`}
+      onClick={() => setBeingDeleted(false)}
+    >
+      <MdOutlineCheckCircle color='black' />
+    </button>
+  ) : (
+    <button
+      type='button'
+      className={`${styles.entryDelete} linearShine`}
+      onClick={() => setBeingDeleted(true)}
+    >
+      <MdDeleteForever color='black' />
+    </button>
+  );
 
   return (
     <div className={styles.musicEntry}>

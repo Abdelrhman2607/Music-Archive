@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect} from 'react';
 import useFilterDropdown from '@/util/useFilterDropdown';
 
 import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
@@ -79,7 +79,7 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
       .then((data) => setArtistOptions(data));
   }, [artistFilter.searchText]);
 
-  // initial states / entryForm special cases
+  // initial states
   useEffect(() => {
     tagFilter.setIsOpen(true);
     artistFilter.setIsOpen(true);

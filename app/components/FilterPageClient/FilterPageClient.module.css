@@ -1,0 +1,56 @@
+.inputArea div {
+    position: static;
+}
+
+.catParentInput {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-bottom: 20px;
+}
+
+.catParentMsg{
+    font-weight: 500;
+    padding: 10px 20px;
+    background-color: var(--Green);
+    color: var(--White);
+    border-radius: 5px;
+    box-shadow: 1px 2px 3px var(--Gray);
+}
+
+.lineSeparator {
+    margin-bottom: 20px;
+    height: 3px;
+    width: 100%;
+}
+
+.tag {
+    background-color: var(--Yellow);
+}
+
+.cat {
+    background-color: var(--Green);
+}
+
+.artist {
+    background-color: var(--Red);
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .tag {
+        background-color: var(--Yellow);
+    }
+
+    .cat {
+        background-color: var(--Green-DarkMode);
+    }
+
+    .artist {
+        background-color: var(--Red-DarkMode);
+    }
+
+    .catParentMsg{
+        background-color: var(--Green-DarkMode);
+    }
+}

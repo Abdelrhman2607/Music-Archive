@@ -2,6 +2,8 @@ import updateFilter from '@/data/data_mutation/updateFilter';
 import deleteFilter from '@/data/data_mutation/deleteFilter';
 import createFilter from '@/data/data_mutation/createFilter';
 
+import getCatIDByCatName from '@/data/data_fetching/single/getCatIDByCatName';
+
 export async function PUT(request: Request) {
     const { searchParams } = new URL(request.url);
 
@@ -21,12 +23,16 @@ export async function PUT(request: Request) {
 export async function POST(request: Request) {
     const { searchParams } = new URL(request.url);
 
-    const value = searchParams.get('value') ?? 'Unnamed tag';
+    const value = searchParams.get('value') || 'Unnamed tag';
     const filterType = searchParams.get('filterType');
+    const catParent = searchParams.get('parentCat') || null;
 
+    const parentId = await getCatIDByCatName(catParent);
+   
     const data = await createFilter(
         filterType,
-        value
+        value,
+        parentId
     );
 
     return Response.json({ status: 200 });

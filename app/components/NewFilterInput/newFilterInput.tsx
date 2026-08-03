@@ -44,6 +44,7 @@ export default function NewFilterInput({ filterType, onSaveSuccess, parentCat }:
             });
 
             if (res.ok) {
+              setName('');
               onSaveSuccess?.();
             }
 

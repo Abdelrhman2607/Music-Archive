@@ -10,7 +10,7 @@ export default function Sidebar() {
 
       <div className={styles.sidebarBase}>
 
-        <Link href={'/new'}><button className={`${styles.newEntryButton} linearShine`}>New Entry</button></Link>
+        <button className={`${styles.newEntryButton} linearShine`}><Link href={'/new'}>New Entry</Link></button>
 
         <div className={styles.dataButtons}>
           <Link href='/artists' className='linearShine'>Artists</Link>

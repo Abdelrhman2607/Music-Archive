@@ -13,8 +13,8 @@
     background-color: var(--Yellow);
 }
 .cat{
-    background-color: var(--Green);
+    background-color: var(--Green-DarkMode);
 }
 .artist{
-    background-color: var(--Red);
+    background-color: var(--Red-DarkMode);
 }

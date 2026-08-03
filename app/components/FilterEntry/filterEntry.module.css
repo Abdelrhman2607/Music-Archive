@@ -8,7 +8,7 @@
 
 @media (prefers-color-scheme: dark){
     .filterEntry{
-        box-shadow: none;
+        box-shadow: 1px 2px 3px var(--Blue);
     }
 }
 
@@ -24,11 +24,11 @@
 
 }
 .catHeader{
-    background-color: var(--Green);
+    background-color: var(--Green-DarkMode);
 
 }
 .artistHeader{
-    background-color: var(--Red);
+    background-color: var(--Red-DarkMode);
 
 }
 
@@ -50,12 +50,12 @@
 }
 .catBody{
     background-color: var(--LightGreen);
-    border: solid var(--Green) 2px;
+    border: solid var(--Green-DarkMode) 2px;
     border-radius: 0px 0px 5px 5px;
 }
 .artistBody{
-    background-color: var(--LightRed);
-    border: solid var(--Red) 2px;
+    background-color: var(--LightRed-DarkMode);
+    border: solid var(--Red-DarkMode) 2px;
     border-radius: 0px 0px 5px 5px;
 }
 
@@ -73,19 +73,19 @@
     border: solid var(--Yellow) 2px;
 }
 .catInput{
-    border: solid var(--Green) 2px;
+    border: solid var(--Green-DarkMode) 2px;
 }
 .artistInput{
-    border: solid var(--Red) 2px;
+    border: solid var(--Red-DarkMode) 2px;
 }
 .tagInput:focus{
     border: solid var(--Yellow) 2px;
 }
 .catInput:focus{
-    border: solid var(--Green) 2px;
+    border: solid var(--Green-DarkMode) 2px;
 }
 .artistInput:focus{
-    border: solid var(--Red) 2px;
+    border: solid var(--Red-DarkMode) 2px;
 }
 
 .tagInput:focus, .catInput:focus, .artistInput:focus{

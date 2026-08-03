@@ -4,16 +4,22 @@
 	--DarkBlue: #080920;
 	--Blue: #5AD3FF;
 	--LightBlue: #e9f9ff;
+
 	--Gray: #e5e5e5;
 	--DarkGray: #262626;
+
 	--White: #ffffff;
 	--Black: #000000;
+
 	--Yellow: #FFCF5E;
 	--LightYellow: #fff2d3;
+
 	--Green: #8FF08B;
 	--LightGreen: #d6ffd4;
+
 	--Red: #ff7a7a;
 	--LightRed: #ffd3d3;
+
 	--Purple: #d881fd;
 
 	--SearchAreaDefaultHeight: 32px;
@@ -23,15 +29,24 @@
 	:root {
 		--DarkBlue: #080920;
 		--Blue: #172254;
-		--LightBlue: #8ca2b4;
+		--LightBlue: #bed3e4;
+
 		--LightGray: #a5a5a5;
 		--Gray: #262626;
 		--DarkGray: #262626;
+
 		--White: #ffffff;
 		--Black: #000000;
-		--Yellow: #d4a943;
-		--Green: #3c9f38;
-		--Red: #a32e2e;
+
+		--Yellow: #dac97d;
+		--LightYellow: #e9dfb2;
+
+		--Green-DarkMode: #7dc59e;
+		--LightGreen: #daf7d9;
+
+		--Red-DarkMode: #7d452f;
+		--LightRed-DarkMode: #c7b9ad;
+
 		--Purple: #7d329d;
 	}
 

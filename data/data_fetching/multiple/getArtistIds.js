@@ -7,8 +7,8 @@ export default async function getArtistIds(artists, client = null) {
     let queryString =
       `
       SELECT id FROM artists a 
-      JOIN UNNEST($1::TEXT[]) AS u(artist_name)
-      ON a.name = u.artist_names
+      JOIN UNNEST($1::text[]) AS u(artist_name)
+      ON a.name = u.artist_name
       `
     let queryValues = [artists];
 

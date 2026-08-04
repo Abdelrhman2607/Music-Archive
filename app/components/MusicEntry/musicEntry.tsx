@@ -10,7 +10,7 @@ import { MdEdit, MdDeleteForever, MdClose, MdOutlineCheckCircle } from 'react-ic
 
 import { EntryData } from '@/definitions'
 
-export default function MusicEntry({ entryData }: { entryData: EntryData }) {
+export default function MusicEntry({ entryData, onSaveSuccess }: { entryData: EntryData, onSaveSuccess: () => void }) {
   const router = useRouter();
   const [beingDeleted, setBeingDeleted] = useState(false);
 
@@ -36,7 +36,21 @@ export default function MusicEntry({ entryData }: { entryData: EntryData }) {
     <button
       type='button'
       className={`${styles.entryDelete} linearShine`}
-      onClick={() => setBeingDeleted(false)}
+      onClick={ async () => {
+        const res = await fetch(`/api/deleteEntry?id=${entryData.id}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+        });
+        setBeingDeleted(false);
+        if (res.ok) {
+          onSaveSuccess?.();
+        }
+        else {
+          const errorMsg = (await res.json()).error;
+          alert(errorMsg);
+        }
+        setBeingDeleted(false)
+      }}
     >
       <MdOutlineCheckCircle color='black' />
     </button>

@@ -19,7 +19,7 @@ type EntryDisplayGridProps = {
 export default function EntryDisplayGrid({ currentPage, pageTotal, searchText, selectedFilters }:
   EntryDisplayGridProps
 ) {
-
+  const [refreshKey, setRefreshKey] = useState(false);
   const [gridData, setGridData] = useState<EntryData[]>([
     {
       id: 0,
@@ -49,13 +49,21 @@ export default function EntryDisplayGrid({ currentPage, pageTotal, searchText, s
         .then((response) => response.json())
         .then((data) => setGridData(data));
     }
-  }, [currentPage, searchText, selectedFilters]);
+  }, [currentPage, searchText, selectedFilters, refreshKey]);
 
   return (
     <div className={styles.entryGrid}>
       {gridData.length === 0
-      ? <p className={styles.noEntriesFound}>No entries match search criteria</p>
-      : gridData.map((entry: EntryData) => { return (<MusicEntry key={entry.id} entryData={entry} />) })}
+        ? <p className={styles.noEntriesFound}>No entries match search criteria</p>
+        : gridData.map((entry: EntryData) => {
+          return (
+            <MusicEntry
+              key={entry.id}
+              entryData={entry}
+              onSaveSuccess={() => { setRefreshKey(!refreshKey) }}
+            />
+          )
+        })}
     </div>
   );
 }

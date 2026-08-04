@@ -8,7 +8,7 @@ export default async function getTagIds(tags, client = null) {
       `
       SELECT id FROM tags t 
       JOIN UNNEST($1::TEXT[]) AS u(tag_name)
-      ON t.name = u.tag_names
+      ON t.name = u.tag_name
       `
     let queryValues = [tags];
 

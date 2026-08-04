@@ -1,11 +1,11 @@
 
 import { pool } from '@/data/db_pool';
 
-export default async function deleteEntry(id) {
-
-    const client = await pool.connect();
+export default async function deleteEntry(id, client = null) {
+    console.log(id)
+    const queryClient = client ?? await pool.connect();
     try {
-
+        await queryClient.query('BEGIN');
         const queryString =
             `
             DELETE FROM music_entries
@@ -13,16 +13,19 @@ export default async function deleteEntry(id) {
             `
 
         const queryValues = [id]
-        const result = await client.query(queryString, queryValues);
+        await queryClient.query(queryString, queryValues);
+        await queryClient.query('COMMIT');
         return
     }
 
     catch (error) {
+        await queryClient.query('ROLLBACK');
         console.error(error);
         return
     }
     finally {
-        client.release();
-        return
+        if (!client) {
+            queryClient.release();
+        }
     }
 }

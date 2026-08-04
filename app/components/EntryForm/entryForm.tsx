@@ -92,6 +92,7 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
     event.preventDefault();
 
     const submission = {
+      id: mode==='edit'? entryId : 0,
       title: event.target.entryTitle.value,
       tags: tagFilter.selected,
       artists: artistFilter.selected,
@@ -120,7 +121,6 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
     <>
       {entryFound || mode === 'new' ?
         <form
-          action={() => { }}
           className={styles.entryForm}
           onSubmit={handleSubmit}>
           <div className={styles.textArea}>
@@ -195,7 +195,7 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
             />
           </div>
 
-          <button type='submit' className={`${styles.submitButton} wideLinearShine`}>Save New Entry</button>
+          <button type='submit' className={`${styles.submitButton} wideLinearShine`}>Save Entry</button>
         </form>
         : <p className={styles.entryNotFound}> Entry not found </p>
       }

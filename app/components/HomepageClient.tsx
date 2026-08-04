@@ -1,7 +1,7 @@
 'use client';
 
 import SearchArea from '@/app/components/Search/searchArea';
-import EntryDisplayGrid from '@/app/components/EntryDisplayGrid/entryDisplayGrid';
+import EntryDisplayGrid from '@/app/components/MusicEntries/EntryDisplayGrid/entryDisplayGrid';
 import PageNav from '@/app/components/UI/pageNav/pageNav';
 
 import { useState } from 'react';

@@ -2,9 +2,9 @@
 
 import styles from './searchArea.module.css';
 
-import Searchbar from './searchbar';
-import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
-import SelectedFilters from '../UI/selectedFilters/selectedFilters';
+import Searchbar from '@/app/components/Search/searchbar';
+import DropdownMenu from '@/app/components/UI/dropdownMenu/dropdownMenu';
+import SelectedFilters from '@/app/components/UI/selectedFilters/selectedFilters';
 
 import { useState, useEffect } from 'react';
 import { useFilterDropdownType } from '@/util/useFilterDropdown'

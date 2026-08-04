@@ -2,7 +2,7 @@
 
 import styles from './entryDisplayGrid.module.css';
 
-import MusicEntry from '../MusicEntry/musicEntry';
+import MusicEntry from '@/app/components/MusicEntries/MusicEntry/musicEntry';
 
 import { EntryData } from '@/definitions';
 import { useState, useEffect } from 'react';

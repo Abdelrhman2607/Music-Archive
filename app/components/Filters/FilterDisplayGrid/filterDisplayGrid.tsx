@@ -2,7 +2,7 @@
 
 import styles from './filterDisplayGrid.module.css';
 
-import FilterEntry from '@/app/components/FilterEntry/filterEntry';
+import FilterEntry from '@/app/components/Filters/FilterEntry/filterEntry';
 import { FilterEntryData } from '@/definitions'
 import titleCaseWord from '@/util/titleCaseWord'
 

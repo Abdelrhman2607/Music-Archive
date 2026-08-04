@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import useFilterDropdown from '@/util/useFilterDropdown';
 
-import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
-import SelectedFilters from '../UI/selectedFilters/selectedFilters';
+import DropdownMenu from '@/app/components/UI/dropdownMenu/dropdownMenu';
+import SelectedFilters from '@/app/components/UI/selectedFilters/selectedFilters';
 import styles from './entryForm.module.css';
 import { useRouter } from 'next/navigation';
 

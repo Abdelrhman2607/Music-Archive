@@ -1,14 +1,14 @@
 'use client';
 
 import styles from './FilterPageClient.module.css'
-import FilterDisplayGrid from "../FilterDisplayGrid/filterDisplayGrid";
-import Searchbar from "../Search/searchbar";
-import PageNav from "../UI/pageNav/pageNav";
+import FilterDisplayGrid from "@/app/components/Filters/FilterDisplayGrid/filterDisplayGrid";
+import Searchbar from "@/app/components/Search/searchbar";
+import PageNav from "@/app/components/UI/pageNav/pageNav";
 
 import { useEffect, useState } from "react";
-import FilterPageHeader from "../FilterPageHeader/filterPageHeader";
-import NewFilterInput from "../NewFilterInput/newFilterInput";
-import DropdownMenu from "../UI/dropdownMenu/dropdownMenu";
+import FilterPageHeader from "@/app/components/Filters/FilterPageHeader/filterPageHeader";
+import NewFilterInput from "@/app/components/Filters/NewFilterInput/newFilterInput";
+import DropdownMenu from "@/app/components/UI/dropdownMenu/dropdownMenu";
 import useFilterDropdown from "@/util/useFilterDropdown";
 
 export default function FilterPageClient({ pageTotal, filterType }: { pageTotal: number, filterType: 'tag' | 'cat' | 'artist' }) {

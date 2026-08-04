@@ -1,6 +1,6 @@
 
-import EntryForm from '@/app/components/EntryForm/entryForm';
-import EntryFormHeader from '@/app/components/EntryFormHeader/entryFormHeader';
+import EntryForm from '@/app/components/MusicEntries/EntryForm/entryForm';
+import EntryFormHeader from '@/app/components/MusicEntries/EntryFormHeader/entryFormHeader';
 
 import getEntryTitleByID from '@/data/data_fetching/single/getEntryTitleByID';
 

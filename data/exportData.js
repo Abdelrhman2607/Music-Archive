@@ -1,7 +1,7 @@
 
 import { pool } from '@/data/db_pool';
 
-export default async function deleteEntry(id, client = null) {
+export default async function exportData(client=null) {
     const queryClient = client ?? await pool.connect();
     try {
         await queryClient.query('BEGIN');
@@ -11,8 +11,9 @@ export default async function deleteEntry(id, client = null) {
             WHERE id = $1::int 
             `
 
-        const queryValues = [id]
+        const queryValues = []
         await queryClient.query(queryString, queryValues);
+
         await queryClient.query('COMMIT');
         return
     }

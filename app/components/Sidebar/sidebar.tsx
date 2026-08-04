@@ -1,7 +1,13 @@
-import Link from 'next/link';
+'use client';
+
 import styles from './sidebar.module.css';
 
+import Link from 'next/link';
+import { useRef } from 'react';
+
 export default function Sidebar() {
+  const importRef = useRef<HTMLInputElement | null>(null);
+  const exportRef = useRef<HTMLInputElement | null>(null);
   return (
     <div className={styles.sidebar}>
       <Link href={'/'} className={`${styles.topLeftCorner} linearShine`}>
@@ -19,11 +25,35 @@ export default function Sidebar() {
         </div>
 
         <div className={styles.import_exportButtons}>
-          <button className='linearShine'>Import</button>
-          <button className='linearShine'>Export</button>
+          <button
+            className='linearShine'
+            onClick={() => {
+              importRef.current?.click()
+            }}
+          >
+            <input
+              type='file'
+              ref={importRef}
+              className='hidden'
+            />
+            Import
+          </button>
+          <button
+            className='linearShine'
+            onClick={() => {
+              exportRef.current?.click()
+            }}
+          >
+            <input
+              type='file'
+              ref={exportRef}
+              className='hidden'
+            />
+            Export
+          </button>
         </div>
 
-      </div>  
+      </div>
     </div>
   );
 }

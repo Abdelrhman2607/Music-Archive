@@ -9,7 +9,9 @@ export async function GET(){
 
 export async function POST(request: Request){
     const body = await (request.json());
-    await importData(body.backup);
+    const backupJSON = JSON.parse(body)
+
+    await importData(backupJSON.backup.entries);
 
     return Response.json( {data:'import'}, { status: 200 });
 }

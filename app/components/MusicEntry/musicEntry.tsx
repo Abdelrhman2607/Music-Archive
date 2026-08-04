@@ -89,7 +89,7 @@ export default function MusicEntry({ entryData, onSaveSuccess }: { entryData: En
         </div>
         <div className={styles.entryBodyBottom}>
           <span className={styles.entryDesc}>{entryData.description}</span>
-          <span className={styles.entryDate}>Last Modified: {new Date(entryData.date_added).toDateString()}</span>
+          <span className={styles.entryDate}>Date added: {new Date(entryData.date_added).toDateString()}</span>
         </div>
 
       </div>

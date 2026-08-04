@@ -2,24 +2,29 @@
 
 import styles from './sidebar.module.css';
 
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link'
 
 export default function Sidebar() {
+  const router = useRouter();
 
   async function handleImport(event: React.ChangeEvent<HTMLInputElement>) {
-    const importedBackupFile = event.currentTarget.files?.item(0);
+    const input = event.currentTarget;
+    const importedBackupFile = input.files?.item(0);
     if (!importedBackupFile) return;
 
-    const backupString = await importedBackupFile.text()
+    const backupString = await importedBackupFile.text();
 
-    await fetch('/api/backup',
-      {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ backup: backupString })
-      })
-      .then()
-    console.log('import')
+    const res = await fetch('/api/backup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(backupString),
+    });
+
+    if (res.ok) {
+      input.value = '';
+      router.refresh();
+    }
   }
 
   async function handleExport() {
@@ -63,16 +68,7 @@ export default function Sidebar() {
 
         <div className={styles.import_exportButtons}>
           <label htmlFor="import-file" className={`${styles.import} linearShine`}>
-          <label htmlFor="import-file" className={`${styles.import} linearShine`}>
             Import
-          </label>
-          <input
-            id="import-file"
-            type="file"
-            onChange={(e) => handleImport(e)}
-            className="hidden" 
-          />
-
           </label>
           <input
             id="import-file"

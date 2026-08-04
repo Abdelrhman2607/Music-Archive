@@ -11,14 +11,17 @@ import getArtistIds from '@/data/data_fetching/multiple/getArtistIds';
 //   description: null,
 //   tags: [ 'Happy' ],
 //   artists: [ 'HOYO-MiX' ],
-//   cat: [ 'Category' ]
+//   cat: [ 'Category' ] ?? catPath: ['cat', 'subcat']
 // }
 export default async function createEntry(entryData, client = null) {
     const queryClient = client ?? await pool.connect();
     try {
         await queryClient.query('BEGIN');
 
-        const catId = await getCatIDByCatName(entryData.cat[0], queryClient);
+        const catName =
+            entryData?.cat?.[0] ??
+            entryData?.catPath?.[entryData.catPath?.length - 1];
+        const catId = await getCatIDByCatName(catName, queryClient);
         const tagIds = await getTagIds(entryData.tags, queryClient);
         const artistIds = await getArtistIds(entryData.artists, queryClient);
 
@@ -33,7 +36,7 @@ export default async function createEntry(entryData, client = null) {
         let queryValues = [entryData.title, entryData.description, catId];
         const entryId = (await queryClient.query(queryString, queryValues)).rows[0].id;
 
-        queryString = 
+        queryString =
             `
             INSERT INTO artist_entries (artist_id, entry_id)
             SELECT artist_id , $1::int 
@@ -43,8 +46,8 @@ export default async function createEntry(entryData, client = null) {
         queryValues = [entryId, artistIds];
         await queryClient.query(queryString, queryValues);
 
-        queryString = 
-             `
+        queryString =
+            `
             INSERT INTO tag_entries (tag_id, entry_id)
             SELECT tag_id , $1::int 
             FROM UNNEST($2::int[]) AS t(tag_id) 
@@ -58,7 +61,7 @@ export default async function createEntry(entryData, client = null) {
     catch (error) {
         await queryClient.query('ROLLBACK')
         console.error(error);
-        return(error.code);
+        return (error.code);
     }
     finally {
         if (!client) {

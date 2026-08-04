@@ -62,6 +62,13 @@
     background-color: var(--Gray);
 }
 
+@media (prefers-color-scheme: dark){
+    .textArea input:focus, .textArea textarea:focus{
+    background-color: var(--White);
+	outline: 2px solid var(--LightBlue);
+}
+}
+
 .selectedFilters{
     margin: 0px 20%;
     padding-left: 0px;

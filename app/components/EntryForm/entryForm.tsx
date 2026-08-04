@@ -6,6 +6,7 @@ import useFilterDropdown from '@/util/useFilterDropdown';
 import DropdownMenu from '../UI/dropdownMenu/dropdownMenu';
 import SelectedFilters from '../UI/selectedFilters/selectedFilters';
 import styles from './entryForm.module.css';
+import { useRouter } from 'next/navigation';
 
 type EntryFormProps = {
   mode: 'new' | 'edit';
@@ -13,6 +14,7 @@ type EntryFormProps = {
 };
 
 export default function EntryForm({ mode, entryId }: EntryFormProps) {
+  const router = useRouter();
   const [entryFound, setEntryFound] = useState(false);
   const [entryTitle, setEntryTitle] = useState('');
   const [entryDesc, setEntryDesc] = useState('');
@@ -112,7 +114,7 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
       console.error('Request failed');
     }
     else {
-      console.log(await response.json());
+      router.push('/')
     }
 
   }

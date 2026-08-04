@@ -50,10 +50,11 @@
     .dropdownMenu{
         background-color: var(--Blue);
         border-color: var(--DarkBlue);
-        
+        scrollbar-color: var(--DarkBlue) transparent;
     }
 
     .dropdownItem{
         color: var(--White);
     }
+
 }

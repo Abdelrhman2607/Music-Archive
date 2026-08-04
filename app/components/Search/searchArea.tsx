@@ -8,6 +8,7 @@ import SelectedFilters from '@/app/components/UI/selectedFilters/selectedFilters
 
 import { useState, useEffect } from 'react';
 import { useFilterDropdownType } from '@/util/useFilterDropdown'
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function SearchArea({ setSearchBarValue, tagFilter, catFilter, artistFilter}: 
   {
@@ -18,36 +19,36 @@ export default function SearchArea({ setSearchBarValue, tagFilter, catFilter, ar
   }) {
 
   const [tagOptions, setTagOptions] = useState<string[]>([]);
-  useEffect(() => {
+  useEffect(useDebouncedCallback(() => {
     fetch(`/api/getTags?target=${tagFilter.searchText}`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => setTagOptions(data));
-  }, [tagFilter.searchText]);
+  }, 300), [tagFilter.searchText]);
 
 
   const [catOptions, setCatOptions] = useState<string[]>([]);
-  useEffect(() => {
+  useEffect(useDebouncedCallback(() => {
     fetch(`/api/getCats?target=${catFilter.searchText}`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => setCatOptions(data));
-  }, [catFilter.searchText]);
+  }, 300), [catFilter.searchText]);
 
 
   const [artistOptions, setArtistOptions] = useState<string[]>([]);
-  useEffect(() => {
+  useEffect(useDebouncedCallback(() => {
     fetch(`/api/getArtists?target=${artistFilter.searchText}`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => setArtistOptions(data));
-  }, [artistFilter.searchText]);
+  }, 300), [artistFilter.searchText]);
 
 
   return (

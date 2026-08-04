@@ -7,6 +7,7 @@ import { FilterEntryData } from '@/definitions'
 import titleCaseWord from '@/util/titleCaseWord'
 
 import { useState, useEffect } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 type FilterDisplayGridProps = {
   currentPage: number;
@@ -22,7 +23,7 @@ export default function FilterDisplayGrid({ currentPage, pageTotal, searchText, 
 ) {
   const [gridData, setGridData] = useState<FilterEntryData[]>([]);
 
-  useEffect(() => {
+  useEffect(useDebouncedCallback(() => {
     if (currentPage <= pageTotal) {
       const params = new URLSearchParams({
         filterType: filterType,
@@ -37,7 +38,7 @@ export default function FilterDisplayGrid({ currentPage, pageTotal, searchText, 
         .then((response) => response.json())
         .then((data) => setGridData(data));
     }
-  }, [currentPage, searchText, refreshKey]);
+  }, 300), [currentPage, searchText, refreshKey]);
 
   return (
     <div className={styles.entryGrid}>

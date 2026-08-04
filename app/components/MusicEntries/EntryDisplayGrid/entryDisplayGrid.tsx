@@ -6,6 +6,7 @@ import MusicEntry from '@/app/components/MusicEntries/MusicEntry/musicEntry';
 
 import { EntryData } from '@/definitions';
 import { useState, useEffect } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 type EntryDisplayGridProps = {
   currentPage: number;
@@ -32,7 +33,7 @@ export default function EntryDisplayGrid({ currentPage, pageTotal, searchText, s
     }
   ]);
 
-  useEffect(() => {
+  useEffect(useDebouncedCallback(() => {
     if (currentPage <= pageTotal) {
       const params = new URLSearchParams({
         page: currentPage.toString(),
@@ -49,7 +50,7 @@ export default function EntryDisplayGrid({ currentPage, pageTotal, searchText, s
         .then((response) => response.json())
         .then((data) => setGridData(data));
     }
-  }, [currentPage, searchText, selectedFilters, refreshKey]);
+  }, 300), [currentPage, searchText, selectedFilters, refreshKey]);
 
   return (
     <div className={styles.entryGrid}>

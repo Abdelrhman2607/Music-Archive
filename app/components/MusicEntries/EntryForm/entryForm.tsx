@@ -7,6 +7,8 @@ import DropdownMenu from '@/app/components/UI/dropdownMenu/dropdownMenu';
 import SelectedFilters from '@/app/components/UI/selectedFilters/selectedFilters';
 import styles from './entryForm.module.css';
 import { useRouter } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce';
+
 
 type EntryFormProps = {
   mode: 'new' | 'edit';
@@ -45,17 +47,17 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
   }
 
   const [tagOptions, setTagOptions] = useState<string[]>([]);
-  useEffect(() => {
+  useEffect(useDebouncedCallback(() => {
     fetch(`/api/getTags?target=${tagFilter.searchText}`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => setTagOptions(data));
-  }, [tagFilter.searchText]);
+  }, 300), [tagFilter.searchText]);
 
   const [catOptions, setCatOptions] = useState<string[]>([]);
-  useEffect(() => {
+  useEffect(useDebouncedCallback(() => {
     fetch(`/api/getCats?target=${catFilter.searchText}`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
@@ -69,17 +71,17 @@ export default function EntryForm({ mode, entryId }: EntryFormProps) {
           catFilter.setSelected([data[0]]);
         }
       })
-  }, [catFilter.searchText]);
+  }, 300), [catFilter.searchText]);
 
   const [artistOptions, setArtistOptions] = useState<string[]>([]);
-  useEffect(() => {
+  useEffect(useDebouncedCallback(() => {
     fetch(`/api/getArtists?target=${artistFilter.searchText}`, {
       method: 'GET',
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => setArtistOptions(data));
-  }, [artistFilter.searchText]);
+  }, 300), [artistFilter.searchText]);
 
   // initial states
   useEffect(() => {

@@ -63,7 +63,16 @@ export default function Sidebar() {
 
         <div className={styles.import_exportButtons}>
           <label htmlFor="import-file" className={`${styles.import} linearShine`}>
+          <label htmlFor="import-file" className={`${styles.import} linearShine`}>
             Import
+          </label>
+          <input
+            id="import-file"
+            type="file"
+            onChange={(e) => handleImport(e)}
+            className="hidden" 
+          />
+
           </label>
           <input
             id="import-file"
@@ -74,6 +83,7 @@ export default function Sidebar() {
 
           <button
             className='linearShine'
+            onClick={handleExport}
             onClick={handleExport}
           >
             Export

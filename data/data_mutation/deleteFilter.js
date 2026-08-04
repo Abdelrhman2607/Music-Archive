@@ -1,14 +1,14 @@
 
 import { pool } from '@/data/db_pool';
 
-export default async function deleteFilter(filterType, id) {
+export default async function deleteFilter(filterType, id, client = null) {
     const allowedTables = {
         tag: 'tags',
         cat: 'categories',
         artist: 'artists'
     };
 
-    const client = await pool.connect();
+    const queryClient = client ?? await pool.connect();
     try {
 
         const queryString =
@@ -18,7 +18,7 @@ export default async function deleteFilter(filterType, id) {
             `
 
         const queryValues = [id]
-        const result = await client.query(queryString, queryValues);
+        const result = await queryClient.query(queryString, queryValues);
         return
     }
 
@@ -27,6 +27,8 @@ export default async function deleteFilter(filterType, id) {
         return(error.code);
     }
     finally {
-        client.release();
+        if (!client) {
+            queryClient.release();
+        }
     }
 }

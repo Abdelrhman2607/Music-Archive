@@ -1,7 +1,8 @@
 import {pool} from '../../db_pool';
 
-export default async function getEntryTagsByID(id){
+export default async function getEntryTagsByID(id, client = null){
 
+    const queryClient = client ?? await pool.connect();
     const queryString =
     `
     SELECT
@@ -16,16 +17,17 @@ export default async function getEntryTagsByID(id){
 
     const queryValues = [id];
 
-    const client = await pool.connect();
     let result;
     try{
-        result = await client.query(queryString, queryValues);
+        result = await queryClient.query(queryString, queryValues);
     }
     catch(error){
         return(undefined)
     }
     finally{
-        client.release();
+        if (!client) {
+            queryClient.release();
+        }
     }
     
 

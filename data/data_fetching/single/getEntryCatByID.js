@@ -1,7 +1,8 @@
 import {pool} from '../db_pool';
 
-export default async function getEntryCatByID(id){
+export default async function getEntryCatByID(id, client = null){
 
+    const queryClient = client ?? await pool.connect();
     const queryString =
     `
     SELECT
@@ -14,20 +15,20 @@ export default async function getEntryCatByID(id){
     `;
 
     const queryValues = [id];
-
-    const client = await pool.connect();
     let result;
     try{
-        result = await client.query(queryString, queryValues);
+        result = await queryClient.query(queryString, queryValues);
     }
     catch(error){
         return(undefined)
     }
     finally{
-        client.release();
+        if (!client) {
+            queryClient.release();
+        }
     }
     
-    const cat = result.rows[0].name;
+    const cat = result.rows[0]?.name;
 
     return(cat);
 }

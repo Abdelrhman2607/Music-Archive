@@ -1,21 +1,23 @@
-import { pool } from '../../db_pool';
+import { pool } from '@/data/db_pool';
 
-export default async function getTags(searchText, client = null) {
+export default async function getTagIds(tags, client = null) {
   const queryClient = client ?? await pool.connect();
   try {
 
     let queryString =
       `
-      SELECT name FROM tags WHERE name ILIKE $1::text ORDER BY NAME LIMIT 20
+      SELECT id FROM tags t 
+      JOIN UNNEST($1::TEXT[]) AS u(tag_name)
+      ON t.name = u.tag_names
       `
-    let queryValues = [`%${searchText}%`];
+    let queryValues = [tags];
 
     let result;
     result = await queryClient.query(queryString, queryValues);
 
-    const tags = result.rows.map((object) => (object.name));
+    const tagIds = result.rows.map((object) => (object.id));
 
-    return tags;
+    return tagIds;
   }
 
   catch (error) {

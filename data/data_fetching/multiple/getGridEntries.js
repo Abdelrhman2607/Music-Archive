@@ -4,8 +4,8 @@ import { pool } from '../../db_pool';
 import getEntryDataByID from '../single/getEntryDataByID'
 import {ENTRIES_PER_PAGE} from '@/definitions'
 
-export default async function getGridEntries(pageOffset = 1, target = '', tags = [], cats = [], artists = []) {
-  const client = await pool.connect();
+export default async function getGridEntries(pageOffset = 1, target = '', tags = [], cats = [], artists = [], client = null) {
+  const queryClient = client ?? await pool.connect();
   try {
 
     const queryString =
@@ -54,11 +54,11 @@ export default async function getGridEntries(pageOffset = 1, target = '', tags =
       `
     const queryValues = [ENTRIES_PER_PAGE, (pageOffset - 1) * ENTRIES_PER_PAGE, `%${target}%`, cats, tags, artists];
 
-    const result = await client.query(queryString, queryValues);
+    const result = await queryClient.query(queryString, queryValues);
 
     const entryIds = result.rows.map((object) => (object.id));
     const entriesData = await Promise.all(
-      entryIds.map((id) => getEntryDataByID(id))
+      entryIds.map((id) => getEntryDataByID(id, queryClient))
     );
 
     return entriesData;
@@ -69,7 +69,9 @@ export default async function getGridEntries(pageOffset = 1, target = '', tags =
     return ([])
   }
   finally {
-    client.release();
+    if (!client) {
+      queryClient.release();
+    }
   }
 
 }

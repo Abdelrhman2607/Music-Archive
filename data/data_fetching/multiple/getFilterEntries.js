@@ -2,14 +2,14 @@
 import { pool } from '../../db_pool';
 import { ENTRIES_PER_PAGE } from '@/definitions';
 
-export default async function getFilterEntries(filterType, pageOffset = 1, target = '') {
+export default async function getFilterEntries(filterType, pageOffset = 1, target = '', client = null) {
     const allowedTables = {
         tag: 'tags',
         cat: 'categories',
         artist: 'artists'
     };
 
-    const client = await pool.connect();
+    const queryClient = client ?? await pool.connect();
     try {
 
         let queryString =
@@ -18,7 +18,7 @@ export default async function getFilterEntries(filterType, pageOffset = 1, targe
             `
         let queryValues = [ENTRIES_PER_PAGE, (pageOffset - 1) * ENTRIES_PER_PAGE, `%${target}%`];
 
-        let result = await client.query(queryString, queryValues);
+        let result = await queryClient.query(queryString, queryValues);
 
         return result.rows;
     }
@@ -28,7 +28,9 @@ export default async function getFilterEntries(filterType, pageOffset = 1, targe
         return ([])
     }
     finally {
-        client.release();
+        if (!client) {
+            queryClient.release();
+        }
     }
 
 }

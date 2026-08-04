@@ -1,9 +1,9 @@
 import { pool } from '../../db_pool';
 
-export default async function getCatPath(catId) {
+export default async function getCatPath(catId, client = null) {
   if (!catId) return [];
 
-  const client = await pool.connect();
+  const queryClient = client ?? await pool.connect();
   try {
     const pathString = [];
 
@@ -20,7 +20,7 @@ export default async function getCatPath(catId) {
     let currentParentId = catId;
 
     while (currentParentId) {
-      const result = await client.query(queryString, [currentParentId]);
+      const result = await queryClient.query(queryString, [currentParentId]);
       if (result.rows.length === 0) break;
 
       const { parent_id, name } = result.rows[0];
@@ -32,7 +32,9 @@ export default async function getCatPath(catId) {
   }
 
   finally {
-    client.release();
+    if (!client) {
+      queryClient.release();
+    }
   }
 
 

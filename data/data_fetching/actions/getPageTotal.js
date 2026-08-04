@@ -3,7 +3,7 @@
 import { pool } from '@/data/db_pool';
 import { ENTRIES_PER_PAGE } from '@/definitions'
 
-export default async function getPageTotal(table) {
+export default async function getPageTotal(table, client = null) {
 
   const allowedTables = {
     tags:'tags',
@@ -11,7 +11,7 @@ export default async function getPageTotal(table) {
     artists: 'artists'
   };
 
-  const client = await pool.connect();
+  const queryClient = client ?? await pool.connect();
   try {
 
     const queryString =
@@ -19,7 +19,7 @@ export default async function getPageTotal(table) {
       SELECT COUNT(*) as total FROM ${allowedTables[table] || 'music_entries'}
       `
 
-    const result = await client.query(queryString);
+    const result = await queryClient.query(queryString);
 
     const pageTotal = Math.ceil(parseInt(result.rows[0].total) / ENTRIES_PER_PAGE);
     return pageTotal;
@@ -30,6 +30,8 @@ export default async function getPageTotal(table) {
     return (0)
   }
   finally {
-    client.release();
+    if (!client) {
+      queryClient.release();
+    }
   }
 }

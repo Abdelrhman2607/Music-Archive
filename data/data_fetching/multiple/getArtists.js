@@ -1,7 +1,7 @@
 import { pool } from '../../db_pool';
 
-export default async function getArtists(searchText) {
-  const client = await pool.connect();
+export default async function getArtists(searchText, client = null) {
+  const queryClient = client ?? await pool.connect();
   try {
 
     let queryString =
@@ -11,7 +11,7 @@ export default async function getArtists(searchText) {
     let queryValues = [`%${searchText}%`];
 
     let result;
-    result = await client.query(queryString, queryValues);
+    result = await queryClient.query(queryString, queryValues);
 
     const artists = result.rows.map((object) => (object.name));
 
@@ -23,7 +23,9 @@ export default async function getArtists(searchText) {
     return ([])
   }
   finally {
-    client.release();
+    if (!client) {
+      queryClient.release();
+    }
   }
 
 }

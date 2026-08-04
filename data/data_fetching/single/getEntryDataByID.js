@@ -3,8 +3,8 @@ import getEntryTagsByID from './getEntryTagsByID';
 import getEntryArtistsByID from './getEntryArtistsByID';
 import getCatPath from './getCatPath';
 
-export default async function getEntryByID(id) {
-  const client = await pool.connect();
+export default async function getEntryByID(id, client = null) {
+  const queryClient = client ?? await pool.connect();
   try {
     const queryString = `
         SELECT 
@@ -17,7 +17,7 @@ export default async function getEntryByID(id) {
         `;
     const queryValues = [id];
 
-    const entryObject = (await client.query(queryString, queryValues)).rows[0];
+    const entryObject = (await queryClient.query(queryString, queryValues)).rows[0];
 
     if (!entryObject) {
       return ({
@@ -31,10 +31,10 @@ export default async function getEntryByID(id) {
       })
     }
 
-    const tags = await getEntryTagsByID(id);
-    const artists = await getEntryArtistsByID(id);
+    const tags = await getEntryTagsByID(id, queryClient);
+    const artists = await getEntryArtistsByID(id, queryClient);
 
-    const catPath = (await getCatPath(entryObject.category_id)) || [];
+    const catPath = (await getCatPath(entryObject.category_id, queryClient)) || [];
 
     entryObject.tags = tags;
     entryObject.artists = artists;
@@ -52,7 +52,9 @@ export default async function getEntryByID(id) {
   }
 
   finally {
-    client.release();
+    if (!client) {
+      queryClient.release();
+    }
   }
 }
 

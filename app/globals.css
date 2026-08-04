@@ -21,7 +21,7 @@
 	--LightRed: #ffd3d3;
 
 	--Purple: #d881fd;
-	
+
 	--EditGreen: #72ff6d;
 	--DeleteRed: #ff3e3e;
 
@@ -60,6 +60,12 @@
 	input[type='text']:focus {
 		background-color: var(--White);
 		outline: 2px solid var(--LightBlue);
+
+
+	}
+
+	* {
+		scrollbar-color: var(--White) transparent;
 	}
 }
 
@@ -78,6 +84,10 @@ button {
 	border-radius: 5px;
 	padding: 5px;
 	width: 100%;
+}
+
+* {
+	scrollbar-color: var(--Blue) transparent;
 }
 
 .linearShine,

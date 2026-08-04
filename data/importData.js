@@ -97,7 +97,6 @@ export default async function importData(entries, client=null) {
         for (const entry of entries){
             await createEntry(entry, queryClient);
         }
-        console.log('finished')
         return
     }
 

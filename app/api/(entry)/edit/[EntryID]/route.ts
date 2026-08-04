@@ -8,7 +8,6 @@ export async function GET(request: Request) {
     const entryId = path[path.length - 1] || 0;
 
     const data = await getEntryDataByID(entryId)
-    console.log(data);
 
     return Response.json(data, {status: 200});
 }

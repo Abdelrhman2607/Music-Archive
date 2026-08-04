@@ -3,11 +3,48 @@
 import styles from './sidebar.module.css';
 
 import Link from 'next/link';
-import { useRef } from 'react';
 
 export default function Sidebar() {
-  const importRef = useRef<HTMLInputElement | null>(null);
-  const exportRef = useRef<HTMLInputElement | null>(null);
+
+  async function handleImport(event: React.ChangeEvent<HTMLInputElement>) {
+    const importedBackupFile = event.currentTarget.files?.item(0);
+    if (!importedBackupFile) return;
+
+    const backupString = await importedBackupFile.text()
+
+    await fetch('/api/backup',
+      {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ backup: backupString })
+      })
+      .then()
+    console.log('import')
+  }
+
+  async function handleExport() {
+    const res = await fetch('/api/backup',
+      {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" },
+      })
+
+    const backupJSON = (await res.json())
+    const backupJSONString = JSON.stringify(backupJSON)
+    
+    const backupFile = new File([backupJSONString], 'music_archive_backup.json', {type: 'application/json'});
+    const fileURL = URL.createObjectURL(backupFile);
+
+    const a = document.createElement("a");
+    a.href = fileURL;
+    a.download = "music_archive_backup.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(fileURL);
+  }
+
   return (
     <div className={styles.sidebar}>
       <Link href={'/'} className={`${styles.topLeftCorner} linearShine`}>
@@ -25,30 +62,20 @@ export default function Sidebar() {
         </div>
 
         <div className={styles.import_exportButtons}>
-          <button
-            className='linearShine'
-            onClick={() => {
-              importRef.current?.click()
-            }}
-          >
-            <input
-              type='file'
-              ref={importRef}
-              className='hidden'
-            />
+          <label htmlFor="import-file" className={`${styles.import} linearShine`}>
             Import
-          </button>
+          </label>
+          <input
+            id="import-file"
+            type="file"
+            onChange={(e) => handleImport(e)}
+            className="hidden" 
+          />
+
           <button
             className='linearShine'
-            onClick={() => {
-              exportRef.current?.click()
-            }}
+            onClick={handleExport}
           >
-            <input
-              type='file'
-              ref={exportRef}
-              className='hidden'
-            />
             Export
           </button>
         </div>

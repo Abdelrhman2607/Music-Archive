@@ -57,7 +57,7 @@
     margin: 10px 0px;
 }
 
-.dataButtons > * {
+.dataButtons > * , .import{
     color: var(--White);
     background-color: var(--Blue);
     cursor: pointer;

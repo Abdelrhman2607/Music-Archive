@@ -3,7 +3,7 @@ import getEntryTagsByID from './getEntryTagsByID';
 import getEntryArtistsByID from './getEntryArtistsByID';
 import getCatPath from './getCatPath';
 
-export default async function getEntryByID(id, client = null) {
+export default async function getEntryDataByID(id, client = null) {
   const queryClient = client ?? await pool.connect();
   try {
     const queryString = `

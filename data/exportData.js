@@ -1,25 +1,28 @@
 
 import { pool } from '@/data/db_pool';
+import getEntryDataByID from '@/data/data_fetching/single/getEntryDataByID';
 
 export default async function exportData(client=null) {
+    let backupJSON = { backup: {
+        entries: []
+    }};
     const queryClient = client ?? await pool.connect();
     try {
-        await queryClient.query('BEGIN');
-        const queryString =
+        let queryString =
             `
-            DELETE FROM music_entries
-            WHERE id = $1::int 
+            SELECT id FROM music_entries 
             `
 
-        const queryValues = []
-        await queryClient.query(queryString, queryValues);
+        let queryValues = []
+        const allEntryIds = (await queryClient.query(queryString, queryValues)).rows.map((entry)=>entry.id);
 
-        await queryClient.query('COMMIT');
-        return
+        for (const id of allEntryIds){
+            backupJSON.backup.entries.push( await getEntryDataByID(id))
+        }
+        return backupJSON
     }
 
     catch (error) {
-        await queryClient.query('ROLLBACK');
         console.error(error);
         return
     }

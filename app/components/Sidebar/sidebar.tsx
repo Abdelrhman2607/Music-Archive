@@ -84,7 +84,6 @@ export default function Sidebar() {
           <button
             className='linearShine'
             onClick={handleExport}
-            onClick={handleExport}
           >
             Export
           </button>

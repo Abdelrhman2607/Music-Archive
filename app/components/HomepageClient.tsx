@@ -4,12 +4,16 @@ import SearchArea from '@/app/components/Search/searchArea';
 import EntryDisplayGrid from '@/app/components/MusicEntries/EntryDisplayGrid/entryDisplayGrid';
 import PageNav from '@/app/components/UI/pageNav/pageNav';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useFilterDropdown from '@/util/useFilterDropdown';
+import getPageTotal from "@/data/data_fetching/actions/getPageTotal";
 
-export default function HomepageClient({ pageTotal }: { pageTotal: number }) {
+export default function HomepageClient() {
+  const [pageTotal, setPageTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchBarValue, setSearchBarValue] = useState('');
+  const [refreshKey, setRefreshKey] = useState(false);
+
 
   const tagFilter = useFilterDropdown();
   const catFilter = useFilterDropdown();
@@ -21,6 +25,16 @@ export default function HomepageClient({ pageTotal }: { pageTotal: number }) {
     selectedArtists: artistFilter.selected
   }
 
+  useEffect(()=>{
+    fetch(`/api/getPageTotal/?table=music_entries`, 
+      {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" },
+      })
+    .then((res) => res.json())
+    .then((data) => setPageTotal(data))
+  }, [refreshKey])
+
   return (
     <>
       <SearchArea
@@ -31,9 +45,13 @@ export default function HomepageClient({ pageTotal }: { pageTotal: number }) {
       />
       <EntryDisplayGrid
         currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
         pageTotal={pageTotal}
+        setPageTotal={setPageTotal}
         searchText={searchBarValue}
         selectedFilters={selectedFilters}
+        refreshKey={refreshKey}
+        setRefreshKey={setRefreshKey}
       />
       <PageNav
         currentPage={currentPage}

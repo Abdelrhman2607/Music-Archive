@@ -11,13 +11,13 @@ import { useDebouncedCallback } from 'use-debounce';
 
 type FilterDisplayGridProps = {
   currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   pageTotal: number;
-  setPageTotal: React.Dispatch<React.SetStateAction<number>>
+  setPageTotal: React.Dispatch<React.SetStateAction<number>>;
   searchText: string;
   filterType: 'tag' | 'cat' | 'artist';
   refreshKey: boolean;
-  setRefreshKey: React.Dispatch<React.SetStateAction<boolean>>
+  setRefreshKey: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function FilterDisplayGrid({ currentPage, setCurrentPage, pageTotal, setPageTotal, searchText, filterType, refreshKey, setRefreshKey }:
@@ -38,7 +38,7 @@ export default function FilterDisplayGrid({ currentPage, setCurrentPage, pageTot
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json())
-        .then(async (data) => {
+        .then((data) => {
           if (data.length !== 0){
             setGridData(data);
           }

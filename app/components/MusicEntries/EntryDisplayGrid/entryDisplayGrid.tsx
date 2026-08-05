@@ -10,17 +10,20 @@ import { useDebouncedCallback } from 'use-debounce';
 
 type EntryDisplayGridProps = {
   currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   pageTotal: number;
+  setPageTotal: React.Dispatch<React.SetStateAction<number>>;
   searchText: string;
   selectedFilters: {
     selectedTags: string[], selectedCats: string[], selectedArtists: string[]
   };
+  refreshKey: boolean;
+  setRefreshKey: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function EntryDisplayGrid({ currentPage, pageTotal, searchText, selectedFilters }:
+export default function EntryDisplayGrid({ currentPage, setCurrentPage, pageTotal, setPageTotal, searchText, selectedFilters, refreshKey, setRefreshKey }:
   EntryDisplayGridProps
 ) {
-  const [refreshKey, setRefreshKey] = useState(false);
   const [gridData, setGridData] = useState<EntryData[]>([
     {
       id: 0,
@@ -32,8 +35,7 @@ export default function EntryDisplayGrid({ currentPage, pageTotal, searchText, s
       catPath: []
     }
   ]);
-
-  useEffect(useDebouncedCallback(() => {
+  useEffect(()=> {
     if (currentPage <= pageTotal) {
       const params = new URLSearchParams({
         page: currentPage.toString(),
@@ -48,9 +50,16 @@ export default function EntryDisplayGrid({ currentPage, pageTotal, searchText, s
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json())
-        .then((data) => setGridData(data));
+        .then((data) => {
+          if (data.length !== 0){
+            setGridData(data);
+          }
+          else{
+            setCurrentPage(prev => Math.max(prev - 1, 1));
+          }
+        });
     }
-  }, 300), [currentPage, searchText, selectedFilters, refreshKey]);
+  }, [currentPage, searchText, selectedFilters, refreshKey]);
 
   return (
     <div className={styles.entryGrid}>

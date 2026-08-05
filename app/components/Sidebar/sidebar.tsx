@@ -2,11 +2,9 @@
 
 import styles from './sidebar.module.css';
 
-import { useRouter } from 'next/navigation';
 import Link from 'next/link'
 
 export default function Sidebar() {
-  const router = useRouter();
 
   async function handleImport(event: React.ChangeEvent<HTMLInputElement>) {
     const input = event.currentTarget;
@@ -23,7 +21,7 @@ export default function Sidebar() {
 
     if (res.ok) {
       input.value = '';
-      router.refresh();
+      window.location.reload();
     }
   }
 

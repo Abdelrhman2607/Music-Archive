@@ -1,9 +1,7 @@
 import FilterPageClient from "@/app/components/Filters/FilterPageClient/FilterPageClient";
-import getPageTotal from "@/data/data_fetching/getPageTotal";
 
-export default async function CatsPage(){
-  const pageTotal = await getPageTotal('cats');
+export default function CatsPage(){
   return(
-    <FilterPageClient filterType="cat" pageTotal={pageTotal}/>
+    <FilterPageClient filterType="cat"/>
   )
 }

@@ -15,6 +15,7 @@
 
 .noEntriesFound{
     background-color: var(--DarkGray);
+    width: 100%;
     border-radius: 10px;
     color: var(--White);
     text-align: center;

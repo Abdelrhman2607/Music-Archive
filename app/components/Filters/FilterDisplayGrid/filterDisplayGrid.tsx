@@ -59,15 +59,17 @@ export default function FilterDisplayGrid({ currentPage, setCurrentPage, pageTot
       {gridData.length === 0
         ? <p className={styles.noEntriesFound}>No entries match search criteria</p>
         : gridData.map((entryData) => {
-          return (
-            <FilterEntry
-              key={entryData.id}
-              entryData={entryData}
-              filterType={filterType}
-              onSaveSuccess={() => setRefreshKey(!refreshKey)}
-            />
-          )
-        })}
+            return (
+              <FilterEntry
+                key={entryData.id}
+                entryData={entryData}
+                filterType={filterType}
+                onSaveSuccess={() => setRefreshKey(!refreshKey)}
+              />
+            )
+          }
+        )
+      }
     </div>
   );
 }

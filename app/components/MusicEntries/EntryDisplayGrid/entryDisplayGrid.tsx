@@ -62,7 +62,7 @@ export default function EntryDisplayGrid({ currentPage, setCurrentPage, pageTota
           setLoading(false);
         });
     }
-  }, [currentPage, searchText, selectedFilters, refreshKey]);
+  }, [currentPage, pageTotal, searchText, selectedFilters, refreshKey]);
 
   if (loading) return <LoadingCard />;
   return (

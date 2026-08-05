@@ -22,7 +22,7 @@ export default async function getPageTotal(table, client = null) {
 
     const result = await queryClient.query(queryString);
     const pageTotal = Math.ceil(parseInt(result.rows[0].total) / ENTRIES_PER_PAGE);
-    return pageTotal;
+    return pageTotal || 1;
   }
 
   catch (error) {

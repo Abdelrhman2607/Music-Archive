@@ -52,11 +52,11 @@
     border-radius: 0px 5px 5px 0px;
     border-left: none;
 }
-.arrowNavButtonUp:disabled{
+.arrowNavButtonUp:disabled, .arrowNavButtonDown:disabled{
     background-color: var(--Gray);
     cursor: default;
 }
-.arrowNavButtonUp:disabled::after{
+.arrowNavButtonUp:disabled::after, .arrowNavButtonDown:disabled::after{
     opacity: 0;
 }
 

@@ -18,6 +18,7 @@ export default function FilterPageClient({ pageTotal, filterType }: { pageTotal:
     'artist': styles.artist
   }
 
+  const [pageTotalState, setPageTotal] = useState(pageTotal);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchBarValue, setSearchBarValue] = useState('');
   const parentCatFilter = useFilterDropdown();
@@ -73,7 +74,9 @@ export default function FilterPageClient({ pageTotal, filterType }: { pageTotal:
 
         <FilterDisplayGrid
           currentPage={currentPage}
-          pageTotal={pageTotal}
+          setCurrentPage={setCurrentPage}
+          pageTotal={pageTotalState}
+          setPageTotal={setPageTotal}
           searchText={searchBarValue}
           filterType={filterType}
           refreshKey={refreshKey}
@@ -82,7 +85,7 @@ export default function FilterPageClient({ pageTotal, filterType }: { pageTotal:
         <PageNav
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          pageTotal={pageTotal}
+          pageTotal={pageTotalState}
         />
       </div>
     </main>

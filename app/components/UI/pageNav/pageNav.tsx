@@ -13,6 +13,7 @@ export default function PageNav({ currentPage, setCurrentPage, pageTotal }: Page
       <div className={styles.boxShadowContainer}>
         <button
           className={`${styles.arrowNavButtonDown} linearShine`}
+          disabled={currentPage === 1}
           onClick={() => { setCurrentPage(Math.max(1, currentPage - 1)) }}>
           &#60;
         </button>

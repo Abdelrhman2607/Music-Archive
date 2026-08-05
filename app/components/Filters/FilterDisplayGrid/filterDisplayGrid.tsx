@@ -25,7 +25,7 @@ export default function FilterDisplayGrid({ currentPage, setCurrentPage, pageTot
 ) {
   const [gridData, setGridData] = useState<FilterEntryData[]>([]);
 
-  useEffect(useDebouncedCallback(() => {
+  useEffect(() => {
     if (currentPage <= pageTotal) {
       const params = new URLSearchParams({
         filterType: filterType,
@@ -38,17 +38,16 @@ export default function FilterDisplayGrid({ currentPage, setCurrentPage, pageTot
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => response.json())
-        .then((data) => {
+        .then(async (data) => {
           if (data.length !== 0){
             setGridData(data);
           }
           else{
-            setPageTotal(pageTotal - 1);
-            setCurrentPage(currentPage - 1);
+            setCurrentPage(prev => Math.max(prev - 1, 1));
           }
         });
     }
-  }, 300), [currentPage, searchText, refreshKey]);
+  }, [currentPage, pageTotal, searchText, refreshKey]);
 
   return (
     <div className={styles.entryGrid}>

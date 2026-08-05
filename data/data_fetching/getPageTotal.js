@@ -6,9 +6,10 @@ import { ENTRIES_PER_PAGE } from '@/definitions'
 export default async function getPageTotal(table, client = null) {
 
   const allowedTables = {
-    tags:'tags',
-    cats: 'categories',
-    artists: 'artists'
+    entries: 'music_entries',
+    tag:'tags',
+    cat: 'categories',
+    artist: 'artists'
   };
 
   const queryClient = client ?? await pool.connect();
@@ -20,7 +21,6 @@ export default async function getPageTotal(table, client = null) {
       `
 
     const result = await queryClient.query(queryString);
-
     const pageTotal = Math.ceil(parseInt(result.rows[0].total) / ENTRIES_PER_PAGE);
     return pageTotal;
   }

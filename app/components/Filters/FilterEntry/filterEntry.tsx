@@ -12,6 +12,7 @@ type FilterEntryProps = {
   filterType: 'tag' | 'cat' | 'artist';
   entryData: FilterEntryData;
   onSaveSuccess?: () => void;
+  onDelete?: () => void;
 }
 
 export default function FilterEntry({ filterType, entryData, onSaveSuccess }: FilterEntryProps) {

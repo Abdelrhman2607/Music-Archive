@@ -1,5 +1,5 @@
 
-import getPageTotal from '@/data/data_fetching/actions/getPageTotal'
+import getPageTotal from '@/data/data_fetching/getPageTotal'
 import HomepageClient from './components/HomepageClient';
 
 export default async function Homepage() {

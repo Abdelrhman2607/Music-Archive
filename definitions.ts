@@ -30,4 +30,4 @@ export interface FilterEntryData{
   name: string,
 }
 
-export const ENTRIES_PER_PAGE = 10
+export const ENTRIES_PER_PAGE = 12

@@ -4,29 +4,45 @@ import styles from './FilterPageClient.module.css'
 import FilterDisplayGrid from "@/app/components/Filters/FilterDisplayGrid/filterDisplayGrid";
 import Searchbar from "@/app/components/Search/searchbar";
 import PageNav from "@/app/components/UI/pageNav/pageNav";
-
 import { useEffect, useState } from "react";
 import FilterPageHeader from "@/app/components/Filters/FilterPageHeader/filterPageHeader";
 import NewFilterInput from "@/app/components/Filters/NewFilterInput/newFilterInput";
 import DropdownMenu from "@/app/components/UI/dropdownMenu/dropdownMenu";
 import useFilterDropdown from "@/util/useFilterDropdown";
+import getPageTotal from "@/data/data_fetching/actions/getPageTotal";
 
-export default function FilterPageClient({ pageTotal, filterType }: { pageTotal: number, filterType: 'tag' | 'cat' | 'artist' }) {
+
+export default function FilterPageClient({ filterType }: { filterType: 'tag' | 'cat' | 'artist' }) {
   const colorClass = {
     'tag': styles.tag,
     'cat': styles.cat,
     'artist': styles.artist
   }
 
-  const [pageTotalState, setPageTotal] = useState(pageTotal);
+  const [pageTotal, setPageTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [refreshKey, setRefreshKey] = useState(false);
+
+  useEffect(()=>{
+    const params = new URLSearchParams({
+        table: filterType
+      });
+
+    fetch(`/api/getPageTotal/?${params.toString()}`, 
+      {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" },
+      })
+    .then((res) => res.json())
+    .then((data) => setPageTotal(data))
+  }, [refreshKey])
+
   const [searchBarValue, setSearchBarValue] = useState('');
   const parentCatFilter = useFilterDropdown();
-  const [refreshKey, setRefreshKey] = useState(false);
 
   const [catOptions, setCatOptions] = useState<string[]>([]);
 
-  useEffect(() => {
+  useEffect( () => {
     if (filterType !== 'cat') {
       return;
     }
@@ -75,7 +91,7 @@ export default function FilterPageClient({ pageTotal, filterType }: { pageTotal:
         <FilterDisplayGrid
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          pageTotal={pageTotalState}
+          pageTotal={pageTotal}
           setPageTotal={setPageTotal}
           searchText={searchBarValue}
           filterType={filterType}
@@ -85,7 +101,7 @@ export default function FilterPageClient({ pageTotal, filterType }: { pageTotal:
         <PageNav
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          pageTotal={pageTotalState}
+          pageTotal={pageTotal}
         />
       </div>
     </main>

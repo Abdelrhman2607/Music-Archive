@@ -1,9 +1,7 @@
 import FilterPageClient from "@/app/components/Filters/FilterPageClient/FilterPageClient";
-import getPageTotal from "@/data/data_fetching/actions/getPageTotal";
 
-export default async function TagsPage(){
-  const pageTotal = await getPageTotal('tags');
+export default function TagsPage(){
   return(
-    <FilterPageClient filterType="tag" pageTotal={pageTotal}/>
+    <FilterPageClient filterType="tag"/>
   )
 }

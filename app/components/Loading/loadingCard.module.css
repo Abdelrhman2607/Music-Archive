@@ -1,0 +1,22 @@
+.loadingCard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-self: center;
+    width: 90%;
+    height: 25vh;
+    border-radius: 5vh;
+    outline: solid var(--DarkBlue) 1vh;
+    background-color: var(--Blue);
+    color: var(--White);
+    margin: 10vh 0px;
+    font-weight: bold;
+    font-size: large;
+}
+
+@media (prefers-color-scheme: dark){
+    .loadingCard{
+        outline-color: var(--White);
+    }
+}

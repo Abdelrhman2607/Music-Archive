@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-	--DarkBlue: #080920;
+	--DarkBlue: rgb(70, 124, 194);
 	--Blue: #5AD3FF;
 	--LightBlue: #e9f9ff;
 
@@ -179,20 +179,20 @@ button {
 			transparent 50%);
 }
 
-.radialShine:hover::after {
-	animation: radialShine 0.7s ease-in-out;
+.radialShine::after {
+	animation: radialShine 1s ease-in-out infinite;
 }
 
 @keyframes radialShine {
 	0% {
-		width: 0%;
-		height: 0%;
+		width: 30%;
+		height: 30%;
 		opacity: 1;
 	}
 
 	100% {
 		width: 1000%;
-		height: 1000%;
+		height: 500%;
 		opacity: 0;
 	}
 }

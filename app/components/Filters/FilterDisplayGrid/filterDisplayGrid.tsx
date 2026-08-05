@@ -3,6 +3,7 @@
 import styles from './filterDisplayGrid.module.css';
 
 import FilterEntry from '@/app/components/Filters/FilterEntry/filterEntry';
+import LoadingCard from '@/app/components/Loading/loadingCard';
 import { FilterEntryData } from '@/definitions'
 import titleCaseWord from '@/util/titleCaseWord'
 
@@ -23,6 +24,7 @@ type FilterDisplayGridProps = {
 export default function FilterDisplayGrid({ currentPage, setCurrentPage, pageTotal, setPageTotal, searchText, filterType, refreshKey, setRefreshKey }:
   FilterDisplayGridProps
 ) {
+  const [loading, setLoading] = useState(true);
   const [gridData, setGridData] = useState<FilterEntryData[]>([]);
 
   useEffect(() => {
@@ -44,11 +46,14 @@ export default function FilterDisplayGrid({ currentPage, setCurrentPage, pageTot
           }
           else{
             setCurrentPage(prev => Math.max(prev - 1, 1));
+            
           }
+          setLoading(false);
         });
     }
   }, [currentPage, pageTotal, searchText, refreshKey]);
 
+  if (loading) return <LoadingCard />
   return (
     <div className={styles.entryGrid}>
       {gridData.length === 0

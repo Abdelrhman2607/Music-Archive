@@ -8,6 +8,7 @@
     border-radius: 5px;
     border: solid var(--Blue) 2px;
     cursor: pointer;
+    width: 100%;
 }
 
 .searchbar:focus{

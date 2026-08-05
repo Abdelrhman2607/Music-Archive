@@ -3,6 +3,7 @@
 import styles from './entryDisplayGrid.module.css';
 
 import MusicEntry from '@/app/components/MusicEntries/MusicEntry/musicEntry';
+import LoadingCard from '@/app/components/Loading/loadingCard';
 
 import { EntryData } from '@/definitions';
 import { useState, useEffect } from 'react';
@@ -24,6 +25,7 @@ type EntryDisplayGridProps = {
 export default function EntryDisplayGrid({ currentPage, setCurrentPage, pageTotal, setPageTotal, searchText, selectedFilters, refreshKey, setRefreshKey }:
   EntryDisplayGridProps
 ) {
+  const [loading, setLoading] = useState(true);
   const [gridData, setGridData] = useState<EntryData[]>([
     {
       id: 0,
@@ -52,15 +54,17 @@ export default function EntryDisplayGrid({ currentPage, setCurrentPage, pageTota
         .then((response) => response.json())
         .then((data) => {
           if (data.length !== 0){
-            setGridData(data);
+            setGridData(data); 
           }
           else{
             setCurrentPage(prev => Math.max(prev - 1, 1));
           }
+          setLoading(false);
         });
     }
   }, [currentPage, searchText, selectedFilters, refreshKey]);
 
+  if (loading) return <LoadingCard />;
   return (
     <div className={styles.entryGrid}>
       {gridData.length === 0

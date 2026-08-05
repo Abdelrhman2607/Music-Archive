@@ -25,7 +25,14 @@ export default function PageNav({ currentPage, setCurrentPage, pageTotal }: Page
           inputMode='numeric'
           className={styles.pageNumber}
           value={currentPage}
-          onChange={(e) => setCurrentPage(parseInt(e.currentTarget.value) || 1)}
+          onChange={(e) => {
+            let input = parseInt(e.currentTarget.value);
+            if (input > pageTotal){
+              input = pageTotal;
+            }
+            setCurrentPage( input || 1)
+            }
+          }
         />
 
         <button
